@@ -1,13 +1,18 @@
 package it.uniroma3.siw;
 
+import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class SiwBooksApplication {
+public class SiwBooksApplication implements CommandLineRunner {
 
 	public static void main(String[] args) {
 		SpringApplication.run(SiwBooksApplication.class, args);
 	}
 
+	@Override
+	public void run(String... args) throws Exception {
+
+	}
 }
