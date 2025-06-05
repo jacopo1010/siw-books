@@ -5,10 +5,8 @@ import jakarta.persistence.*;
 import java.awt.*;
 import java.math.BigDecimal;
 import java.time.LocalDate;
-import java.util.HashSet;
-import java.util.LinkedList;
+import java.util.*;
 import java.util.List;
-import java.util.Set;
 
 @Entity
 public class Libro {
@@ -73,4 +71,16 @@ public class Libro {
          this.scrittori.add(autore);
     }
 
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null || this.getClass() != obj.getClass())
+            return false;
+        Libro other = (Libro) obj;
+        return this.id == other.getId() && this.titolo.equals(other.getTitolo());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id,titolo);
+    }
 }
