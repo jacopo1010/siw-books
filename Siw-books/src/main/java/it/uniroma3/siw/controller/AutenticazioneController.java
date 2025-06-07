@@ -2,9 +2,13 @@ package it.uniroma3.siw.controller;
 
 
 import it.uniroma3.siw.model.Utente;
+import it.uniroma3.siw.model.UtenteDto;
+import jakarta.validation.Valid;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
 @Controller
@@ -18,16 +22,17 @@ public class AutenticazioneController {
 
     @GetMapping("/register")
     public String iniviaModuloregistraUtente(Model model){
+        model.addAttribute("Utente", new UtenteDto());
         return "register.html";
     }
 
-    @GetMapping("/register")
-    public String creaUtenze(){
-        return "";
-    }
-
     @PostMapping("/register")
-    public String registraUtente(){
+    public String registraUtente(@Valid @ModelAttribute("Utente") UtenteDto u, BindingResult bindingResult){
+
+        if (bindingResult.hasErrors()){
+            return "register.html";
+        }
+
 
         return "";
     }
