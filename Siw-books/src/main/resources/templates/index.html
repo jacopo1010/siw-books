@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="it">
+<html lang="it" xmlns:th="http://www.w3.org/1999/xhtml" xmlns:sec="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <title>Librelandia</title>
@@ -11,9 +11,11 @@
 
 <div>
     <nav>
-        <li><a href="login.html"><i>Accedi</i></a></li>
-        <li><a href="registrazione.html"><i>Registrati</i></a></li>
-        <li><a href="libri.html"><i>Libri</i></a></li>
+        <ul>
+            <li th:if="${utente == null}"><a href="/login"><i>Accedi</i></a></li>
+            <li sec:authorize="isAuthenticated()"><a th:href="@{/logout}">Logout</a></li>
+            <li><a href="libri.html"><i>Libri</i></a></li>
+        </ul>
     </nav>
 </div>
 
@@ -26,6 +28,13 @@
         </p>
     </section>
 </div>
+
+<div th:if="${utente != null}">
+    <aside>
+         <p th:text="${utente.nome}"></p>
+    </aside>
+</div>
+
 
 </body>
 </html>

@@ -31,6 +31,10 @@ public class Credenziali {
         this.utente = u;
     }
 
+    public Credenziali(){
+
+    }
+
     public Long getId() {
         return id;
     }
@@ -82,5 +86,16 @@ public class Credenziali {
     @Override
     public int hashCode() {
          return Objects.hash(id,username);
+    }
+
+    @Override
+    public String toString() {
+        return "Credenziali{" +
+                "id=" + id +
+                ", username='" + username + '\'' +
+                ", password='" + password + '\'' +
+                ", ruolo='" + ruolo + '\'' +
+                ", utente=" + this.utente.toString() +
+                '}';
     }
 }

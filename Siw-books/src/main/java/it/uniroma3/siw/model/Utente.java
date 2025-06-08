@@ -3,6 +3,8 @@ package it.uniroma3.siw.model;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 
+import java.util.Objects;
+
 @Entity
 public class Utente {
     @Id
@@ -13,13 +15,17 @@ public class Utente {
     @NotBlank
     private String cognome;
     @NotBlank
-    @Column(nullable = false,unique = true)
+    @Column(nullable = false, unique = true)
     private String email;
 
-    public Utente(String nome,String cognome, String email) {
+    public Utente(String nome, String cognome, String email) {
         this.nome = nome;
         this.cognome = cognome;
         this.email = email;
+    }
+
+    public Utente(){
+
     }
 
     public Long getId() {
@@ -52,5 +58,27 @@ public class Utente {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    @Override
+    public String toString() {
+        return "Utente{" +
+                "id=" + id +
+                ", nome='" + nome + '\'' +
+                ", cognome='" + cognome + '\'' +
+                ", email='" + email + '\'' +
+                '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == null || getClass() != o.getClass()) return false;
+        Utente utente = (Utente) o;
+        return this.id == utente.getId() && this.email.equals(utente.getEmail());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, email);
     }
 }
