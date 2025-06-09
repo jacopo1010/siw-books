@@ -3,6 +3,8 @@ package it.uniroma3.siw.model;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Objects;
 
 @Entity
@@ -17,11 +19,15 @@ public class Utente {
     @NotBlank
     @Column(nullable = false, unique = true)
     private String email;
+    @OneToMany(cascade = CascadeType.REMOVE, fetch = FetchType.LAZY)
+    private List<Recensione> recensioneList;
+
 
     public Utente(String nome, String cognome, String email) {
         this.nome = nome;
         this.cognome = cognome;
         this.email = email;
+        this.recensioneList = new LinkedList<Recensione>();
     }
 
     public Utente(){
@@ -58,6 +64,14 @@ public class Utente {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public List<Recensione> getRecensioneList() {
+        return recensioneList;
+    }
+
+    public void setRecensioneList(List<Recensione> recensioneList) {
+        this.recensioneList = recensioneList;
     }
 
     @Override

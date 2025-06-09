@@ -16,14 +16,17 @@ public class Libro {
     private String titolo;
     @Column(name = "anno_di_pubblicazione")
     private LocalDate annopublicazione;
-    private String immagine;
+    @ElementCollection
+    private List<String> immagine;
     @OneToMany
     private Set<Autore> scrittori;
+    @OneToMany(mappedBy = "libro", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    private List<Recensione> recensioni;
 
-    public Libro(String titolo, LocalDate d, String g) {
+    public Libro(String titolo, LocalDate d) {
         this.titolo = titolo;
         this.annopublicazione = d;
-        this.immagine = g;
+        this.immagine = new LinkedList<>();
         this.scrittori = new HashSet<Autore>();
     }
 
@@ -43,11 +46,11 @@ public class Libro {
         this.titolo = titolo;
     }
 
-    public String getImmagine() {
+    public List<String> getImmagine() {
         return immagine;
     }
 
-    public void setImmagine(String immagine) {
+    public void setImmagine(List<String> immagine) {
         this.immagine = immagine;
     }
 
@@ -67,8 +70,12 @@ public class Libro {
         this.scrittori = scrittori;
     }
 
-    public void addAutore(Autore autore){
-         this.scrittori.add(autore);
+    public void addAutore(Autore autore) {
+        this.scrittori.add(autore);
+    }
+
+    public void addFoto(String s){
+        this.immagine.add(s);
     }
 
     @Override
@@ -81,6 +88,6 @@ public class Libro {
 
     @Override
     public int hashCode() {
-        return Objects.hash(id,titolo);
+        return Objects.hash(id, titolo);
     }
 }
