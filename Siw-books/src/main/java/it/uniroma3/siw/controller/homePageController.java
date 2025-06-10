@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Controller
 public class homePageController {
 
-    @Autowired private SessionData sessionData;
 
     @GetMapping("/")
     public String homePage(){

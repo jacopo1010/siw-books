@@ -66,8 +66,10 @@ public class AutenticazioneController {
         }else {
             userD = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
             credenziali = this.credenzialiService.getCredenzialiPerUsername(userD.getUsername());
+            Utente logged = this.credenzialiService.getCredenzialiPerUsername(credenziali.getUsername()).getUtente();
             if (credenziali.getRuolo().equals(Credenziali.ADMIN_ROLE)){
-                return "/admin/books";
+                model.addAttribute("utente", logged);
+                return "/admin/indexAdmin.html";
             }
         }
         Utente loggato = this.sessionData.getLoggedUtente();

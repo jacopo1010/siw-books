@@ -11,16 +11,13 @@ public class Librelandia {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @OneToOne(cascade = CascadeType.ALL)
-    private Gestore gestore;
     @OneToMany(cascade = CascadeType.REMOVE)
     @MapKey
     private Map<Long, Libro> libri;
     @OneToMany(cascade = CascadeType.REMOVE, fetch = FetchType.LAZY)
     private List<Utente> utentiRegistrati;
 
-    public Librelandia(Gestore gestore){
-        this.gestore = gestore;
+    public Librelandia(){
         this.libri = new HashMap<Long,Libro>();
         this.utentiRegistrati = new ArrayList<Utente>();
     }
@@ -39,14 +36,6 @@ public class Librelandia {
 
     public void setLibri(Map<Long, Libro> libri) {
         this.libri = libri;
-    }
-
-    public Gestore getGestore() {
-        return gestore;
-    }
-
-    public void setGestore(Gestore gestore) {
-        this.gestore = gestore;
     }
 
     public List<Utente> getUtentiRegistrati() {

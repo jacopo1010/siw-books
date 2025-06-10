@@ -18,13 +18,14 @@ public class Recensione {
     private int voto;
     @Column(columnDefinition = "TEXT")
     private String testo;
-    @ManyToMany
+    @ManyToOne
     private Libro libro;
 
-    public Recensione(String titolo, int voto, String testo) {
+    public Recensione(String titolo, int voto, String testo, Libro libro) {
         this.titolo = titolo;
         this.voto = voto;
         this.testo = testo;
+        this.libro = libro;
     }
 
     public Recensione(){
