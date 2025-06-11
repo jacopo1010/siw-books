@@ -21,6 +21,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import static it.uniroma3.siw.model.Credenziali.ADMIN_ROLE;
 
 @Controller
 public class AutenticazioneController {
@@ -66,14 +67,13 @@ public class AutenticazioneController {
         }else {
             userD = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
             credenziali = this.credenzialiService.getCredenzialiPerUsername(userD.getUsername());
-            Utente logged = this.credenzialiService.getCredenzialiPerUsername(credenziali.getUsername()).getUtente();
-            if (credenziali.getRuolo().equals(Credenziali.ADMIN_ROLE)){
-                model.addAttribute("utente", logged);
+            Utente logged = this.sessionData.getLoggedUtente();
+            model.addAttribute("utente", logged);
+
+            if (credenziali.getRuolo().trim().equals(ADMIN_ROLE)){
                 return "/admin/indexAdmin.html";
             }
         }
-        Utente loggato = this.sessionData.getLoggedUtente();
-        model.addAttribute("utente",loggato);
         return "index.html";
     }
 

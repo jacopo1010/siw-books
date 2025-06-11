@@ -12,11 +12,11 @@
 <div>
     <nav>
         <ul>
-            <li ><a href="/logout">Logout</a></li>
-            <li><a href="/books"><i>Libri</i></a></li>
+            <li><a href="/logout">Logout</a></li>
+            <li><a href="/books">Libri</a></li>
             <li><a href="/modifica">Modifica</a> </li>
-            <li><a href="/aggiungi">Modifica</a> </li>
-            <li><a href="/elimina">Modifica</a> </li>
+            <li><a href="/aggiungi">Aggiungi</a> </li>
+            <li><a href="/elimina">Elimina</a> </li>
         </ul>
     </nav>
 </div>
@@ -34,6 +34,7 @@
 <div th:if="${utente != null}">
     <aside>
         <p th:text="${utente.nome}"></p>
+        <p>Bentornato Admin</p>
     </aside>
 </div>
 
