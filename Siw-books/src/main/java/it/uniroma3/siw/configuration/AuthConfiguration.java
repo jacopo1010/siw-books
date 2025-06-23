@@ -46,29 +46,25 @@ public class AuthConfiguration {
 
     @Bean
     protected SecurityFilterChain configure(final HttpSecurity http) throws Exception {
-        http
-                .csrf().disable()
-                .cors().disable()
-                .authorizeHttpRequests()
+        http.csrf(csrf-> csrf.disable())
+                .cors(cors->cors.disable()).authorizeHttpRequests(auth->auth
                 .requestMatchers(HttpMethod.GET, "/", "/index", "/login", "/register", "/css/**", "/images/**", "/favicon.ico").permitAll()
                 .requestMatchers(HttpMethod.POST, "/register", "/login").permitAll()
                 .requestMatchers(HttpMethod.GET, "/admin/**").hasAuthority(ADMIN_ROLE)
                 .requestMatchers(HttpMethod.POST, "/admin/**").hasAuthority(ADMIN_ROLE)
-                .anyRequest().authenticated()
-                .and()
-                .formLogin()
+                .anyRequest().authenticated())
+                 .formLogin(form->form
                 .loginPage("/login")
                 .permitAll()
                 .defaultSuccessUrl("/success", true)
-                .failureUrl("/login?error=true")
-                .and()
-                .logout()
+                .failureUrl("/login?error=true"))
+                .logout(logout->logout
                 .logoutSuccessUrl("/")
                 .invalidateHttpSession(true)
                 .deleteCookies("JSESSIONID")
                 .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
                 .clearAuthentication(true)
-                .permitAll();
+                .permitAll());
 
         return http.build();
     }
