@@ -12,7 +12,7 @@ public interface LibroRepository extends CrudRepository<Libro, Long> {
 
     public Set<Libro> findAll();
 
-    @Query(value = "SELECT l.* FROM libro l JOIN libro_autore la ON l.id = la.libro_id WHERE la.autore_id = :autoreId", nativeQuery = true)
-    List<Libro> findByAutoreId(@Param("autoreId") Long autoreId);
-
+   /** @Query("select l from Libro l join libro_scrittori s on l.id = s. ")
+    List<Libro> findByAutoreId(Long autoreId);
+  **/
 }
