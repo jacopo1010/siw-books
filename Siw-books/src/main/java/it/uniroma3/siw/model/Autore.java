@@ -5,6 +5,7 @@ import jakarta.persistence.*;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Objects;
+import java.util.Set;
 
 @Entity
 public class Autore {
@@ -18,6 +19,8 @@ public class Autore {
     private LocalDateTime dataMorte;
     private String  nazionalita;
     private String url_foto;
+    @ManyToMany(mappedBy = "scrittori")
+    private Set<Libro> libriScritti;
 
     public Autore(String nome,String cognome, LocalDateTime dn,LocalDateTime dm,String na,String foto) {
         this.nome = cognome;
@@ -86,6 +89,14 @@ public class Autore {
 
     public void setUrl_foto(String url_foto) {
         this.url_foto = url_foto;
+    }
+
+    public Set<Libro> getLibriScritti() {
+        return libriScritti;
+    }
+
+    public void setLibriScritti(Set<Libro> libriScritti) {
+        this.libriScritti = libriScritti;
     }
 
     @Override

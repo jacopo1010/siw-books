@@ -18,7 +18,12 @@ public class Libro {
     private LocalDate annopublicazione;
     @ElementCollection
     private List<String> immagine;
-    @OneToMany
+    @ManyToMany
+    @JoinTable(
+            name = "libro_autore",
+            joinColumns = @JoinColumn(name = "libro_id"),
+            inverseJoinColumns = @JoinColumn(name = "autore_id")
+    )
     private Set<Autore> scrittori;
     @OneToMany(mappedBy = "libro", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<Recensione> recensioni;
