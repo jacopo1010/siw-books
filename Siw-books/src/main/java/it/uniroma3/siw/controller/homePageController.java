@@ -20,7 +20,7 @@ public class homePageController {
 
     @GetMapping("/index")
     public String homePage(Model model){
-        Utente utente;
+        Utente utente = null;
         model.addAttribute("utente",utente);
         return "index.html";
     }
