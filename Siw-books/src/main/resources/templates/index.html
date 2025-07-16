@@ -12,9 +12,10 @@
 <div>
     <nav>
         <ul>
+            <li> <a th:href="@{/}">Home</a></li>
             <li th:if="${utente == null}"><a href="/login"><i>Accedi</i></a></li>
             <li th:if="${utente != null}"><a href="/logout">Logout</a></li>
-            <li><a href="libri.html"><i>Libri</i></a></li>
+            <li><a th:href="@{/libri}"><i>Libri</i></a></li>
         </ul>
     </nav>
 </div>

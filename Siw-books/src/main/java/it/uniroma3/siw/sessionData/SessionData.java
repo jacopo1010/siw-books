@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.context.annotation.ScopedProxyMode;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
 
@@ -35,16 +36,13 @@ public class SessionData {
     }
 
     private void update() {
-       Object obj = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-       if (obj instanceof UserDetails) {
-           UserDetails userLoggato = (UserDetails) obj;
-           this.credenziali = this.credenzialiRepository.findByUsername(userLoggato.getUsername()).get();
-           this.credenziali.setPassword("[PROTECTED]");
-           this.utente = this.credenziali.getUtente();
-       }else {
-           throw new RuntimeException();
-       }
+        Object obj = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        if (obj instanceof UserDetails) {
+            UserDetails userLoggato = (UserDetails) obj;
+            this.credenziali = this.credenzialiRepository.findByUsername(userLoggato.getUsername()).get();
+            this.credenziali.setPassword("[PROTECTED]");
+            this.utente = this.credenziali.getUtente();
+        }
     }
-
 
 }

@@ -1,4 +1,5 @@
 package it.uniroma3.siw.configuration;
+
 import static it.uniroma3.siw.model.Credenziali.ADMIN_ROLE;
 import static it.uniroma3.siw.model.Credenziali.DEFAULT_ROLE;
 
@@ -24,7 +25,8 @@ import java.lang.annotation.Annotation;
 public class AuthConfiguration {
 
 
-    @Autowired private DataSource dataSource;
+    @Autowired
+    private DataSource dataSource;
 
     @Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
@@ -46,25 +48,26 @@ public class AuthConfiguration {
 
     @Bean
     protected SecurityFilterChain configure(final HttpSecurity http) throws Exception {
-        http.csrf(csrf-> csrf.disable())
-                .cors(cors->cors.disable()).authorizeHttpRequests(auth->auth
-                .requestMatchers(HttpMethod.GET, "/", "/index", "/login", "/register", "/css/**", "/images/**", "/favicon.ico").permitAll()
-                .requestMatchers(HttpMethod.POST, "/register", "/login").permitAll()
-                .requestMatchers(HttpMethod.GET, "/admin/**").hasAuthority(ADMIN_ROLE)
-                .requestMatchers(HttpMethod.POST, "/admin/**").hasAuthority(ADMIN_ROLE)
-                .anyRequest().authenticated())
-                 .formLogin(form->form
-                .loginPage("/login")
-                .permitAll()
-                .defaultSuccessUrl("/success", true)
-                .failureUrl("/login?error=true"))
-                .logout(logout->logout
-                .logoutSuccessUrl("/")
-                .invalidateHttpSession(true)
-                .deleteCookies("JSESSIONID")
-                .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
-                .clearAuthentication(true)
-                .permitAll());
+        http.csrf(csrf -> csrf.disable())
+                .cors(cors -> cors.disable()).authorizeHttpRequests(auth -> auth
+                        .requestMatchers(HttpMethod.GET, "/", "/index", "/login", "/register", "/css/**", "/images/**", "/favicon.ico", "/libri").permitAll()
+                        .requestMatchers(HttpMethod.POST, "/", "/index", "/login", "/register", "/css/**", "/images/**", "/favicon.ico", "/libri").permitAll()
+                        .requestMatchers(HttpMethod.POST, "/register", "/login").permitAll()
+                        .requestMatchers(HttpMethod.GET, "/admin/**").hasAuthority(ADMIN_ROLE)
+                        .requestMatchers(HttpMethod.POST, "/admin/**").hasAuthority(ADMIN_ROLE)
+                        .anyRequest().authenticated())
+                .formLogin(form -> form
+                        .loginPage("/login")
+                        .permitAll()
+                        .defaultSuccessUrl("/success", true)
+                        .failureUrl("/login?error=true"))
+                .logout(logout -> logout
+                        .logoutSuccessUrl("/")
+                        .invalidateHttpSession(true)
+                        .deleteCookies("JSESSIONID")
+                        .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
+                        .clearAuthentication(true)
+                        .permitAll());
 
         return http.build();
     }
