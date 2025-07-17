@@ -10,30 +10,30 @@
     <h1>Registrazione</h1>
 </div>
 
-<form th:action="@{/register}" method="post" th:object="${utente}">
+<form th:action="@{/register}" method="post" th:object="${utente1}">
     <div>
         <label for="nome">Nome:
-            <input type="text" id="nome" th:field="*{nome}" required />
+            <input type="text" id="nome" th:field="*{nome}" required autocomplete="off"/>
         </label>
     </div>
     <div>
         <label for="cognome">Cognome:
-            <input type="text" id="cognome" th:field="*{cognome}" required />
+            <input type="text" id="cognome" th:field="*{cognome}" required  autocomplete="off"/>
         </label>
     </div>
     <div>
         <label for="email">Email:
-            <input type="email" id="email" th:field="*{email}" required />
+            <input type="email" id="email" th:field="*{email}" required autocomplete="off"/>
         </label>
     </div>
     <div>
         <label for="username">Username:
-            <input type="text" id="username" th:field="*{username}" required />
+            <input type="text" id="username" th:field="*{username}" required autocomplete="off"/>
         </label>
     </div>
     <div>
         <label for="password">Password:
-            <input type="password" id="password" th:field="*{password}" required />
+            <input type="password" id="password" th:field="*{password}" required autocomplete="off"/>
         </label>
     </div>
 

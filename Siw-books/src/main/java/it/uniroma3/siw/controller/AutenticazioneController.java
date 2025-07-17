@@ -39,13 +39,13 @@ public class AutenticazioneController {
     @GetMapping("/register")
     public String iniviaModuloregistraUtente(Model model){
         UtenteDto utenteDto = new UtenteDto();
-        model.addAttribute("utente", utenteDto);
+        model.addAttribute("utente1", utenteDto);
         return "register.html";
     }
 
     @PostMapping("/register")
-    public String registraUtente(@Valid @ModelAttribute("utente") UtenteDto u, BindingResult bindingResult, Model model){
-        System.out.println("Ricevuta registrazione: " + u.getUsername());
+    public String registraUtente(@Valid @ModelAttribute("utente1") UtenteDto u, BindingResult bindingResult, Model model){
+
         if (!bindingResult.hasErrors()){
            Utente nuovoUtente = this.utenteService.creaUtente(u.getNome(),u.getCognome(),u.getEmail());
            Credenziali credenziali = this.credenzialiService.creaCredenziali(u.getUsername(),u.getPassword(),Credenziali.DEFAULT_ROLE,nuovoUtente);
@@ -67,8 +67,7 @@ public class AutenticazioneController {
         }else {
             userD = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
             credenziali = this.credenzialiService.getCredenzialiPerUsername(userD.getUsername());
-            Utente logged = this.sessionData.getLoggedUtente();
-            model.addAttribute("utente", logged);
+            model.addAttribute("utente", userD);
 
             if (credenziali.getRuolo().trim().equals(ADMIN_ROLE)){
                 return "/admin/indexAdmin.html";

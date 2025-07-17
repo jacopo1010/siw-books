@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Controller
 public class homePageController {
 
-    @Autowired private UtenteService utenteService;
 
     @GetMapping("/")
     public String homePage(){
@@ -19,9 +18,7 @@ public class homePageController {
     }
 
     @GetMapping("/index")
-    public String homePage(Model model){
-        Utente utente = null;
-        model.addAttribute("utente",utente);
+    public String showhomePage(Model model){
         return "index.html";
     }
 
