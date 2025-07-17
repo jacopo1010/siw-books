@@ -1,7 +1,6 @@
 package it.uniroma3.siw.configuration;
 
 import static it.uniroma3.siw.model.Credenziali.ADMIN_ROLE;
-import static it.uniroma3.siw.model.Credenziali.DEFAULT_ROLE;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -18,7 +17,6 @@ import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 import javax.sql.DataSource;
-import java.lang.annotation.Annotation;
 
 @Configuration
 @EnableWebSecurity

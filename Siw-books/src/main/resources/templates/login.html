@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="it" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
+    <link rel="stylesheet" href="/css/login.css">
     <meta charset="UTF-8">
     <title>Accesso</title>
 </head>
@@ -13,22 +14,22 @@
 <form th:action="@{/login}" method="post">
     <div>
         <label  for="username" align="center">username</label>
-        <input type="text" name="username" id="username" align="center" required autocomplete="off"> <br>
+        <input type="text" name="username" id="username"  required autocomplete="off"> <br>
     </div>
 
     <div>
         <label  for="password" align="center">password</label>
-        <input type="password" name="password" id="password" align="center" required autocomplete="off"> <br>
+        <input type="password" name="password" id="password"  required autocomplete="off"> <br>
     </div>
     <div>
-        <button type="submit" align="center"> Accedi</button>
+        <button type="submit"> Accedi</button>
     </div>
 </form>
 
 <!-- Bottone di registrazione -->
 
 <p>Non hai un account? <a href="/register">
-    <button align="center">Registrati</button>
+    <button>Registrati</button>
 </a></p>
 
 </body>
