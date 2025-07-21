@@ -1,29 +1,28 @@
 <!DOCTYPE html>
 <html lang="it" xmlns:th="http://www.w3.org/1999/xhtml" xmlns:sec="http://www.w3.org/1999/xhtml">
 <head>
-    <link rel="stylesheet" href="/css/index.css">
+    <link rel="stylesheet" href="/css/style.css">
     <meta charset="UTF-8">
     <title>Librelandia</title>
 </head>
 <body>
-<div>
-    <h1><strong> Librelandia </strong></h1>
-</div>
+<header>
+    <h1> Librelandia </h1>
+</header>
 
 <div>
     <nav>
-        <ul>
-            <li> <a th:href="@{/}">Home</a></li>
-            <li th:if="${utente == null}"><a href="/login"><i>Accedi</i></a></li>
-            <li th:if="${utente != null}"><a href="/logout">Logout</a></li>
-            <li><a th:href="@{/libri}"><i>Libri</i></a></li>
-        </ul>
+        <a th:href="@{/}" class="nav-button">Home</a>
+        <a th:href="@{/libri}" class="nav-button">Libri</a>
+        <a th:href="@{/autori}" class="nav-button">Autori</a>
+        <a th:if="${isAnonymous}" href="/login" class="nav-button">Accedi</a>
+        <a th:if="${!isAnonymous}" href="/logout" class="nav-button">Logout</a>
     </nav>
 </div>
 
 <div>
-    <section>
-        <h2>Chi siamo ?</h2>
+    <section class="info-box">
+        <h2>Chi siamo?</h2>
         <p> Siamo una piccola associazione formata volontari che salva i Libri e li rende fruibili,
             online ad un costo stracciato. La nostra missione?
             è quella di far tornare a leggere le persone.

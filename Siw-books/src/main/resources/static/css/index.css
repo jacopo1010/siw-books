@@ -8,6 +8,10 @@ body {
     color: #333;
 }
 
+header {
+    background-color: #B4C6B2;
+}
+
 h1 {
     text-align: center;
     padding: 20px;
