@@ -11,4 +11,5 @@ public interface CredenzialiRepository extends CrudRepository<Credenziali,Long> 
 
     public Optional<Credenziali> findByUsername(String username);
 
+    public Optional<Credenziali> findByResetPasswordToken(String passwordToken);
 }

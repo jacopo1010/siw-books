@@ -21,7 +21,8 @@ public class Utente {
     private String email;
     @OneToMany(cascade = CascadeType.REMOVE, fetch = FetchType.LAZY)
     private List<Recensione> recensioneList;
-
+    @OneToOne(mappedBy = "utente", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private Credenziali credenziali;
 
     public Utente(String nome, String cognome, String email) {
         this.nome = nome;
@@ -72,6 +73,14 @@ public class Utente {
 
     public void setRecensioneList(List<Recensione> recensioneList) {
         this.recensioneList = recensioneList;
+    }
+
+    public Credenziali getCredenziali() {
+        return credenziali;
+    }
+
+    public void setCredenziali(Credenziali credenziali) {
+        this.credenziali = credenziali;
     }
 
     @Override
