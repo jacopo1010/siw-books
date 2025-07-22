@@ -1,41 +1,45 @@
 <!DOCTYPE html>
 <html lang="it" xmlns:th="http://www.w3.org/1999/xhtml" xmlns:sec="http://www.w3.org/1999/xhtml">
-<head>
-    <link rel="stylesheet" href="/css/style.css">
-    <meta charset="UTF-8">
-    <title>Librelandia</title>
-</head>
-<body>
-<header>
-    <h1> Librelandia </h1>
-</header>
+    <head>
+        <link rel="stylesheet" href="/css/style.css">
+        <link rel="stylesheet" href="/css/index.css">
+        <meta charset="UTF-8">
+        <title>Librelandia</title>
+    </head>
+    <body>
+        <header>
+            <img src="/images/librelandia-logo.png">
+            <h1> Librelandia </h1>
+        </header>
 
-<div>
-    <nav>
-        <a th:href="@{/}" class="nav-button">Home</a>
-        <a th:href="@{/libri}" class="nav-button">Libri</a>
-        <a th:href="@{/autori}" class="nav-button">Autori</a>
-        <a th:if="${isAnonymous}" href="/login" class="nav-button">Accedi</a>
-        <a th:if="${!isAnonymous}" href="/logout" class="nav-button">Logout</a>
-    </nav>
-</div>
+        <nav>
+            <a th:href="@{/}" class="nav-button">Home</a>
+            <a th:href="@{/libri}" class="nav-button">Libri</a>
+            <a th:href="@{/autori}" class="nav-button">Autori</a>
+            <a th:if="${isAnonymous}" href="/login" class="nav-button">Accedi</a>
+            <a th:if="${!isAnonymous}" href="/account" class="nav-button" th:text="${utente.username}"></a>
+        </nav>
 
-<div>
-    <section class="info-box">
-        <h2>Chi siamo?</h2>
-        <p> Siamo una piccola associazione formata volontari che salva i Libri e li rende fruibili,
-            online ad un costo stracciato. La nostra missione?
-            è quella di far tornare a leggere le persone.
-        </p>
-    </section>
-</div>
+        <main>
+            <section class="info-box">
+                <h1>Chi siamo?</h1>
+                <div class="info-content">
+                    <img src="/images/homepage.png">
+                    <p> Siamo una piccola associazione formata da volontari che si occupa di salvare i libri
+                        e di renderli fruibili online ad un costo stracciato. La nostra missione?
+                        Riaccendere la passione per la lettura nelle persone.
+                    </p>
+                </div>
+            </section>
 
-<div th:if="${utente != null}">
-    <aside>
-         <p th:text="${utente.username}"></p>
-    </aside>
-</div>
+            <section class="bestsellers">
+                <h1>Bestsellers</h1>
+            </section>
+        </main>
 
-
-</body>
+        <footer>
+            <p>* 2025 Librelandia - Tutti i diritti riservati</p>
+        </footer>
+    
+    </body>
 </html>

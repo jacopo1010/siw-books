@@ -1,78 +1,35 @@
-/* index.css */
-
-body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    margin: 0;
-    padding: 0;
-    background-color: #f9f9f9;
-    color: #333;
+.info-box {
+    border: 0.5px solid lightgrey;
+    border-radius: 12px;
+    margin: 10vh 10vw;
+    padding: 1rem 2rem;
+    background-color: #F7F9F4;
 }
 
-header {
-    background-color: #B4C6B2;
-}
-
-h1 {
+.info-box h1 {
+    font-size: 32px;
+    color: #2F443B;
     text-align: center;
-    padding: 20px;
-    font-size: 2.5rem;
-    background-color: #4b6584;
-    color: white;
-    margin: 0;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
 }
 
-nav {
-    background-color: #dff9fb;
-    padding: 10px 0;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
-}
-
-nav ul {
-    list-style-type: none;
+.info-content {
     display: flex;
-    justify-content: center;
-    padding: 0;
-    margin: 0;
 }
 
-nav li {
-    margin: 0 15px;
+.info-content img {
+    max-height: 30vh;
 }
 
-nav a {
-    text-decoration: none;
-    color: #130f40;
-    font-weight: bold;
-    transition: color 0.3s ease;
+.info-content p {
+    font-size: 18px;
+    font-weight: 600;
+    margin-left: 1rem;
 }
 
-nav a:hover {
-    color: #30336b;
+.bestsellers {
+    margin: 0 10vw;
 }
 
-section {
-    max-width: 800px;
-    margin: 40px auto;
-    background-color: white;
-    padding: 30px;
-    border-radius: 10px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
-}
-
-section h2 {
-    font-size: 1.8rem;
-    margin-bottom: 15px;
-    color: #30336b;
-}
-
-aside {
-    max-width: 200px;
-    margin: 30px auto;
-    padding: 10px;
-    background-color: #f0f0f0;
-    text-align: center;
-    border-radius: 5px;
-    font-weight: bold;
-    color: #2d3436;
+.bestsellers h1 {
+    font-size: 36px;
 }
