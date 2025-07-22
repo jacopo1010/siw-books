@@ -12,10 +12,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -24,29 +21,41 @@ public class LibrelandiaController {
 
     @Autowired private LibroService libroService;
     @Autowired private AutoreService autoreService;
-    @Autowired private RecensioneService recensioneService;
 
-
-    @GetMapping("/admin/indexAdmin")
+    @GetMapping("/admin/paginaModifiche")
     public String getAdminPage(){
-        return "/admin/indexAdmin.html";
+        return "paginaModifiche.html";
     }
 
     @GetMapping("/admin/aggiungiLibro")
     public String getPaginaModifica(Model model){
         LibroDto nuovoLibro = new LibroDto();
-        model.addAttribute("prodotto",nuovoLibro);
+        List<Autore> autori = this.autoreService.getAllAutori();
+        model.addAttribute("autori", autori);
+        model.addAttribute("libro",nuovoLibro);
         return "/admin/aggiungiLibro.html";
     }
 
     @PostMapping("/admin/aggiungiLibro")
-    public String addProdotto(@Valid @ModelAttribute("prodotto") LibroDto l,  BindingResult bindingResult, Model model){
-         if (!bindingResult.hasErrors()){
-             List<Autore> autori = this.autoreService.getAllAutori();
-             model.addAttribute("autori", autori);
+    public String addLibro(@Valid @ModelAttribute("libro") LibroDto l, BindingResult bindingResult, Model model,
+                              @RequestParam(name = "autori", required = false) List<Long> autoriId) {
+        if (bindingResult.hasErrors()) {
+            if (!(autoriId == null && autoriId.isEmpty())) {
+                List<Autore> autori = this.autoreService.listAllById(autoriId);
+                l.setScrittoriIds(autori);
+            }
+                Libro nuovolibro = new Libro(l.getTitolo(), l.getAnnopublicazione());
+                nuovolibro.setScrittori(l.getScrittoriIds());
+                this.libroService.saveLibro(nuovolibro);
+                model.addAttribute("nuovolibro", nuovolibro);
+                return "vediModifiche.html";
+            } else {
+                List<Autore> autori = this.autoreService.getAllAutori();
+                model.addAttribute("autori", autori);
+                model.addAttribute("libro", l);
+                return "/admin/aggiungiLibro.html";
+            }
 
-         }
-         return "";
     }
 
 

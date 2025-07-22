@@ -24,7 +24,7 @@ public class Libro {
             joinColumns = @JoinColumn(name = "libro_id"),
             inverseJoinColumns = @JoinColumn(name = "autore_id")
     )
-    private Set<Autore> scrittori;
+    private List<Autore> scrittori;
     @OneToMany(mappedBy = "libro", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<Recensione> recensioni;
 
@@ -32,8 +32,10 @@ public class Libro {
         this.titolo = titolo;
         this.annopublicazione = d;
         this.immagine = new LinkedList<>();
-        this.scrittori = new HashSet<Autore>();
+        this.scrittori = new LinkedList<Autore>();
     }
+
+    public Libro() {}
 
     public Long getId() {
         return id;
@@ -67,15 +69,16 @@ public class Libro {
         this.annopublicazione = annopublicazione;
     }
 
-    public Set<Autore> getScrittori() {
+    public List<Autore> getScrittori() {
         return scrittori;
     }
 
-    public void setScrittori(Set<Autore> scrittori) {
+    public void setScrittori(List<Autore> scrittori) {
         this.scrittori = scrittori;
     }
 
     public void addAutore(Autore autore) {
+        autore.addLibriScritti(this);
         this.scrittori.add(autore);
     }
 

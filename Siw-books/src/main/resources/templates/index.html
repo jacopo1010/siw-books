@@ -18,6 +18,14 @@
             <a th:href="@{/autori}" class="nav-button">Autori</a>
             <a th:if="${isAnonymous}" href="/login" class="nav-button">Accedi</a>
             <a th:if="${!isAnonymous}" href="/account" class="nav-button" th:text="${utente.username}"></a>
+            <a th:if="${isAdmin}" href="/admin" class="nav-button">Admin</a>
+            <!--barra di ricerca-->
+            <form th:action="@{/ricercaHome}" method="post">
+                <div class="field">
+                    <input type="text" th:value="${keyword}" placeholder="Cerca...">
+                </div>
+                <button type="submit">Cerca</button>
+            </form>
         </nav>
 
         <main>

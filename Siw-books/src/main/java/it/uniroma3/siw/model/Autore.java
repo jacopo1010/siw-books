@@ -3,6 +3,7 @@ package it.uniroma3.siw.model;
 import jakarta.persistence.*;
 
 import java.time.LocalDateTime;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
 import java.util.Set;
@@ -29,6 +30,7 @@ public class Autore {
         this.dataMorte = dm;
         this.nazionalita = na;
         this.url_foto = foto;
+        this.libriScritti = new HashSet<>();
     }
 
     public Autore(){
@@ -97,6 +99,11 @@ public class Autore {
 
     public void setLibriScritti(Set<Libro> libriScritti) {
         this.libriScritti = libriScritti;
+    }
+
+    public void addLibriScritti(Libro libro){
+        libro.addAutore(this);
+        this.libriScritti.add(libro);
     }
 
     @Override

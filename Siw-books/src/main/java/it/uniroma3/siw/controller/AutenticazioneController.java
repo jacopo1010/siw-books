@@ -70,7 +70,7 @@ public class AutenticazioneController {
             model.addAttribute("utente", userD);
 
             if (credenziali.getRuolo().trim().equals(ADMIN_ROLE)){
-                return "/admin/indexAdmin.html";
+                return "index.html";
             }
         }
         return "index.html";

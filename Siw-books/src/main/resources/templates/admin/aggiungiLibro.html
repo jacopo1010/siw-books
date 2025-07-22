@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>SiwBooks</title>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+
+<body>
+
+<header>
+
+    <div class="logo-title">
+        <span><img src="../images/siw-books-logo.png" class="image-logo"></span>
+        <span><h1>SiwBooks</h1></span>
+    </div>
+
+    <nav class="nav">
+        <a href="/" class="nav-link">Home</a>
+        <a href="/books" class="nav-link">Libri</a>
+        <a href="/authors" class="nav-link">Autori</a>
+        <a href="/addBook" class="login-button">Aggiungi Libro</a>
+        <a href="/account" class="login-button">Account</a>
+    </nav>
+</header>
+
+<main class="main-form">
+    <div class="form-container">
+        <div class="form-box">
+            <h1>Aggiungi Libro</h1>
+
+            <form th:action="@{/admin/aggiungiLibro}" method="post" th:object="${libro}">
+                <div class="input-field">
+                    <label for="title">Titolo</label>
+                    <input type="text" name="title" id="title" th:field="*{titolo}" required>
+                </div>
+
+                <div class="input-field">
+                    <label for="year">Anno di Pubblicazione</label>
+                    <input type="date" name="year" id="year" th:field="*{annopublicazione}" required>
+                </div>
+
+                <div class="input-field" style="padding-bottom: 6vh;">
+                    <label for="autoriId">Autori</label>
+                    <div th:if="${#lists.isEmpty(authors)}" class="message">
+                        Nessun autore disponibile al momento.
+                    </div>
+
+                    <div th:if="${not #lists.isEmpty(autori)}" th:each="author : ${autori}">
+                        <input type="checkbox" th:id="'author-' + ${author.id}" th:name="author" th:value="${author.id}">
+                        <label th:for="'author-' + ${author.id}" th:text="${author.name} + ${author.surname}"></label>
+                    </div>
+<!----
+                    <div>
+                        <a href="/admin/" class="generic-button1">Aggiungi Autore</a>
+                    </div>
+                </div>
+-->
+                <div class="input-field">
+                    <label for="urlImages">Foto</label>
+                    <input type="file" name="urlImages" accept="image/*">
+                </div>
+
+                <div class="input-field">
+                    <button type="submit" class="submit-button">Salva Libro</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</main>
+
+</body>
+</html>

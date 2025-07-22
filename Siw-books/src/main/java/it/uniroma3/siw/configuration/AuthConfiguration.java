@@ -49,7 +49,7 @@ public class AuthConfiguration {
         http.csrf(csrf -> csrf.disable())
                 .cors(cors -> cors.disable()).authorizeHttpRequests(auth -> auth
                         .requestMatchers(HttpMethod.GET, "/", "/index", "/login", "/register", "/css/**", "/images/**", "/favicon.ico", "/libri", "/autori","/password_dimenticata","/reimposta_password").permitAll()
-                        .requestMatchers(HttpMethod.POST, "/", "/index", "/login", "/register", "/css/**", "/images/**", "/favicon.ico", "/libri", "/autori","/password_dimenticata","/reimposta_password").permitAll()
+                        .requestMatchers(HttpMethod.POST, "/", "/index", "/login", "/register", "/css/**", "/images/**", "/favicon.ico", "/libri", "/autori","/password_dimenticata","/reimposta_password","/ricercaHome").permitAll()
                         .requestMatchers(HttpMethod.POST, "/register", "/login").permitAll()
                         .requestMatchers(HttpMethod.GET, "/admin/**").hasAuthority(ADMIN_ROLE)
                         .requestMatchers(HttpMethod.POST, "/admin/**").hasAuthority(ADMIN_ROLE)

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="it" xmlns:th="http://www.w3.org/1999/xhtml" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head>
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/index.css">
+    <meta charset="UTF-8">
+    <title>Librelandia</title>
+</head>
+<body>
+<header>
+    <img src="/images/librelandia-logo.png">
+    <h1> Librelandia </h1>
+</header>
+
+<nav>
+    <!--barra di ricerca-->
+    <form th:action="@{/ricercaHome}" method="post">
+        <div class="field">
+            <input type="text" th:value="${keyword}" placeholder="Cerca...">
+        </div>
+        <button type="submit">Cerca</button>
+    </form>
+
+    <a th:href="@{/}" class="nav-button">Home</a>
+    <a th:href="@{/libri}" class="nav-button">Libri</a>
+    <a th:href="@{/autori}" class="nav-button">Autori</a>
+    <a th:if="${isAnonymous}" href="/login" class="nav-button">Accedi</a>
+    <a th:if="${!isAnonymous}" href="/account" class="nav-button" th:text="${utente.username}"></a>
+</nav>
+
+<main>
+    <section th:if="${books.size()>0 and autori.size() == 0}"  th:each ="book : ${books}" class="info-box">
+        <p th:field="${book.titolo}"> titolo:</p>
+    </section>
+    <section th:if="${books.size() == 0}">Nessun libro disponibile al momento!</section>
+
+    <section th:if="${autori.size()>0 and books.size()==0}" th:each ="autore : ${autori}"  class="info-box">
+        <p th:field="${autore.nome}"> titolo:</p>
+        <p th:field="${autore.nazionalita}"> nazionalita
+        <p th:field="${autore.nazionalita}"> nazionalita:</p>
+    </section>
+    <section th:if="${autori.size() == 0}">Nessun Autore disponibile al momento!</section>
+
+</main>
+
+<footer>
+    <p>* 2025 Librelandia - Tutti i diritti riservati</p>
+</footer>
+
+</body>
+</html>

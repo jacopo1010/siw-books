@@ -21,7 +21,7 @@ public class LibroDto {
     private List<String> immagine = new LinkedList<>();
 
     @NotNull
-    private Set<Long> scrittoriIds = new HashSet<>(); // ID degli autori
+    private List<Autore> scrittoriIds = new LinkedList<>(); // ID degli autori
 
     // getter/setter
 
@@ -34,8 +34,11 @@ public class LibroDto {
     public List<String> getImmagine() { return immagine; }
     public void setImmagine(List<String> immagine) { this.immagine = immagine; }
 
-    public Set<Long> getScrittoriIds() { return scrittoriIds; }
-    public void setScrittoriIds(Set<Long> scrittoriIds) { this.scrittoriIds = scrittoriIds; }
+    public List<Autore> getScrittoriIds() { return scrittoriIds; }
+
+    public void setScrittoriIds(List<Autore> scrittoriIds) {
+        this.scrittoriIds = scrittoriIds;
+    }
 }
 
 
