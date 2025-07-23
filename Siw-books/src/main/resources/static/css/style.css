@@ -137,7 +137,7 @@ footer p {
      font-size: 16px;
 }
 
-.submit-button {
+.button {
      width: 20vw;
      height: 10vh;
      display: block; /* Rende il pulsante un elemento a livello di blocco */
@@ -149,7 +149,7 @@ footer p {
      font-size: 24px;
 }
 
-.submit-button:hover {
+.button:hover {
      background-color: #2F443B;
 }
 

@@ -24,7 +24,7 @@ public class LibrelandiaController {
 
     @GetMapping("/admin/paginaModifiche")
     public String getAdminPage(){
-        return "paginaModifiche.html";
+        return "/admin/paginaModifiche.html";
     }
 
     @GetMapping("/admin/aggiungiLibro")
