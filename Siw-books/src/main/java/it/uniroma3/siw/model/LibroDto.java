@@ -12,15 +12,15 @@ import java.util.Set;
 
 public class LibroDto {
 
-    @NotBlank
+    //@NotBlank
     private String titolo;
 
-    @NotNull
+    //@NotNull
     private LocalDate annopublicazione;
 
     private List<String> immagine = new LinkedList<>();
 
-    @NotNull
+    //@NotNull
     private List<Autore> scrittoriIds = new LinkedList<>(); // ID degli autori
 
     // getter/setter

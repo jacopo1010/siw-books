@@ -137,7 +137,7 @@ footer p {
      font-size: 16px;
 }
 
-.button {
+.submit-button {
      width: 20vw;
      height: 10vh;
      display: block; /* Rende il pulsante un elemento a livello di blocco */
@@ -149,7 +149,7 @@ footer p {
      font-size: 24px;
 }
 
-.button:hover {
+.submit-button:hover {
      background-color: #2F443B;
 }
 
@@ -172,4 +172,26 @@ footer p {
 .message {
      color: lightgrey;
      font-size: 14px;
+}
+
+/* Bottoni */
+.generic-button {
+     width: 20vw;
+     height: 10vh;
+     display: block; /* Rende il pulsante un elemento a livello di blocco */
+     margin: 0 auto; /* Centra orizzontalmente */
+     background-color: #446054;
+     border: 0.5px solid grey;
+     border-radius: 6px;
+     color: white;
+     font-size: 24px;
+     text-decoration: none;
+     text-align: center;
+     display: flex;
+     flex-direction: column;
+     justify-content: center;
+}
+
+.generic-button:hover {
+     background-color: #2F443B;
 }

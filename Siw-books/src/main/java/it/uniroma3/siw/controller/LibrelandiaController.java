@@ -5,10 +5,8 @@ import it.uniroma3.siw.model.Libro;
 import it.uniroma3.siw.model.LibroDto;
 import it.uniroma3.siw.service.AutoreService;
 import it.uniroma3.siw.service.LibroService;
-import it.uniroma3.siw.service.RecensioneService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -27,8 +25,13 @@ public class LibrelandiaController {
         return "/admin/paginaModifiche.html";
     }
 
+    @GetMapping("/admin/vediModifiche")
+    public String getPaginaModifiche(){
+        return "/admin/vediModifiche.html";
+    }
+
     @GetMapping("/admin/aggiungiLibro")
-    public String getPaginaModifica(Model model){
+    public String getPaginaAggiungiLibro(Model model){
         LibroDto nuovoLibro = new LibroDto();
         List<Autore> autori = this.autoreService.getAllAutori();
         model.addAttribute("autori", autori);
@@ -48,7 +51,7 @@ public class LibrelandiaController {
                 nuovolibro.setScrittori(l.getScrittoriIds());
                 this.libroService.saveLibro(nuovolibro);
                 model.addAttribute("nuovolibro", nuovolibro);
-                return "vediModifiche.html";
+                return "/admin/vediModifiche.html";
             } else {
                 List<Autore> autori = this.autoreService.getAllAutori();
                 model.addAttribute("autori", autori);
