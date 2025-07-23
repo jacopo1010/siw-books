@@ -1,47 +1,77 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml" xmlns="http://www.w3.org/1999/html">
+<html lang="it" xmlns:th="http://www.w3.org/1999/xhtml" xmlns:sec="http://www.w3.org/1999/xhtml">
 <head>
-    <link rel="stylesheet" href="/css/register.css">
+    <link rel="stylesheet" href="/css/style.css">
     <meta charset="UTF-8">
-    <title>Registrazione</title>
+    <title>Librelandia</title>
 </head>
 <body>
+<header>
+    <img src="/images/librelandia-logo.png">
+    <h1> Librelandia </h1>
+</header>
 
-<div>
-    <h1>Registrazione</h1>
-</div>
+<nav>
+    <!--barra di ricerca-->
+    <form th:action="@{/ricercaHome}" method="post" class="searchbar-field">
+        <input type="text" th:value="${keyword}" placeholder="Cerca...">
+        <button type="submit">Cerca</button>
+    </form>
+    <section class="menu">
+        <a th:href="@{/}" class="nav-button">Home</a>
+        <a th:href="@{/libri}" class="nav-button">Libri</a>
+        <a th:href="@{/autori}" class="nav-button">Autori</a>
+        <a th:if="${isAnonymous}" href="/login" class="nav-button">Accedi</a>
+        <a th:if="${!isAnonymous}" href="/account" class="nav-button" th:text="${utente.username}"></a>
+        <a th:if="${isAdmin}" href="/admin" class="nav-button">Admin</a>
+    </section>
+</nav>
 
-<form th:action="@{/register}" method="post" th:object="${utente1}">
-    <div>
-        <label for="nome">Nome:
-            <input type="text" id="nome" th:field="*{nome}" required autocomplete="off"/>
-        </label>
-    </div>
-    <div>
-        <label for="cognome">Cognome:
-            <input type="text" id="cognome" th:field="*{cognome}" required  autocomplete="off"/>
-        </label>
-    </div>
-    <div>
-        <label for="email">Email:
-            <input type="email" id="email" th:field="*{email}" required autocomplete="off"/>
-        </label>
-    </div>
-    <div>
-        <label for="username">Username:
-            <input type="text" id="username" th:field="*{username}" required autocomplete="off"/>
-        </label>
-    </div>
-    <div>
-        <label for="password">Password:
-            <input type="password" id="password" th:field="*{password}" required autocomplete="off"/>
-        </label>
-    </div>
+<main>
+    <section class="form-box">
+        <h1>Registrati</h1>
 
-    <div>
-        <button type="submit">Conferma</button>
-    </div>
-</form>
+        <form th:action="@{/register}" method="post" th:object="${utente1}">
+            <div class="field">
+                <label for="nome">Nome</label>
+                <input type="text" id="nome" th:field="*{nome}" required autocomplete="off"/>
+            </div>
+
+            <div class="field">
+                <label for="cognome">Cognome</label>
+                <input type="text" id="cognome" th:field="*{cognome}" required  autocomplete="off"/>
+            </div>
+
+            <div class="field">
+                <label for="email">Email</label>
+                <input type="email" id="email" th:field="*{email}" required autocomplete="off"/>
+            </div>
+
+            <div class="field">
+                <label for="username">Username</label>
+                <input type="text" id="username" th:field="*{username}" required autocomplete="off"/>
+            </div>
+
+            <div class="field" style="margin-bottom: 1rem">
+                <label for="password">Password</label>
+                <input type="password" id="password" th:field="*{password}" required autocomplete="off"/>
+            </div>
+
+            <div class="field">
+                <button type="submit" class="submit-button">Registrati</button>
+            </div>
+
+            <div class="container" style="margin-top: 1rem">
+                <p>Hai un account? <a th:href="@{/login}">Accedi</a></p>
+            </div>
+        </form>
+    </section>
+
+</main>
+
+<footer>
+    <p>* 2025 Librelandia - Tutti i diritti riservati</p>
+</footer>
 
 </body>
 </html>

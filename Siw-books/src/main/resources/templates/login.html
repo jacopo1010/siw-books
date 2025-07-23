@@ -37,18 +37,22 @@
                         <input type="text" name="username" id="username"  required autocomplete="off">
                     </div>
 
-                    <div class="field">
+                    <div class="field" style="margin-bottom: 1rem">
                         <label  for="password">Password</label>
                         <input type="password" name="password" id="password"  required autocomplete="off">
                     </div>
 
                     <div class="field">
-                        <button type="submit">Accedi</button>
+                        <button type="submit" class="submit-button">Accedi</button>
+                    </div>
+                    <div class="container" style="margin-top: -2.5rem;">
                         <p>
-                            <a th:href="@{/password_dimenticata}" style="color: #1c87c9;">Hai dimeticato la tua password?</a>
+                            <a th:href="@{/password_dimenticata}" class="forgot-password">Hai dimeticato la tua password?</a>
                         </p>
                     </div>
-                    <p>Non hai un account? <a th:href="@{/register}">Registrati</a></p>
+                    <div class="container" style="margin-top: 1rem">
+                        <p>Non hai un account? <a th:href="@{/register}">Registrati</a></p>
+                    </div>
                 </form>
             </section>
 

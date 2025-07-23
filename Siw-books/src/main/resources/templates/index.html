@@ -24,7 +24,7 @@
                 <a th:href="@{/autori}" class="nav-button">Autori</a>
                 <a th:if="${isAnonymous}" href="/login" class="nav-button">Accedi</a>
                 <a th:if="${!isAnonymous}" href="/account" class="nav-button" th:text="${utente.username}"></a>
-                <a th:if="${isAdmin}" href="/admin" class="nav-button">Admin</a>
+                <a th:if="${isAdmin}" href="/admin/paginaModifiche" class="nav-button">Admin</a>
             </section>
         </nav>
 
