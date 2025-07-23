@@ -19,7 +19,7 @@
                 <button type="submit">Cerca</button>
             </form>
             <section class="menu">
-                <a th:href="@{/}" class="nav-button">Home</a>
+                <a th:href="@{/logout}" class="nav-button">Home</a>
                 <a th:href="@{/libri}" class="nav-button">Libri</a>
                 <a th:href="@{/autori}" class="nav-button">Autori</a>
                 <a th:if="${isAnonymous}" href="/login" class="nav-button">Accedi</a>
@@ -42,6 +42,21 @@
 
             <section class="bestsellers">
                 <h1>Bestsellers</h1>
+                <div th:if="${#lists.isEmpty(libri)}" class="message">
+                    Nessun libro disponibile al momento.
+                </div>
+
+                <div th:if="${not #lists.isEmpty(libri)}" class="carousel-container">
+                    <div class="carousel-track">
+                        <div class="carousel-card" th:each="libro : ${libri}">
+                            <a th:href="@{'/libro/' + ${libro.id}}">
+                                <!--<img th:if="${book.urlImgage} != null" th:src="@{'/images/' + ${book.urlImgage}}" alt="Immagine"> -->
+                                <h5 th:text="${libro.titolo}">Title</h5>
+                                <p th:text="${libro.annoPubblicazione}">Year</p>
+                            </a>
+                        </div>
+                    </div>
+                </div>
             </section>
         </main>
 

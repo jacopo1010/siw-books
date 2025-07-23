@@ -95,10 +95,11 @@ public class LibrelandiaController {
          throw new IllegalArgumentException("L'libro non valido");
     }
 
-     @PostMapping("/admin/cancellaLibro/{id}")
+     @GetMapping("/admin/cancellaLibro/{id}")
      public String cancellaLibro(@PathVariable Long id){
-        this.libroService.deleteLibro(id);
-        return "/admin/paginaModifiche.html";
+        Libro daCancellare = this.libroService.getLibro(id);
+        this.libroService.deleteLibro(daCancellare);
+        return "redirect:/admin/paginaModifiche.html";
      }
 
 }

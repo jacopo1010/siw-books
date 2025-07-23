@@ -55,7 +55,7 @@ public class LibroService {
     }
 
     @Transactional
-    public void deleteLibro(Long Id){
-        this.libroRepository.deleteById(Id);
+    public void deleteLibro(Libro libro){
+        this.libroRepository.delete(libro);
     }
 }

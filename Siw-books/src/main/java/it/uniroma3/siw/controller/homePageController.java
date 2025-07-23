@@ -29,7 +29,8 @@ public class homePageController {
     }
 
     @GetMapping("/index")
-    public String showhomePage(){
+    public String showhomePage(Model model){
+        model.addAttribute("libri",this.libroService.getAllLibri());
         return "index.html";
     }
 

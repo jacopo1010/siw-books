@@ -5,6 +5,7 @@ import it.uniroma3.siw.model.Credenziali;
 import it.uniroma3.siw.model.Utente;
 import it.uniroma3.siw.model.UtenteDto;
 import it.uniroma3.siw.service.CredenzialiService;
+import it.uniroma3.siw.service.LibroService;
 import it.uniroma3.siw.service.UtenteService;
 import it.uniroma3.siw.sessionData.SessionData;
 import jakarta.validation.Valid;
@@ -29,7 +30,7 @@ public class AutenticazioneController {
     @Autowired private UtenteService utenteService;
     @Autowired private CredenzialiService credenzialiService;
     @Autowired private SessionData sessionData;
-
+    @Autowired private LibroService libroService;
 
     @GetMapping("/login")
     public String login(){
@@ -63,12 +64,13 @@ public class AutenticazioneController {
         Credenziali credenziali = null;
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         if (auth instanceof AnonymousAuthenticationToken){
+            model.addAttribute("libri", this.libroService.getAllLibri());
             return "index.html";
         }else {
             userD = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
             credenziali = this.credenzialiService.getCredenzialiPerUsername(userD.getUsername());
             model.addAttribute("utente", userD);
-
+            model.addAttribute("libri", this.libroService.getAllLibri());
             if (credenziali.getRuolo().trim().equals(ADMIN_ROLE)){
                 return "index.html";
             }
