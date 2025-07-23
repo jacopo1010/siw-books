@@ -28,7 +28,7 @@ public class LibrelandiaController {
 
     @GetMapping("/admin/vediModifiche")
     public String getPaginaDati(Model model){
-        Set<Libro> libri = this.libroService.getAllLibri();
+        List<Libro> libri = this.libroService.getAllLibri();
         List<Autore> autori = this.autoreService.getAllAutori();
         model.addAttribute("libri", libri);
         model.addAttribute("autori", autori);
@@ -64,5 +64,41 @@ public class LibrelandiaController {
 
     }
 
+    @GetMapping("/admin/modificaLibro/{id}")
+    public String modificaLibro(Model model, @PathVariable Long id){
+         List<Autore> autori = this.autoreService.getAllAutori();
+         Libro daModificare = this.libroService.getLibro(id);
+         LibroDto  nuovoLibro = new LibroDto();
+         nuovoLibro.setTitolo(daModificare.getTitolo());
+         nuovoLibro.setAnnoPubblicazione(daModificare.getAnnoPubblicazione());
+         nuovoLibro.setScrittoriIds(daModificare.getScrittori());
+         model.addAttribute("libroDto", nuovoLibro);
+         model.addAttribute("autori", autori);
+         return "/admin/modificaLibro.html";
+    }
+
+    @PostMapping("/admin/modificaLibro/{id}")
+    public String modificaLibro(Model model, @PathVariable Long id,@Valid @ModelAttribute("libroDto") LibroDto libroDto,BindingResult bindingResult,
+                                @RequestParam(name = "autori", required = false) List<Long> autoriId){
+         if (!bindingResult.hasErrors()) {
+             if (autoriId != null && !autoriId.isEmpty()) {
+                 List<Autore> autori = this.autoreService.getAllAutori();
+                 libroDto.setScrittoriIds(autori);
+             }
+             Libro daModificare = this.libroService.getLibro(id);
+             daModificare.setTitolo(libroDto.getTitolo());
+             daModificare.setAnnoPubblicazione(libroDto.getAnnoPubblicazione());
+             daModificare.setScrittori(libroDto.getScrittoriIds());
+             this.libroService.saveLibro(daModificare);
+             return "/admin/vediModificaLibro.html";
+         }
+         throw new IllegalArgumentException("L'libro non valido");
+    }
+
+     @PostMapping("/admin/cancellaLibro/{id}")
+     public String cancellaLibro(@PathVariable Long id){
+        this.libroService.deleteLibro(id);
+        return "/admin/paginaModifiche.html";
+     }
 
 }

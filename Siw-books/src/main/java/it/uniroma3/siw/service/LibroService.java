@@ -39,11 +39,11 @@ public class LibroService {
           return this.libroRepository.findById(Id).orElseThrow(() -> new IllegalArgumentException("Libro non trovato"));
     }
 
-    public Set<Libro> getAllLibri(){
+    public List<Libro> getAllLibri(){
          return this.libroRepository.findAll();
     }
 
-    public Set<Libro> listAllKeyWord(String keyWord){
+    public List<Libro> listAllKeyWord(String keyWord){
         if (keyWord != null){
             return this.libroRepository.findAllWithThatKeyword(keyWord);
         }
@@ -54,4 +54,8 @@ public class LibroService {
         return this.libroRepository.save(libro);
     }
 
+    @Transactional
+    public void deleteLibro(Long Id){
+        this.libroRepository.deleteById(Id);
+    }
 }

@@ -29,13 +29,13 @@ public class homePageController {
     }
 
     @GetMapping("/index")
-    public String showhomePage(Model model){
+    public String showhomePage(){
         return "index.html";
     }
 
     @PostMapping("/ricercaHome")
     public String ricercaBarraHome(Model model, @Param("keyword") String keyword) {
-        Set<Libro> books = this.libroService.listAllKeyWord(keyword);
+        List<Libro> books = this.libroService.listAllKeyWord(keyword);
         List<Autore> autori = this.autoreService.listAll(keyword);
         model.addAttribute("books", books);
         model.addAttribute("autori", autori);

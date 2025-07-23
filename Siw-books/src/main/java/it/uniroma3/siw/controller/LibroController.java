@@ -20,7 +20,7 @@ public class LibroController {
 
     @GetMapping("/libri")
     public String getAllBooks(Model model) {
-        Set<Libro> libri = this.libroService.getAllLibri();
+        List<Libro> libri = this.libroService.getAllLibri();
         model.addAttribute("libri",libri);
         return "libri.html";
     }
