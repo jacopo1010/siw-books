@@ -34,10 +34,45 @@ header h1 {
 /* Menù */
 nav {
      display: flex;
-     justify-content: space-evenly;
+     justify-content: space-between;
      align-items: center;
      padding: 0.5rem;
+     height: 5vh;
      background-color: #2F443B;
+}
+
+.searchbar-field {
+     width: 40%;
+     display: flex;
+}
+
+.searchbar-field input {
+     width: 80%;
+     height: 4vh;
+     border: 0.5px solid grey;
+     border-radius: 6px;
+     background-color: white;
+     padding: 4px 6px;
+     font-size: 16px;
+     margin: 0.5rem 1rem 0.5rem 2rem;
+}
+
+.searchbar-field button {
+     width: 15%;
+     height: auto;
+     border: 0.5px solid grey;
+     border-radius: 6px;
+     background-color: #F7F9F4;
+     color: #2F443B;
+     padding: 4px 6px;
+     font-size: 16px;
+     margin: 0.5rem 0;
+}
+
+.menu {
+     width: 50%;
+     display: flex;
+     justify-content: space-evenly;
 }
 
 .nav-button {

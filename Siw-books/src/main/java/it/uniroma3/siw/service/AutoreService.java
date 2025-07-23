@@ -51,4 +51,9 @@ public class AutoreService {
           return this.autoreRepository.findAllById(ids);
     }
 
+    @Transactional
+    public void deleteAutore(Long id){
+         this.autoreRepository.deleteById(id);
+    }
+
 }
