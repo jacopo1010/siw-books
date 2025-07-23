@@ -19,9 +19,9 @@ public class LibroService {
     @Autowired private AutoreRepository autoreRepository;
 
     @Transactional
-    public Libro creaLibro(String titolo, LocalDate t, String urlI){
-        Libro libro = new Libro(titolo,t);
-        libro.addFoto(urlI);
+    public Libro creaLibro(String titolo, LocalDate t,List<Autore> autori){
+        Libro libro = new Libro(titolo,t,autori);
+        //libro.addFoto(urlI);
         libro = this.libroRepository.save(libro);
         return libro;
     }

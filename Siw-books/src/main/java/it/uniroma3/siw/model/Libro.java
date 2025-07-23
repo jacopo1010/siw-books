@@ -2,8 +2,6 @@ package it.uniroma3.siw.model;
 
 import jakarta.persistence.*;
 
-import java.awt.*;
-import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.*;
 import java.util.List;
@@ -15,7 +13,7 @@ public class Libro {
     private Long id;
     private String titolo;
     @Column(name = "anno_di_pubblicazione")
-    private LocalDate annopublicazione;
+    private LocalDate annoPubblicazione;
     @ElementCollection
     private List<String> immagine;
     @ManyToMany
@@ -28,11 +26,11 @@ public class Libro {
     @OneToMany(mappedBy = "libro", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<Recensione> recensioni;
 
-    public Libro(String titolo, LocalDate d) {
+    public Libro(String titolo, LocalDate d, List<Autore> autori) {
         this.titolo = titolo;
-        this.annopublicazione = d;
-        this.immagine = new LinkedList<>();
-        this.scrittori = new LinkedList<Autore>();
+        this.annoPubblicazione = d;
+        this.immagine = new LinkedList<String>();
+        this.scrittori = autori;
     }
 
     public Libro() {}
@@ -61,12 +59,12 @@ public class Libro {
         this.immagine = immagine;
     }
 
-    public LocalDate getAnnopublicazione() {
-        return annopublicazione;
+    public LocalDate getAnnoPubblicazione() {
+        return annoPubblicazione;
     }
 
-    public void setAnnopublicazione(LocalDate annopublicazione) {
-        this.annopublicazione = annopublicazione;
+    public void setAnnoPubblicazione(LocalDate annoPubblicazione) {
+        this.annoPubblicazione = annoPubblicazione;
     }
 
     public List<Autore> getScrittori() {

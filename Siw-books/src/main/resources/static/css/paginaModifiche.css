@@ -1,4 +1,4 @@
-h1 {
+main h1 {
     font-size: 32px;
     color: #2F443B;
     text-align: center;
@@ -8,7 +8,7 @@ h1 {
 .activity-box {
     border: 0.5px solid lightgrey;
     border-radius: 12px;
-    margin: 3vh 35vw 10vh 35vw;
+    margin: 3vh 35vw 10vh 35vw; /* top - right - bottom - left */
     padding: 2rem 2rem 0 2rem; /* top - right - bottom - left */
     background-color: #F7F9F4;
     display: flex;

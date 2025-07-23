@@ -1,10 +1,115 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+<html lang="it" xmlns:th="http://www.w3.org/1999/xhtml" xmlns:sec="http://www.w3.org/1999/xhtml">
+    <head>
+        <link rel="stylesheet" href="/css/style.css">
+        <link rel="stylesheet" href="/css/vediModifiche.css">
+        <meta charset="UTF-8">
+        <title>Librelandia</title>
+    </head>
+    <body>
+        <header>
+            <img src="/images/librelandia-logo.png">
+            <h1> Librelandia </h1>
+        </header>
 
-</body>
+        <nav>
+            <!--barra di ricerca-->
+            <form th:action="@{/ricercaHome}" method="post" class="searchbar-field">
+                <input type="text" th:value="${keyword}" placeholder="Cerca...">
+                <button type="submit">Cerca</button>
+            </form>
+            <section class="menu">
+                <a th:href="@{/}" class="nav-button">Home</a>
+                <a th:href="@{/libri}" class="nav-button">Libri</a>
+                <a th:href="@{/autori}" class="nav-button">Autori</a>
+                <a th:if="${isAnonymous}" href="/login" class="nav-button">Accedi</a>
+                <a th:if="${!isAnonymous}" href="/account" class="nav-button" th:text="${utente.username}"></a>
+                <a th:if="${isAdmin}" href="/admin/paginaModifiche" class="nav-button">Admin</a>
+            </section>
+        </nav>
+
+        <main>
+            <h1>Vedi Modifiche</h1>
+
+            <section class="table-box">
+                <h2>Libri</h2>
+
+                <table>
+                    <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Foto</th>
+                        <th>Dettagli</th>
+                        <th>Attivita'</th>
+                    </tr>
+                    </thead>
+                    <tbody th:if="${#sets.isEmpty(libri)}">
+                    <tr>
+                        <td class="message">Nessun ID disponibile</td>
+                        <td class="message">Nessuna foto disponibile</td>
+                        <td class="message">Nessun dettaglio disponibile</td>
+                        <td class="message">Nessuna attivita' disponibile</td>
+                    </tr>
+                    </tbody>
+                    <tbody th:if="${not #sets.isEmpty(libri)}" th:each="libro : ${libri}">
+                    <tr>
+                        <td th:text="${libro.id}"></td>
+                        <td th:text="${libro.immagine}"></td>
+                        <td>
+                            Titolo: <span th:text="${libro.titolo}"></span><br/>
+                            Anno di pubblicazione: <span th:text="${libro.annoPubblicazione}"></span>
+                        </td>
+                        <td>
+                            <a class="table-button" href="">Modifica</a>
+                            <a class="table-button" href="">Elimina</a>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </section>
+
+            <section class="table-box">
+                <h2>Autori</h2>
+
+                <table>
+                    <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Foto</th>
+                        <th>Dettagli</th>
+                        <th>Attivita'</th>
+                    </tr>
+                    </thead>
+                    <tbody th:if="${#sets.isEmpty(autori)}">
+                    <tr>
+                        <td class="message">Nessun ID disponibile</td>
+                        <td class="message">Nessuna foto disponibile</td>
+                        <td class="message">Nessun dettaglio disponibile</td>
+                        <td class="message">Nessuna attivita' disponibile</td>
+                    </tr>
+                    </tbody>
+                    <tbody th:if="${not #sets.isEmpty(autori)}" th:each="autore : ${autori}">
+                    <tr>
+                        <td th:text="${autore.id}"></td>
+                        <td th:text="${autore.immagine}"></td>
+                        <td>
+                            Nome: <span th:text="${autore.nome}"></span><br/>
+                            Cognome: <span th:text="${autore.cognome}"></span>
+                            Nazionalita': <span th:text="${autore.nazionalita}"></span>
+                        </td>
+                        <td>
+                            <a class="table-button" href="">Modifica</a>
+                            <a class="table-button" href="">Elimina</a>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </section>
+        </main>
+
+        <footer>
+            <p>* 2025 Librelandia - Tutti i diritti riservati</p>
+        </footer>
+
+    </body>
 </html>

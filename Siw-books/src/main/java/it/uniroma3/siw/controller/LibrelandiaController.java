@@ -13,6 +13,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Set;
 
 @Controller
 public class LibrelandiaController {
@@ -26,12 +27,16 @@ public class LibrelandiaController {
     }
 
     @GetMapping("/admin/vediModifiche")
-    public String getPaginaModifiche(){
+    public String getPaginaDati(Model model){
+        Set<Libro> libri = this.libroService.getAllLibri();
+        List<Autore> autori = this.autoreService.getAllAutori();
+        model.addAttribute("libri", libri);
+        model.addAttribute("autori", autori);
         return "/admin/vediModifiche.html";
     }
 
     @GetMapping("/admin/aggiungiLibro")
-    public String getPaginaAggiungiLibro(Model model){
+    public String getPaginaModifiche(Model model){
         LibroDto nuovoLibro = new LibroDto();
         List<Autore> autori = this.autoreService.getAllAutori();
         model.addAttribute("autori", autori);
@@ -42,22 +47,20 @@ public class LibrelandiaController {
     @PostMapping("/admin/aggiungiLibro")
     public String addLibro(@Valid @ModelAttribute("libro") LibroDto l, BindingResult bindingResult, Model model,
                               @RequestParam(name = "autori", required = false) List<Long> autoriId) {
-        if (bindingResult.hasErrors()) {
-            if (!(autoriId == null && autoriId.isEmpty())) {
+        if (!bindingResult.hasErrors()) {
+            if (autoriId != null && !autoriId.isEmpty()) {
                 List<Autore> autori = this.autoreService.listAllById(autoriId);
                 l.setScrittoriIds(autori);
             }
-                Libro nuovolibro = new Libro(l.getTitolo(), l.getAnnopublicazione());
-                nuovolibro.setScrittori(l.getScrittoriIds());
-                this.libroService.saveLibro(nuovolibro);
+                Libro nuovolibro = this.libroService.creaLibro(l.getTitolo(),l.getAnnoPubblicazione(),l.getScrittoriIds());
                 model.addAttribute("nuovolibro", nuovolibro);
-                return "/admin/vediModifiche.html";
-            } else {
-                List<Autore> autori = this.autoreService.getAllAutori();
-                model.addAttribute("autori", autori);
-                model.addAttribute("libro", l);
-                return "/admin/aggiungiLibro.html";
-            }
+                return "/admin/paginaModifiche.html";
+        } else {
+            List<Autore> autori = this.autoreService.getAllAutori();
+            model.addAttribute("autori", autori);
+            model.addAttribute("libro", l);
+            return "/admin/aggiungiLibro.html";
+        }
 
     }
 

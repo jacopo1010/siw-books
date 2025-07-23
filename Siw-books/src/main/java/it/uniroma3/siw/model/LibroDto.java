@@ -16,20 +16,20 @@ public class LibroDto {
     private String titolo;
 
     //@NotNull
-    private LocalDate annopublicazione;
+    private LocalDate annoPubblicazione;
 
-    private List<String> immagine = new LinkedList<>();
+    private List<String> immagine = new LinkedList<String>();
 
     //@NotNull
-    private List<Autore> scrittoriIds = new LinkedList<>(); // ID degli autori
+    private List<Autore> scrittoriIds = new LinkedList<Autore>(); // ID degli autori
 
     // getter/setter
 
     public String getTitolo() { return titolo; }
     public void setTitolo(String titolo) { this.titolo = titolo; }
 
-    public LocalDate getAnnopublicazione() { return annopublicazione; }
-    public void setAnnopublicazione(LocalDate annopublicazione) { this.annopublicazione = annopublicazione; }
+    public LocalDate getAnnoPubblicazione() { return annoPubblicazione; }
+    public void setAnnoPubblicazione(LocalDate annoPubblicazione) { this.annoPubblicazione = annoPubblicazione; }
 
     public List<String> getImmagine() { return immagine; }
     public void setImmagine(List<String> immagine) { this.immagine = immagine; }

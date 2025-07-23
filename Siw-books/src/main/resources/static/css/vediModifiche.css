@@ -1,0 +1,61 @@
+main h1 {
+    font-size: 32px;
+    color: #2F443B;
+    text-align: center;
+    margin-top: 10vh;
+}
+
+.table-box {
+    margin: 3vh 10vw 10vh 10vw; /* top - right - bottom - left */
+    padding: 0.3rem 2rem 1rem 2rem; /* top - right - bottom - left */
+    background-color: white;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 6px;
+}
+
+h2 {
+    color: #2F443B;
+    border-bottom: 2px solid #2F443B;
+    padding-bottom: 1rem;
+    margin-bottom: 1rem;
+    text-align: center;
+}
+
+table {
+    width: 100%;
+    border-radius: 6px;
+    margin-top: 1rem;
+}
+
+table th, table td {
+    border: 1px solid lightgrey;
+    padding: 0.5rem;
+}
+
+table th {
+    background-color: #2F443B;
+    color: white;
+    text-align: center;
+    font-weight: bold;
+}
+
+.table-button {
+    width: 100%;
+    height: 5vh;
+    display: block; /* Rende il pulsante un elemento a livello di blocco */
+    margin: 1vh auto; /* Centra orizzontalmente */
+    background-color: #446054;
+    border: 0.5px solid grey;
+    border-radius: 6px;
+    color: white;
+    font-size: 16px;
+    text-decoration: none;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.table-button:hover {
+    background-color: #2F443B;
+}
