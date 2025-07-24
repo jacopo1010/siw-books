@@ -13,13 +13,14 @@ public interface LibroRepository extends JpaRepository<Libro, Long> {
 
     public List<Libro> findAll();
 
-   public Optional<Libro> findById(Long aLong);
+   public Optional<Libro> findById(Long id);
 
     @Query("select l from Libro l where CONCAT(l.id,'',l.titolo) LIKE %?1%")
     public List<Libro> findAllWithThatKeyword(String keyword);
 
     @Query(value = "select a.* from Autore a join libro_autore la on la.autore_id = a.id  where a.id =?1", nativeQuery = true)
     public Set<Autore> findAutoriDelLibro(Long idAutore);
+
 
 
 }

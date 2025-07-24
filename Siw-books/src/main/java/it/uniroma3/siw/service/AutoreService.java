@@ -56,4 +56,9 @@ public class AutoreService {
          this.autoreRepository.deleteById(id);
     }
 
+    public void salva(Autore autore){
+        this.autoreRepository.save(autore);
+    }
+
+
 }

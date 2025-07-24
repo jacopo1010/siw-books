@@ -3,10 +3,7 @@ package it.uniroma3.siw.model;
 import jakarta.persistence.*;
 
 import java.time.LocalDateTime;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Objects;
-import java.util.Set;
+import java.util.*;
 
 @Entity
 public class Autore {
@@ -21,16 +18,16 @@ public class Autore {
     private String  nazionalita;
     private String url_foto;
     @ManyToMany(mappedBy = "scrittori")
-    private Set<Libro> libriScritti;
+    private List<Libro> libriScritti;
 
     public Autore(String nome,String cognome, LocalDateTime dn,LocalDateTime dm,String na,String foto) {
-        this.nome = cognome;
+        this.nome = nome;
         this.cognome = cognome;
         this.dataNascita = dn;
         this.dataMorte = dm;
         this.nazionalita = na;
         this.url_foto = foto;
-        this.libriScritti = new HashSet<>();
+        this.libriScritti = new ArrayList<>();
     }
 
     public Autore(){
@@ -93,16 +90,16 @@ public class Autore {
         this.url_foto = url_foto;
     }
 
-    public Set<Libro> getLibriScritti() {
+    public List<Libro> getLibriScritti() {
         return libriScritti;
     }
 
-    public void setLibriScritti(Set<Libro> libriScritti) {
+    public void setLibriScritti(List<Libro> libriScritti) {
         this.libriScritti = libriScritti;
     }
 
     public void addLibriScritti(Libro libro){
-        libro.addAutore(this);
+        libro.getScrittori().add(this);
         this.libriScritti.add(libro);
     }
 

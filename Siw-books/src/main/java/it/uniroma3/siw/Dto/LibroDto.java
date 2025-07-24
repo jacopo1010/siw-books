@@ -1,14 +1,10 @@
-package it.uniroma3.siw.model;
+package it.uniroma3.siw.Dto;
 
-import jakarta.persistence.*;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
+import it.uniroma3.siw.model.Autore;
 
 import java.time.LocalDate;
-import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Set;
 
 public class LibroDto {
 

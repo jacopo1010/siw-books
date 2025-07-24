@@ -61,7 +61,9 @@
                         </td>
                         <td>
                             <a class="table-button" th:href="@{/admin/modificaLibro/{id}(id=${libro.id})}">Modifica</a>
-                            <a class="table-button" href="">Elimina</a>
+                            <form th:action="@{/admin/cancellaLibro/{id}(id =${libro.id})}" method="post">
+                            <button type="submit" class="table-button">Elimina</button>
+                            </form>
                         </td>
                     </tr>
                     </tbody>
@@ -91,7 +93,7 @@
                     <tbody th:if="${not #sets.isEmpty(autori)}" th:each="autore : ${autori}">
                     <tr>
                         <td th:text="${autore.id}"></td>
-                        <td th:text="${autore.immagine}"></td>
+                        <td th:text="${autore.url_foto}"></td>
                         <td>
                             Nome: <span th:text="${autore.nome}"></span><br/>
                             Cognome: <span th:text="${autore.cognome}"></span>

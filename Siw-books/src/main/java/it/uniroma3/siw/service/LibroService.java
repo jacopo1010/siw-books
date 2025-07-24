@@ -22,6 +22,9 @@ public class LibroService {
     public Libro creaLibro(String titolo, LocalDate t,List<Autore> autori){
         Libro libro = new Libro(titolo,t,autori);
         //libro.addFoto(urlI);
+        for(Autore a : autori){
+            a.addLibriScritti(libro);
+        }
         libro = this.libroRepository.save(libro);
         return libro;
     }

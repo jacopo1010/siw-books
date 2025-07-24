@@ -76,7 +76,7 @@ public class Libro {
     }
 
     public void addAutore(Autore autore) {
-        autore.addLibriScritti(this);
+        autore.getLibriScritti().add(this);
         this.scrittori.add(autore);
     }
 

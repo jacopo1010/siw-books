@@ -1,8 +1,9 @@
 package it.uniroma3.siw.controller;
 
+import it.uniroma3.siw.Dto.AutoreDto;
 import it.uniroma3.siw.model.Autore;
 import it.uniroma3.siw.model.Libro;
-import it.uniroma3.siw.model.LibroDto;
+import it.uniroma3.siw.Dto.LibroDto;
 import it.uniroma3.siw.service.AutoreService;
 import it.uniroma3.siw.service.LibroService;
 import jakarta.validation.Valid;
@@ -13,7 +14,6 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Set;
 
 @Controller
 public class LibrelandiaController {
@@ -83,24 +83,46 @@ public class LibrelandiaController {
                                 @RequestParam(name = "autori", required = false) List<Long> autoriId){
          if (!bindingResult.hasErrors()) {
              if (autoriId != null && !autoriId.isEmpty()) {
-                 List<Autore> autori = this.autoreService.getAllAutori();
+                 List<Autore> autori = this.autoreService.listAllById(autoriId);
                  libroDto.setScrittoriIds(autori);
              }
              Libro daModificare = this.libroService.getLibro(id);
              daModificare.setTitolo(libroDto.getTitolo());
              daModificare.setAnnoPubblicazione(libroDto.getAnnoPubblicazione());
-             daModificare.setScrittori(libroDto.getScrittoriIds());
+             for (Autore  autore : libroDto.getScrittoriIds()){
+                 this.libroService.addAutore(autore.getId(),daModificare.getId());
+             }
              this.libroService.saveLibro(daModificare);
              return "admin/paginaModifiche.html";
          }
-         throw new IllegalArgumentException("L'libro non valido");
+         throw new IllegalArgumentException("il libro non e' valido");
     }
 
-     @GetMapping("/admin/cancellaLibro/{id}")
-     public String cancellaLibro(@PathVariable Long id){
+     @PostMapping("/admin/cancellaLibro/{id}")
+     public String cancellaLibro(@PathVariable Long id,Model model){
         Libro daCancellare = this.libroService.getLibro(id);
+        model.addAttribute("id", id);
         this.libroService.deleteLibro(daCancellare);
-        return "redirect:/admin/paginaModifiche.html";
+        return "admin/paginaModifiche.html";
+     }
+
+     @GetMapping("/admin/aggiungiAutore")
+    public String aggiungiAutore(Model model){
+        AutoreDto daAutore = new AutoreDto();
+        model.addAttribute("autore", daAutore);
+        return "admin/aggiungiAutore.html";
+     }
+
+     @PostMapping("/admin/aggiungiAutore")
+     public String aggiungiAutorePost(Model model, @Valid @ModelAttribute("autore") AutoreDto daAutore,
+                                      BindingResult bindingResult) {
+         if (!bindingResult.hasErrors()) {
+             Autore autore = this.autoreService.creaAutore(daAutore.getNome(), daAutore.getCognome(), daAutore.getDataNascita(), daAutore.getDataNascita(), daAutore.getNazionalita(), daAutore.getUrl_foto());
+             this.autoreService.salva(autore);
+             return "admin/paginaModifiche.html";
+         } else {
+             throw new IllegalArgumentException("L'autore non valido");
+         }
      }
 
 }

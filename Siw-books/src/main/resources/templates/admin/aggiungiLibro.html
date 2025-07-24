@@ -32,7 +32,7 @@
             <section class="form-box">
                 <h1>Aggiungi Libro</h1>
 
-                <form th:action="@{/admin/aggiungiLibro}" method="post" th:object="${libro}">
+                <form th:action="@{/admin/aggiungiLibro}" enctype="multipart/form-data" method="post" th:object="${libro}">
                     <div class="field">
                         <label for="titolo">Titolo</label>
                         <input type="text" name="titolo" id="titolo" th:field="*{titolo}" required autocomplete="off">
