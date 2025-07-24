@@ -23,7 +23,7 @@ public class LibrelandiaController {
 
     @GetMapping("/admin/paginaModifiche")
     public String getAdminPage(){
-        return "/admin/paginaModifiche.html";
+        return "admin/paginaModifiche.html";
     }
 
     @GetMapping("/admin/vediModifiche")
@@ -32,7 +32,7 @@ public class LibrelandiaController {
         List<Autore> autori = this.autoreService.getAllAutori();
         model.addAttribute("libri", libri);
         model.addAttribute("autori", autori);
-        return "/admin/vediModifiche.html";
+        return "admin/vediModifiche.html";
     }
 
     @GetMapping("/admin/aggiungiLibro")
@@ -41,7 +41,7 @@ public class LibrelandiaController {
         List<Autore> autori = this.autoreService.getAllAutori();
         model.addAttribute("autori", autori);
         model.addAttribute("libro",nuovoLibro);
-        return "/admin/aggiungiLibro.html";
+        return "admin/aggiungiLibro.html";
     }
 
     @PostMapping("/admin/aggiungiLibro")
@@ -54,12 +54,12 @@ public class LibrelandiaController {
             }
                 Libro nuovolibro = this.libroService.creaLibro(l.getTitolo(),l.getAnnoPubblicazione(),l.getScrittoriIds());
                 model.addAttribute("nuovolibro", nuovolibro);
-                return "/admin/paginaModifiche.html";
+                return "admin/paginaModifiche.html";
         } else {
             List<Autore> autori = this.autoreService.getAllAutori();
             model.addAttribute("autori", autori);
             model.addAttribute("libro", l);
-            return "/admin/aggiungiLibro.html";
+            return "admin/aggiungiLibro.html";
         }
 
     }
@@ -75,7 +75,7 @@ public class LibrelandiaController {
          model.addAttribute("id", id);
          model.addAttribute("libroDto", nuovoLibro);
          model.addAttribute("autori", autori);
-         return "/admin/modificaLibro.html";
+         return "admin/modificaLibro.html";
     }
 
     @PostMapping("/admin/modificaLibro/{id}")
@@ -91,7 +91,7 @@ public class LibrelandiaController {
              daModificare.setAnnoPubblicazione(libroDto.getAnnoPubblicazione());
              daModificare.setScrittori(libroDto.getScrittoriIds());
              this.libroService.saveLibro(daModificare);
-             return "/admin/vediModificaLibro.html";
+             return "admin/paginaModifiche.html";
          }
          throw new IllegalArgumentException("L'libro non valido");
     }
