@@ -30,38 +30,37 @@
 
 <main>
     <section class="form-box">
-        <h1>Modifica Libro</h1>
+        <h1>Modifica Autore</h1>
 
-        <form th:action="@{/admin/modificaLibro/{id}(id=${id})}" enctype="multipart/form-data" method="post" th:object="${libroDto}">
+        <form th:action="@{/admin/modificaAutore/{id}(id=${id})}" method="post" th:object="${autoreDto}">
             <div class="field">
-                <label for="titolo">Titolo</label>
-                <input type="text" name="titolo" id="titolo" th:field="*{titolo}" required autocomplete="off">
+                <label for="nome">Nome</label>
+                <input type="text" name="nome" id="nome" th:field="*{nome}" required autocomplete="off">
             </div>
-
             <div class="field">
-                <label for="anno">Anno di Pubblicazione</label>
-                <input type="date" name="anno" id="anno" th:field="*{annoPubblicazione}" required autocomplete="off">
+                <label for="Cognome">Cognome</label>
+                <input type="text" name="Cognome" id="Cognome" th:field="*{cognome}" required autocomplete="off">
             </div>
-
-            <div class="field" style="padding-bottom: 6vh;">
-                <label for="autoriId">Autori</label>
-                <div th:if="${#lists.isEmpty(autori)}" class="message">
-                    Nessun autore disponibile al momento.
-                </div>
-
-                <div th:if="${not #lists.isEmpty(autori)}" th:each="autore : ${autori}">
-                    <input type="checkbox" th:id="'autore-' + ${autore.id}" th:name="autore" th:value="${autore.id}">
-                    <label th:for="'autore-' + ${autore.id}" th:text="${autore.nome} + ${autore.cognome}"></label>
-                </div>
+            <div class="field">
+                <label for="annoDiNascita">Anno di nascita</label>
+                <input type="datetime-local" name="annoDiNascita" id="annoDiNascita" th:field="*{dataNascita}" required autocomplete="off">
+            </div>
+            </div>
+            <div class="field">
+                <label for="annoDiMorte">Anno di morte</label>
+                <input type="datetime-local" name="annoDiMorte" id="annoDiMorte" th:field="*{dataMorte}" required autocomplete="off">
             </div>
 
             <div class="field">
                 <label for="urlImmagine">Foto</label>
                 <input type="file" name="urlImmagine" accept="image/*">
             </div>
-
             <div class="field">
-                <button type="submit" class="submit-button">Salva Libro</button>
+                <label for="nazionalita">Nazionalita</label>
+                <input type="text" name="nazionalita" id="nazionalita" th:field="*{nazionalita}" required autocomplete="off">
+            </div>
+            <div class="field">
+                <button type="submit" class="submit-button">Salva Autore</button>
             </div>
         </form>
     </section>

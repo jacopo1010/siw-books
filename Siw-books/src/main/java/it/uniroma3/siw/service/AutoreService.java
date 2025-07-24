@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -52,8 +53,23 @@ public class AutoreService {
     }
 
     @Transactional
-    public void deleteAutore(Long id){
-         this.autoreRepository.deleteById(id);
+    public void deleteAutore(Long autoreId){
+        Autore daCancellare = autoreRepository.findById(autoreId)
+                .orElseThrow(() -> new IllegalArgumentException("Autore non trovato"));
+
+        /**
+         * itero su i libri che ha scritto l'autore che vogliamo cancellare
+         * e su ogni libro prendiamo la propria lista e rimuoviamo l'autore da cancellare stess.
+         */
+        for (Libro libro : daCancellare.getLibriScritti()) {
+            libro.getScrittori().remove(daCancellare);
+        }
+        /**
+         * comando in più per essere sicure che l'abbia cancellato
+         */
+        daCancellare.getLibriScritti().clear();
+
+        this.autoreRepository.delete(daCancellare);
     }
 
     public void salva(Autore autore){

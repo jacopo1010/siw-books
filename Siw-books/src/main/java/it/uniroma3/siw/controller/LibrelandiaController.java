@@ -18,16 +18,18 @@ import java.util.List;
 @Controller
 public class LibrelandiaController {
 
-    @Autowired private LibroService libroService;
-    @Autowired private AutoreService autoreService;
+    @Autowired
+    private LibroService libroService;
+    @Autowired
+    private AutoreService autoreService;
 
     @GetMapping("/admin/paginaModifiche")
-    public String getAdminPage(){
+    public String getAdminPage() {
         return "admin/paginaModifiche.html";
     }
 
     @GetMapping("/admin/vediModifiche")
-    public String getPaginaDati(Model model){
+    public String getPaginaDati(Model model) {
         List<Libro> libri = this.libroService.getAllLibri();
         List<Autore> autori = this.autoreService.getAllAutori();
         model.addAttribute("libri", libri);
@@ -36,25 +38,25 @@ public class LibrelandiaController {
     }
 
     @GetMapping("/admin/aggiungiLibro")
-    public String getPaginaModifiche(Model model){
+    public String getPaginaModifiche(Model model) {
         LibroDto nuovoLibro = new LibroDto();
         List<Autore> autori = this.autoreService.getAllAutori();
         model.addAttribute("autori", autori);
-        model.addAttribute("libro",nuovoLibro);
+        model.addAttribute("libro", nuovoLibro);
         return "admin/aggiungiLibro.html";
     }
 
     @PostMapping("/admin/aggiungiLibro")
     public String addLibro(@Valid @ModelAttribute("libro") LibroDto l, BindingResult bindingResult, Model model,
-                              @RequestParam(name = "autori", required = false) List<Long> autoriId) {
+                           @RequestParam(name = "autore", required = false) List<Long> autoriId) {
         if (!bindingResult.hasErrors()) {
             if (autoriId != null && !autoriId.isEmpty()) {
                 List<Autore> autori = this.autoreService.listAllById(autoriId);
                 l.setScrittoriIds(autori);
             }
-                Libro nuovolibro = this.libroService.creaLibro(l.getTitolo(),l.getAnnoPubblicazione(),l.getScrittoriIds());
-                model.addAttribute("nuovolibro", nuovolibro);
-                return "admin/paginaModifiche.html";
+            Libro nuovolibro = this.libroService.creaLibro(l.getTitolo(), l.getAnnoPubblicazione(), l.getScrittoriIds());
+            model.addAttribute("nuovolibro", nuovolibro);
+            return "admin/paginaModifiche.html";
         } else {
             List<Autore> autori = this.autoreService.getAllAutori();
             model.addAttribute("autori", autori);
@@ -65,64 +67,98 @@ public class LibrelandiaController {
     }
 
     @GetMapping("/admin/modificaLibro/{id}")
-    public String modificaLibro(Model model, @PathVariable Long id){
-         List<Autore> autori = this.autoreService.getAllAutori();
-         Libro daModificare = this.libroService.getLibro(id);
-         LibroDto  nuovoLibro = new LibroDto();
-         nuovoLibro.setTitolo(daModificare.getTitolo());
-         nuovoLibro.setAnnoPubblicazione(daModificare.getAnnoPubblicazione());
-         nuovoLibro.setScrittoriIds(daModificare.getScrittori());
-         model.addAttribute("id", id);
-         model.addAttribute("libroDto", nuovoLibro);
-         model.addAttribute("autori", autori);
-         return "admin/modificaLibro.html";
+    public String modificaLibro(Model model, @PathVariable Long id) {
+        List<Autore> autori = this.autoreService.getAllAutori();
+        Libro daModificare = this.libroService.getLibro(id);
+        LibroDto nuovoLibro = new LibroDto();
+        nuovoLibro.setTitolo(daModificare.getTitolo());
+        nuovoLibro.setAnnoPubblicazione(daModificare.getAnnoPubblicazione());
+        nuovoLibro.setScrittoriIds(daModificare.getScrittori());
+        model.addAttribute("id", id);
+        model.addAttribute("libroDto", nuovoLibro);
+        model.addAttribute("autori", autori);
+        return "admin/modificaLibro.html";
     }
 
     @PostMapping("/admin/modificaLibro/{id}")
-    public String modificaLibro(Model model, @PathVariable Long id,@Valid @ModelAttribute("libroDto") LibroDto libroDto,BindingResult bindingResult,
-                                @RequestParam(name = "autori", required = false) List<Long> autoriId){
-         if (!bindingResult.hasErrors()) {
-             if (autoriId != null && !autoriId.isEmpty()) {
-                 List<Autore> autori = this.autoreService.listAllById(autoriId);
-                 libroDto.setScrittoriIds(autori);
-             }
-             Libro daModificare = this.libroService.getLibro(id);
-             daModificare.setTitolo(libroDto.getTitolo());
-             daModificare.setAnnoPubblicazione(libroDto.getAnnoPubblicazione());
-             for (Autore  autore : libroDto.getScrittoriIds()){
-                 this.libroService.addAutore(autore.getId(),daModificare.getId());
-             }
-             this.libroService.saveLibro(daModificare);
-             return "admin/paginaModifiche.html";
-         }
-         throw new IllegalArgumentException("il libro non e' valido");
+    public String modificaLibro(Model model, @PathVariable Long id, @Valid @ModelAttribute("libroDto") LibroDto libroDto, BindingResult bindingResult,
+                                @RequestParam(name = "autore", required = false) List<Long> autoriId) {
+        if (!bindingResult.hasErrors()) {
+            if (autoriId != null && !autoriId.isEmpty()) {
+                List<Autore> autori = this.autoreService.listAllById(autoriId);
+                libroDto.setScrittoriIds(autori);
+            }
+            Libro daModificare = this.libroService.getLibro(id);
+            daModificare.setTitolo(libroDto.getTitolo());
+            daModificare.setAnnoPubblicazione(libroDto.getAnnoPubblicazione());
+            for (Autore autore : libroDto.getScrittoriIds()) {
+                this.libroService.addAutore(autore.getId(), daModificare.getId());
+            }
+            this.libroService.saveLibro(daModificare);
+            return "admin/paginaModifiche.html";
+        }
+        throw new IllegalArgumentException("il libro non e' valido");
     }
 
-     @PostMapping("/admin/cancellaLibro/{id}")
-     public String cancellaLibro(@PathVariable Long id,Model model){
+    @PostMapping("/admin/cancellaLibro/{id}")
+    public String cancellaLibro(@PathVariable Long id, Model model) {
         Libro daCancellare = this.libroService.getLibro(id);
         model.addAttribute("id", id);
         this.libroService.deleteLibro(daCancellare);
         return "admin/paginaModifiche.html";
-     }
+    }
 
-     @GetMapping("/admin/aggiungiAutore")
-    public String aggiungiAutore(Model model){
+    @GetMapping("/admin/aggiungiAutore")
+    public String aggiungiAutore(Model model) {
         AutoreDto daAutore = new AutoreDto();
         model.addAttribute("autore", daAutore);
         return "admin/aggiungiAutore.html";
-     }
+    }
 
-     @PostMapping("/admin/aggiungiAutore")
-     public String aggiungiAutorePost(Model model, @Valid @ModelAttribute("autore") AutoreDto daAutore,
-                                      BindingResult bindingResult) {
-         if (!bindingResult.hasErrors()) {
-             Autore autore = this.autoreService.creaAutore(daAutore.getNome(), daAutore.getCognome(), daAutore.getDataNascita(), daAutore.getDataNascita(), daAutore.getNazionalita(), daAutore.getUrl_foto());
-             this.autoreService.salva(autore);
-             return "admin/paginaModifiche.html";
-         } else {
-             throw new IllegalArgumentException("L'autore non valido");
-         }
-     }
+    @PostMapping("/admin/aggiungiAutore")
+    public String aggiungiAutorePost(Model model, @Valid @ModelAttribute("autore") AutoreDto daAutore,
+                                     BindingResult bindingResult) {
+        if (!bindingResult.hasErrors()) {
+            Autore autore = this.autoreService.creaAutore(daAutore.getNome(), daAutore.getCognome(), daAutore.getDataNascita(), daAutore.getDataNascita(), daAutore.getNazionalita(), daAutore.getUrl_foto());
+            this.autoreService.salva(autore);
+            return "admin/paginaModifiche.html";
+        } else {
+            throw new IllegalArgumentException("L'autore non valido");
+        }
+    }
+
+    @GetMapping("/admin/modificaAutore/{id}")
+    public String modificaAutore(Model model, @PathVariable Long id) {
+        AutoreDto daAutore = new AutoreDto();
+        model.addAttribute("autoreDto", daAutore);
+        return "admin/modificaAutore.html";
+    }
+
+    @PostMapping("/admin/modificaAutore/{id}")
+    public String modificaAutorePost(Model model, @PathVariable Long id, @Valid @ModelAttribute("autoreDto") AutoreDto daAutore,
+                                     BindingResult bindingResult) {
+        if (!bindingResult.hasErrors()) {
+            Autore autore = this.autoreService.getAutore(id);
+            autore.setNome(daAutore.getNome());
+            autore.setCognome(daAutore.getCognome());
+            autore.setDataNascita(daAutore.getDataNascita());
+            autore.setDataNascita(daAutore.getDataNascita());
+            autore.setUrl_foto(daAutore.getUrl_foto());
+            autore.setNazionalita(daAutore.getNazionalita());
+            this.autoreService.salva(autore);
+            return "admin/paginaModifiche.html";
+        } else {
+            throw new IllegalArgumentException("L'autore non valido");
+        }
+    }
+
+    @PostMapping("/admin/cancellaAutore/{id}")
+    public String cancellaAutore(Model model,@PathVariable  Long id) {
+        Autore daCancellare = this.autoreService.getAutore(id);
+        model.addAttribute("id", id);
+        this.autoreService.deleteAutore(id);
+        return "admin/paginaModifiche.html";
+    }
+
 
 }

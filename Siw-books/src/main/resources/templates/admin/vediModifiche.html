@@ -100,8 +100,10 @@
                             Nazionalita': <span th:text="${autore.nazionalita}"></span>
                         </td>
                         <td>
-                            <a class="table-button" href="">Modifica</a>
-                            <a class="table-button" href="">Elimina</a>
+                            <a class="table-button" th:href="@{/admin/modificaAutore/{id}(id=${autore.id})}">Modifica</a>
+                            <form th:action="@{/admin/cancellaAutore/{id}(id =${autore.id})}" method="post">
+                                <button type="submit" class="table-button">Elimina</button>
+                            </form>
                         </td>
                     </tr>
                     </tbody>
