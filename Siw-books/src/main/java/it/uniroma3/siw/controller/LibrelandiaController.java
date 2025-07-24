@@ -72,6 +72,7 @@ public class LibrelandiaController {
          nuovoLibro.setTitolo(daModificare.getTitolo());
          nuovoLibro.setAnnoPubblicazione(daModificare.getAnnoPubblicazione());
          nuovoLibro.setScrittoriIds(daModificare.getScrittori());
+         model.addAttribute("id", id);
          model.addAttribute("libroDto", nuovoLibro);
          model.addAttribute("autori", autori);
          return "/admin/modificaLibro.html";

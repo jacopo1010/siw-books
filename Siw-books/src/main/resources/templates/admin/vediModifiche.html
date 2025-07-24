@@ -60,7 +60,7 @@
                             Anno di pubblicazione: <span th:text="${libro.annoPubblicazione}"></span>
                         </td>
                         <td>
-                            <a class="table-button" href="">Modifica</a>
+                            <a class="table-button" th:href="@{/admin/modificaLibro/{id}(id=${libro.id})}">Modifica</a>
                             <a class="table-button" href="">Elimina</a>
                         </td>
                     </tr>
