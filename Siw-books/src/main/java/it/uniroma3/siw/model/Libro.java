@@ -14,7 +14,9 @@ public class Libro {
     private String titolo;
     @Column(name = "anno_di_pubblicazione")
     private LocalDate annoPubblicazione;
-    @ElementCollection
+    @ElementCollection(fetch = FetchType.EAGER)
+    @CollectionTable(name = "libro_immagini", joinColumns = @JoinColumn(name = "libro_id"))
+    @Column(name = "url_immagine")
     private List<String> immagine;
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(

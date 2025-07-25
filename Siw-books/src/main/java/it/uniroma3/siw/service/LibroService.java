@@ -7,8 +7,16 @@ import it.uniroma3.siw.model.Libro;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.InputStream;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Set;
 
@@ -18,12 +26,47 @@ public class LibroService {
     @Autowired private LibroRepository libroRepository;
     @Autowired private AutoreRepository autoreRepository;
 
+    private List<String> gestioniImmagini(List<MultipartFile> file) {
+        Date createdAt = new Date();
+        List<String> nomiSalvati = new ArrayList<>();
+
+        for (MultipartFile image : file) {
+            if (image.isEmpty()) continue;
+
+            String storageFileName = createdAt.getTime() + "_" + image.getOriginalFilename();
+
+            try {
+                String uploadDir = "public/images/";
+                Path uploadPath = Paths.get(uploadDir);
+
+                if (!Files.exists(uploadPath)) {
+                    Files.createDirectories(uploadPath);
+                }
+
+                try (InputStream inputStream = image.getInputStream()) {
+                    Path filePath = uploadPath.resolve(storageFileName);
+                    Files.copy(inputStream, filePath, StandardCopyOption.REPLACE_EXISTING);
+                    nomiSalvati.add(storageFileName);
+                }
+
+            } catch (Exception ex) {
+                System.out.println("Errore durante il salvataggio immagine: " + ex.getMessage());
+            }
+        }
+
+        return nomiSalvati;
+    }
+
     @Transactional
-    public Libro creaLibro(String titolo, LocalDate t,List<Autore> autori){
+    public Libro creaLibro(String titolo, LocalDate t,List<Autore> autori,List<MultipartFile> immagini){
         Libro libro = new Libro(titolo,t,autori);
-        //libro.addFoto(urlI);
         for(Autore a : autori){
             a.addLibriScritti(libro);
+        }
+        if (immagini != null && !immagini.isEmpty()) {
+            for (String nome : gestioniImmagini(immagini)) {
+                libro.addFoto(nome); // salva il nome effettivamente scritto su disco
+            }
         }
         libro = this.libroRepository.save(libro);
         return libro;

@@ -62,12 +62,7 @@
                     List<Autore> autori = this.autoreService.listAllById(autoriId);
                     l.setScrittoriIds(autori);
                 }
-                Libro nuovolibro = this.libroService.creaLibro(l.getTitolo(), l.getAnnoPubblicazione(), l.getScrittoriIds());
-                if (immagini != null && !immagini.isEmpty()) {
-                    for (String nome : gestioniImmagini(immagini)) {
-                        nuovolibro.addFoto(nome); // salva il nome effettivamente scritto su disco
-                    }
-                }
+                Libro nuovolibro = this.libroService.creaLibro(l.getTitolo(), l.getAnnoPubblicazione(), l.getScrittoriIds(),immagini);
                 model.addAttribute("nuovolibro", nuovolibro);
                 return "admin/paginaModifiche.html";
             } else {
@@ -141,12 +136,14 @@
                 this.libroService.saveLibro(daModificare);
                 return "admin/paginaModifiche.html";
             }
+            System.err.println("Errore durante il modificaLibro: " + bindingResult.getAllErrors());
             throw new IllegalArgumentException("il libro non e' valido");
         }
 
         @PostMapping("/admin/cancellaLibro/{id}")
         public String cancellaLibro(@PathVariable Long id, Model model) {
             Libro daCancellare = this.libroService.getLibro(id);
+            cancellaImmagini(daCancellare);
             model.addAttribute("id", id);
             this.libroService.deleteLibro(daCancellare);
             return "admin/paginaModifiche.html";
@@ -204,5 +201,25 @@
             return "admin/paginaModifiche.html";
         }
 
+        private void cancellaImmagini(Libro daCancellare) {
+            try {
+
+                //recupero il prodotto dato l'id inserito
+
+
+                //prendo la directory dell'immagine del dato prodotto
+                Path imagePath = Paths.get("public/images/" + daCancellare.getImmagine());
+
+                try {
+                    //cancello l'immagine relativa al prodotto
+                    Files.delete(imagePath);
+
+                } catch (Exception ex) {
+                    System.out.println("Exception: " + ex.getMessage());
+                }
+            } catch (Exception e) {
+                throw new RuntimeException(e);
+            }
+        }
 
     }
