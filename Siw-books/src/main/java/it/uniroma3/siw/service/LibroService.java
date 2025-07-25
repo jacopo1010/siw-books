@@ -46,12 +46,13 @@ public class LibroService {
          return this.libroRepository.findAll();
     }
 
-    public List<Libro> listAllKeyWord(String keyWord){
-        if (keyWord != null){
-            return this.libroRepository.searchByKeyword(keyWord);
+    public List<Libro> listAllKeyWord(String keyword) {
+        if (keyword == null || keyword.trim().isEmpty()) {
+            return List.of();
         }
-        return this.getAllLibri();
+        return libroRepository.searchByKeyword(keyword);
     }
+
 
     public Libro saveLibro(Libro libro){
         return this.libroRepository.save(libro);

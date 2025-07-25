@@ -12,6 +12,7 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.Mapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import java.util.List;
@@ -39,9 +40,12 @@ public class homePageController {
     public String ricercaBarraHome(Model model, @Param("keyword") String keyword) {
         List<Libro> books = this.libroService.listAllKeyWord(keyword);
         List<Autore> autori = this.autoreService.listAllKeyword(keyword);
-        model.addAttribute("books", books);
+        model.addAttribute("libri", books);
         model.addAttribute("autori", autori);
         model.addAttribute("keyword", keyword);
+        for(Libro libro : books){
+            System.err.println(libro.getScrittori().size());
+        }
         return "ricercaBarra.html";
     }
 

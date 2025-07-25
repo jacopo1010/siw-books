@@ -16,7 +16,7 @@ public class Libro {
     private LocalDate annoPubblicazione;
     @ElementCollection
     private List<String> immagine;
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
             name = "libro_autore",
             joinColumns = @JoinColumn(name = "libro_id"),
