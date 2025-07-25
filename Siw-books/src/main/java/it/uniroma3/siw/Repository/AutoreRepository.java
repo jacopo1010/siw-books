@@ -24,6 +24,12 @@ public interface AutoreRepository extends JpaRepository<Autore, Long> {
     @Query(value = "SELECT l.* FROM libro l JOIN libro_autore la ON l.id = la.libro_id WHERE la.autore_id = ?1", nativeQuery = true)
     public List<Libro> findLibriByAutoreId(Long id);
 
+    /**
+     * Query per trovare tutti gli autori che hanno scritto un libro x
+     */
+
+    @Query(value = "SELECT a.* FROM Autore a JOIN libro_autore la ON a.id = la.autore_id WHERE la.libro_id =?1", nativeQuery = true)
+    public List<Autore> autoriCheHannoScrittoUnLibroX(Long libroId);
 
 
 }

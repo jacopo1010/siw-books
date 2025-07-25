@@ -43,7 +43,7 @@
                         <th>Attivita'</th>
                     </tr>
                     </thead>
-                    <tbody th:if="${#sets.isEmpty(libri)}">
+                    <tbody th:if="${#lists.isEmpty(libri)}">
                     <tr>
                         <td class="message">Nessun ID disponibile</td>
                         <td class="message">Nessuna foto disponibile</td>
@@ -51,10 +51,15 @@
                         <td class="message">Nessuna attivita' disponibile</td>
                     </tr>
                     </tbody>
-                    <tbody th:if="${not #sets.isEmpty(libri)}" th:each="libro : ${libri}">
+                    <tbody th:if="${not #lists.isEmpty(libri)}" th:each="libro : ${libri}">
                     <tr>
                         <td th:text="${libro.id}"></td>
-                        <td th:text="${libro.immagine}"></td>
+                        <td>
+                            <div th:each="img : ${libro.immagine}">
+                                <img th:src="@{'/images/' + ${img}}" alt="Foto libro" width="80" height="100">
+                            </div>
+                        </td>
+
                         <td>
                             Titolo: <span th:text="${libro.titolo}"></span><br/>
                             Anno di pubblicazione: <span th:text="${libro.annoPubblicazione}"></span>

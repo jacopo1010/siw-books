@@ -42,9 +42,8 @@
                         <label for="anno">Anno di Pubblicazione</label>
                         <input type="date" name="anno" id="anno" th:field="*{annoPubblicazione}" required autocomplete="off">
                     </div>
-
                     <div class="field" style="padding-bottom: 6vh;">
-                        <label for="autoriId">Autori</label>
+                        <label>Autori</label>
                         <div th:if="${#lists.isEmpty(autori)}" class="message">
                             Nessun autore disponibile al momento.
                         </div>
@@ -56,8 +55,8 @@
                     </div>
 
                     <div class="field">
-                        <label for="urlImmagine">Foto</label>
-                        <input type="file" name="urlImmagine" accept="image/*">
+                        <label for="immagini">Foto (puoi caricare più immagini)</label>
+                        <input type="file" id="immagini" name="immagini" accept="image/*" multiple>
                     </div>
 
                     <div class="field">
