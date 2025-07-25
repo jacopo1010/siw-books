@@ -41,7 +41,7 @@ public class AutoreService {
        this.autoreRepository.save(autore);
     }
 
-    public List<Autore> listAll(String keyWord){
+    public List<Autore> listAllKeyword(String keyWord){
         if (keyWord != null){
             return this.autoreRepository.findAllWithThatKeyWord(keyWord);
         }

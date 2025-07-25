@@ -24,7 +24,8 @@ public class homePageController {
     @Autowired private AutoreService autoreService;
 
     @GetMapping("/")
-    public String homePage(){
+    public String homePage(Model model) {
+        model.addAttribute("libri", this.libroService.getAllLibri());
         return "index.html";
     }
 
@@ -37,7 +38,7 @@ public class homePageController {
     @PostMapping("/ricercaHome")
     public String ricercaBarraHome(Model model, @Param("keyword") String keyword) {
         List<Libro> books = this.libroService.listAllKeyWord(keyword);
-        List<Autore> autori = this.autoreService.listAll(keyword);
+        List<Autore> autori = this.autoreService.listAllKeyword(keyword);
         model.addAttribute("books", books);
         model.addAttribute("autori", autori);
         model.addAttribute("keyword", keyword);

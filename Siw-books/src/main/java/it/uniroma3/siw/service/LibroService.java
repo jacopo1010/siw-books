@@ -48,7 +48,7 @@ public class LibroService {
 
     public List<Libro> listAllKeyWord(String keyWord){
         if (keyWord != null){
-            return this.libroRepository.findAllWithThatKeyword(keyWord);
+            return this.libroRepository.searchByKeyword(keyWord);
         }
         return this.getAllLibri();
     }
