@@ -16,5 +16,4 @@ public class SiwBooksApplication implements CommandLineRunner {
 
 	}
 
-	//commento di prova
 }
