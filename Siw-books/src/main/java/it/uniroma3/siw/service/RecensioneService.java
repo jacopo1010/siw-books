@@ -26,4 +26,8 @@ public class RecensioneService {
         return this.recensioneRepository.findAll();
     }
 
+    public void salvaRecensione(Recensione recensione){
+        this.recensioneRepository.save(recensione);
+    }
+
 }

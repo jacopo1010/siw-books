@@ -59,6 +59,7 @@ public class homePageController {
         List<Recensione> recensioni = this.recensioneService.listaRecensioni();
         model.addAttribute("libro", book);
         model.addAttribute("recensioni", recensioni);
+        model.addAttribute("id", id);
         return "vediLibro.html";
     }
 

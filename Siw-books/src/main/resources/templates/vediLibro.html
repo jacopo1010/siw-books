@@ -57,9 +57,7 @@
     <h2>Recensioni</h2>
 
     <div th:if="${!isAnonymous}" style="width: 100%;">
-      <a th:href="@{'/libro/' + ${libro.id} + '/recensione'}">
-        <button type="button" class="submit-button" style="width: 13vw;">Scrivi recensione</button>
-      </a>
+      <a th:href="@{/aggiungiRecensione/{id}(id=${libro.id})}">Scrivi la tua recensione</a>
     </div>
 
     <!-- Nessuna recensione -->
