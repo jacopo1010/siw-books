@@ -20,6 +20,7 @@ public class Recensione {
     private String testo;
     @ManyToOne
     private Libro libro;
+    //
 
     public Recensione(String titolo, int voto, String testo, Libro libro) {
         this.titolo = titolo;
