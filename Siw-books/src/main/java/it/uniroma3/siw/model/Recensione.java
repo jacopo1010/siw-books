@@ -32,7 +32,6 @@ public class Recensione {
         this.testo = testo;
         this.libro = libro;
         this.utente = utente;
-        this.libro = libro;
     }
 
     public Recensione(){
