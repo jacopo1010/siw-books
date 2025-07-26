@@ -16,7 +16,8 @@ public interface LibroRepository extends JpaRepository<Libro, Long> {
 
    public Optional<Libro> findById(Long id);
 
-    @Query("select l from Libro l where CONCAT(l.titolo,'',l.annoPubblicazione,'',l.id) LIKE %?1%")
+    @Query("SELECT l FROM Libro l WHERE " +
+            "LOWER(CONCAT(l.titolo, '', l.annoPubblicazione, '', l.id)) LIKE LOWER(CONCAT('%', :keyword, '%'))")
     List<Libro> searchByKeyword(@Param("keyword") String keyword);
 
     /**

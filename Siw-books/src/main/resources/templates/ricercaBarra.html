@@ -41,6 +41,10 @@
                 <a th:href="@{'/book/' + ${book.id}}">
                     <img src="/images/homepage-image.png">
                     <div class="carousel-card-details">
+                        <div th:each="imgName : ${book.immagine}">
+                            <img th:src="@{'/images/' + ${imgName}}" alt="Copertina" width="200px">
+                        </div>
+
                         <h4 th:text="${book.titolo}">Titolo</h4>
                         <p th:text="${book.annoPubblicazione}">Anno di pubblicazione</p>
                         <div th:if="${book.scrittori != null}" th:each="autore : ${book.scrittori}">
