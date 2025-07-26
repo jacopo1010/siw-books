@@ -63,8 +63,12 @@ public class LibroService {
         for(Autore a : autori){
             a.addLibriScritti(libro);
         }
+        System.err.println(immagini.size());
         if (immagini != null && !immagini.isEmpty()) {
-            libro.setImmagine(gestioniImmagini(immagini));
+            for (String nome : gestioniImmagini(immagini)) {
+                System.err.println(nome);
+                libro.addFoto(nome); // salva il nome effettivamente scritto su disco
+            }
         }
         libro = this.libroRepository.save(libro);
         return libro;

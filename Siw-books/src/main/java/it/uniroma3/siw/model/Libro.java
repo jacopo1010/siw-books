@@ -30,8 +30,8 @@ public class Libro {
     @OneToMany(mappedBy = "libro", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<Recensione> recensioni;
     @CreationTimestamp
-    @Column(nullable = false, updatable = false)
-    private LocalDateTime oraEDataCreazione;
+    @Column(nullable = true, updatable = false)
+    private LocalDateTime oraEDataCreazione = LocalDateTime.now();
 
     public Libro(String titolo, LocalDate d, List<Autore> autori) {
         this.titolo = titolo;

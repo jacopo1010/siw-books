@@ -54,24 +54,24 @@
             return "admin/aggiungiLibro.html";
         }
 
-        @PostMapping("/admin/aggiungiLibro")
-        public String addLibro(@Valid @ModelAttribute("libro") LibroDto l, BindingResult bindingResult, Model model,
-                               @RequestParam(name = "autore", required = false) List<Long> autoriId,@RequestParam(name = "immagini", required = false)List<MultipartFile> immagini) {
-            if (!bindingResult.hasErrors()) {
-                if (autoriId != null && !autoriId.isEmpty()) {
-                    List<Autore> autori = this.autoreService.listAllById(autoriId);
-                    l.setScrittoriIds(autori);
+            @PostMapping("/admin/aggiungiLibro")
+            public String addLibro(@Valid @ModelAttribute("libro") LibroDto l, BindingResult bindingResult, Model model,
+                                   @RequestParam(name = "autore", required = false) List<Long> autoriId,@RequestParam(name = "immagini", required = false)List<MultipartFile> immagini) {
+                if (!bindingResult.hasErrors()) {
+                    if (autoriId != null && !autoriId.isEmpty()) {
+                        List<Autore> autori = this.autoreService.listAllById(autoriId);
+                        l.setScrittoriIds(autori);
+                    }
+                    Libro nuovolibro = this.libroService.creaLibro(l.getTitolo(), l.getAnnoPubblicazione(), l.getScrittoriIds(),immagini);
+                    model.addAttribute("nuovolibro", nuovolibro);
+                    return "admin/paginaModifiche.html";
+                } else {
+                    List<Autore> autori = this.autoreService.getAllAutori();
+                    model.addAttribute("autori", autori);
+                    model.addAttribute("libro", l);
+                    return "admin/aggiungiLibro.html";
                 }
-                Libro nuovolibro = this.libroService.creaLibro(l.getTitolo(), l.getAnnoPubblicazione(), l.getScrittoriIds(),immagini);
-                model.addAttribute("nuovolibro", nuovolibro);
-                return "admin/paginaModifiche.html";
-            } else {
-                List<Autore> autori = this.autoreService.getAllAutori();
-                model.addAttribute("autori", autori);
-                model.addAttribute("libro", l);
-                return "admin/aggiungiLibro.html";
             }
-        }
 
         @GetMapping("/admin/modificaLibro/{id}")
         public String modificaLibro(Model model, @PathVariable Long id) {
