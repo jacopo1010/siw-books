@@ -26,4 +26,6 @@ public interface LibroRepository extends JpaRepository<Libro, Long> {
     @Query(value = "SELECT l.* FROM Libro l JOIN libro_autore la ON la.libro_id = l.id WHERE la_autore.id =?1",nativeQuery = true)
     public List<Libro> findLibriScrittiDa(Long autoreId);
 
+    public List<Libro> findTop10ByOrderByOraEDataCreazioneDesc();
+
 }

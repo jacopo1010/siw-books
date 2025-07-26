@@ -1,8 +1,10 @@
 package it.uniroma3.siw.model;
 
 import jakarta.persistence.*;
+import org.hibernate.annotations.CreationTimestamp;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.*;
 import java.util.List;
 
@@ -27,6 +29,9 @@ public class Libro {
     private List<Autore> scrittori;
     @OneToMany(mappedBy = "libro", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<Recensione> recensioni;
+    @CreationTimestamp
+    @Column(nullable = false, updatable = false)
+    private LocalDateTime oraEDataCreazione;
 
     public Libro(String titolo, LocalDate d, List<Autore> autori) {
         this.titolo = titolo;
@@ -84,6 +89,14 @@ public class Libro {
 
     public void addFoto(String s){
         this.immagine.add(s);
+    }
+
+    public LocalDateTime getOraEDataCreazione() {
+        return oraEDataCreazione;
+    }
+
+    public void setOraEDataCreazione(LocalDateTime oraEDataCreazione) {
+        this.oraEDataCreazione = oraEDataCreazione;
     }
 
     @Override

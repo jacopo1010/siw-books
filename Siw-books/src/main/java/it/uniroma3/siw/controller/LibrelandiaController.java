@@ -73,38 +73,6 @@
             }
         }
 
-        private List<String> gestioniImmagini(List<MultipartFile> file) {
-            Date createdAt = new Date();
-            List<String> nomiSalvati = new ArrayList<>();
-
-            for (MultipartFile image : file) {
-                if (image.isEmpty()) continue;
-
-                String storageFileName = createdAt.getTime() + "_" + image.getOriginalFilename();
-
-                try {
-                    String uploadDir = "public/images/";
-                    Path uploadPath = Paths.get(uploadDir);
-
-                    if (!Files.exists(uploadPath)) {
-                        Files.createDirectories(uploadPath);
-                    }
-
-                    try (InputStream inputStream = image.getInputStream()) {
-                        Path filePath = uploadPath.resolve(storageFileName);
-                        Files.copy(inputStream, filePath, StandardCopyOption.REPLACE_EXISTING);
-                        nomiSalvati.add(storageFileName);
-                    }
-
-                } catch (Exception ex) {
-                    System.out.println("Errore durante il salvataggio immagine: " + ex.getMessage());
-                }
-            }
-
-            return nomiSalvati;
-        }
-
-
         @GetMapping("/admin/modificaLibro/{id}")
         public String modificaLibro(Model model, @PathVariable Long id) {
             List<Autore> autori = this.autoreService.getAllAutori();

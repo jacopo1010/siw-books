@@ -28,7 +28,7 @@ public class LibroService {
 
     private List<String> gestioniImmagini(List<MultipartFile> file) {
         Date createdAt = new Date();
-        List<String> nomiSalvati = new ArrayList<>();
+        List<String> nomiSalvati = new ArrayList<>(file.size());
 
         for (MultipartFile image : file) {
             if (image.isEmpty()) continue;
@@ -64,9 +64,7 @@ public class LibroService {
             a.addLibriScritti(libro);
         }
         if (immagini != null && !immagini.isEmpty()) {
-            for (String nome : gestioniImmagini(immagini)) {
-                libro.addFoto(nome); // salva il nome effettivamente scritto su disco
-            }
+            libro.setImmagine(gestioniImmagini(immagini));
         }
         libro = this.libroRepository.save(libro);
         return libro;
@@ -105,4 +103,9 @@ public class LibroService {
     public void deleteLibro(Libro libro){
         this.libroRepository.delete(libro);
     }
+
+    public List<Libro> getUltimiLibriInseriti(){
+        return this.libroRepository.findTop10ByOrderByOraEDataCreazioneDesc();
+    }
+
 }

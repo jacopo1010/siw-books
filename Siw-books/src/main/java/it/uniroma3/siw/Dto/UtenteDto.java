@@ -1,4 +1,4 @@
-package it.uniroma3.siw.model;
+package it.uniroma3.siw.Dto;
 
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
