@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -105,11 +106,29 @@ public class LibroService {
 
     @Transactional
     public void deleteLibro(Libro libro){
+        cancellaImmagini(libro);
         this.libroRepository.delete(libro);
     }
 
     public List<Libro> getUltimiLibriInseriti(){
         return this.libroRepository.findTop10ByOrderByOraEDataCreazioneDesc();
     }
+
+    private void cancellaImmagini(Libro daCancellare) {
+        List<String> immagini = daCancellare.getImmagine(); // lista delle immagini
+        if (immagini == null || immagini.isEmpty()) return;
+
+        for (String nomeImmagine : immagini) {
+            Path imagePath = Paths.get("public/images/" + nomeImmagine);
+
+            try {
+                Files.deleteIfExists(imagePath); // evita eccezioni se il file non esiste
+                System.out.println("Cancellata immagine: " + nomeImmagine);
+            } catch (IOException ex) {
+                System.err.println("Errore durante la cancellazione: " + nomeImmagine + " - " + ex.getMessage());
+            }
+        }
+    }
+
 
 }

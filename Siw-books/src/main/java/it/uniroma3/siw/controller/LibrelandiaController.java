@@ -14,6 +14,7 @@
     import org.springframework.web.bind.annotation.*;
     import org.springframework.web.multipart.MultipartFile;
 
+    import java.io.IOException;
     import java.io.InputStream;
     import java.nio.file.Files;
     import java.nio.file.Path;
@@ -104,16 +105,14 @@
                 this.libroService.saveLibro(daModificare);
                 return "admin/paginaModifiche.html";
             }
-            System.err.println("Errore durante il modificaLibro: " + bindingResult.getAllErrors());
             throw new IllegalArgumentException("il libro non e' valido");
         }
 
         @PostMapping("/admin/cancellaLibro/{id}")
         public String cancellaLibro(@PathVariable Long id, Model model) {
             Libro daCancellare = this.libroService.getLibro(id);
-            cancellaImmagini(daCancellare);
-            model.addAttribute("id", id);
             this.libroService.deleteLibro(daCancellare);
+            model.addAttribute("id", id);
             return "admin/paginaModifiche.html";
         }
 
@@ -164,30 +163,10 @@
         @PostMapping("/admin/cancellaAutore/{id}")
         public String cancellaAutore(Model model,@PathVariable  Long id) {
             Autore daCancellare = this.autoreService.getAutore(id);
-            model.addAttribute("id", id);
             this.autoreService.deleteAutore(id);
+            model.addAttribute("id", id);
             return "admin/paginaModifiche.html";
         }
 
-        private void cancellaImmagini(Libro daCancellare) {
-            try {
-
-                //recupero il prodotto dato l'id inserito
-
-
-                //prendo la directory dell'immagine del dato prodotto
-                Path imagePath = Paths.get("public/images/" + daCancellare.getImmagine());
-
-                try {
-                    //cancello l'immagine relativa al prodotto
-                    Files.delete(imagePath);
-
-                } catch (Exception ex) {
-                    System.out.println("Exception: " + ex.getMessage());
-                }
-            } catch (Exception e) {
-                throw new RuntimeException(e);
-            }
-        }
 
     }
