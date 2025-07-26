@@ -99,6 +99,14 @@ public class Libro {
         this.oraEDataCreazione = oraEDataCreazione;
     }
 
+    public List<Recensione> getRecensioni() {
+        return recensioni;
+    }
+
+    public void setRecensioni(List<Recensione> recensioni) {
+        this.recensioni = recensioni;
+    }
+
     @Override
     public boolean equals(Object obj) {
         if (obj == null || this.getClass() != obj.getClass())

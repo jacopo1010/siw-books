@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="it" xmlns:th="http://www.w3.org/1999/xhtml" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head>
+  <title>Librelandia</title>
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+
+<header>
+  <div class="logo-title">
+    <span><img src="/images/librelandia-logo.png" class="image-logo"></span>
+    <span><h1>Librelandia</h1></span>
+  </div>
+
+  <nav class="nav">
+    <a href="/" class="nav-link">Home</a>
+    <a href="/libri" class="nav-link">Libri</a>
+    <a href="/autori" class="nav-link">Autori</a>
+    <a th:if="${isAdmin}" href="/addBook" class="login-button">Aggiungi Libro</a>
+    <a th:if="${isAnonymous}" href="/login" class="login-button">Accedi/Registrati</a>
+    <a th:if="${!isAnonymous}" href="/account" class="login-button">Account</a>
+  </nav>
+</header>
+
+<main>
+  <section>
+    <div>
+      <h1 th:text="${libro.titolo}">Titolo</h1>
+      <p class="subtitle" th:text="'Anno di pubblicazione: ' + ${libro.annoPubblicazione}">Anno di pubblicazione</p>
+
+      <!-- Immagini -->
+      <div th:if="${libro.immagine != null and !#lists.isEmpty(libro.immagine)}" class="image-gallery">
+        <img th:each="img : ${libro.immagine}" th:src="@{'/images/' + ${img}}" alt="Immagine libro" class="book-image"/>
+      </div>
+
+      <!-- Autori -->
+      <div th:if="${libro.scrittori != null and !#lists.isEmpty(libro.scrittori)}">
+        <p><strong>Scrittori:</strong></p>
+        <ul>
+          <li th:each="autore : ${libro.scrittori}">
+            <a th:href="@{'/author/' + ${autore.id}}" th:text="${autore.nome} + ' ' + ${autore.cognome}">Autore</a>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Pulsanti admin -->
+      <div th:if="${isAdmin}">
+        <a th:href="@{'/updateBook/' + ${libro.id}}" id="update-button">Modifica Libro</a>
+        <a th:href="@{'/deleteBook/' + ${libro.id}}" id="delete-button">Elimina Libro</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Sezione Recensioni -->
+  <section class="reviews-section">
+    <h2>Recensioni</h2>
+
+    <div th:if="${!isAnonymous}" style="width: 100%;">
+      <a th:href="@{'/libro/' + ${libro.id} + '/recensione'}">
+        <button type="button" class="submit-button" style="width: 13vw;">Scrivi recensione</button>
+      </a>
+    </div>
+
+    <!-- Nessuna recensione -->
+    <div th:if="${libro.recensioni == null or #lists.isEmpty(libro.recensioni)}" class="message">
+      Nessuna recensione disponibile per questo libro.
+    </div>
+
+    <!-- Elenco recensioni -->
+    <div th:if="${libro.recensioni != null and !#lists.isEmpty(libro.recensioni)}">
+      <div th:each="recensione : ${libro.recensioni}">
+        <p><strong th:text="${recensione.utente?.username ?: 'Utente anonimo'}">Utente</strong>:</p>
+        <p th:text="${recensione.testo}">Testo recensione</p>
+        <hr/>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <p>© 2025 Librelandia - Tutti i diritti riservati</p>
+</footer>
+
+</body>
+</html>

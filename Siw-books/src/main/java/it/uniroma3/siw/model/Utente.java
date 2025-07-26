@@ -19,8 +19,8 @@ public class Utente {
     @NotBlank
     @Column(nullable = false, unique = true)
     private String email;
-    @OneToMany(cascade = CascadeType.REMOVE, fetch = FetchType.LAZY)
-    private List<Recensione> recensioneList;
+    @OneToMany(mappedBy = "utente", cascade = CascadeType.REMOVE, fetch = FetchType.LAZY)
+    private List<Recensione> recensioni;
     @OneToOne(mappedBy = "utente", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Credenziali credenziali;
 
@@ -28,7 +28,7 @@ public class Utente {
         this.nome = nome;
         this.cognome = cognome;
         this.email = email;
-        this.recensioneList = new LinkedList<Recensione>();
+        this.recensioni = new LinkedList<Recensione>();
     }
 
     public Utente(){
@@ -67,12 +67,16 @@ public class Utente {
         this.email = email;
     }
 
-    public List<Recensione> getRecensioneList() {
-        return recensioneList;
+    public List<Recensione> getRecensioni() {
+        return recensioni;
     }
 
-    public void setRecensioneList(List<Recensione> recensioneList) {
-        this.recensioneList = recensioneList;
+    public void setRecensioni(List<Recensione> recensioni) {
+        this.recensioni = recensioni;
+    }
+
+    public void addRecensione(Recensione recensione){
+        this.recensioni.add(recensione);
     }
 
     public Credenziali getCredenziali() {

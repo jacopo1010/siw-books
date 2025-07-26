@@ -50,7 +50,7 @@
                 <div th:if="${libri} and ${libri.size() > 0}" class="carousel-container">
                     <div class="carousel-track">
                         <div class="carousel-card" th:each="libro : ${libri}">
-                            <a th:href="@{'/libro/' + ${libro.id}}">
+                            <a th:href="@{/visualizzaLibro/{id}(id=${libro.id})}">
                                 <!--<img th:if="${book.urlImgage} != null" th:src="@{'/images/' + ${book.urlImgage}}" alt="Immagine"> -->
                                 <h5 th:text="${libro.titolo}">Titolo</h5>
                                 <p th:text="${libro.annoPubblicazione}">Anno di pubblicazione</p>

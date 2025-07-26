@@ -4819,7 +4819,13 @@ libri_id</ColNames>
       <RefKeyColPositions>2</RefKeyColPositions>
       <RefTableId>109260</RefTableId>
     </foreign-key>
-    <index id="351" parent="286" name="recensione_pkey">
+    <foreign-key id="351" parent="286" name="fkb77d6048y1xbjljw1aaew6dt9">
+      <ObjectId>109358</ObjectId>
+      <StateNumber>27934</StateNumber>
+      <RefKeyColPositions>1</RefKeyColPositions>
+      <RefTableId>109280</RefTableId>
+    </foreign-key>
+    <index id="352" parent="286" name="recensione_pkey">
       <ColNames>id</ColNames>
       <NameSurrogate>1</NameSurrogate>
       <ObjectId>109278</ObjectId>
@@ -4828,42 +4834,42 @@ libri_id</ColNames>
       <Unique>1</Unique>
       <AccessMethodId>403</AccessMethodId>
     </index>
-    <key id="352" parent="286" name="recensione_pkey">
+    <key id="353" parent="286" name="recensione_pkey">
       <NameSurrogate>1</NameSurrogate>
       <ObjectId>109279</ObjectId>
       <Primary>1</Primary>
       <StateNumber>27783</StateNumber>
       <UnderlyingIndexId>109278</UnderlyingIndexId>
     </key>
-    <column id="353" parent="287" name="id">
+    <column id="354" parent="287" name="id">
       <NotNull>1</NotNull>
       <Position>1</Position>
       <StateNumber>27784</StateNumber>
       <StoredType>bigint|0s</StoredType>
       <TypeId>20</TypeId>
     </column>
-    <column id="354" parent="287" name="cognome">
+    <column id="355" parent="287" name="cognome">
       <NotNull>1</NotNull>
       <Position>2</Position>
       <StateNumber>27784</StateNumber>
       <StoredType>varchar(255)|0s</StoredType>
       <TypeId>1043</TypeId>
     </column>
-    <column id="355" parent="287" name="email">
+    <column id="356" parent="287" name="email">
       <NotNull>1</NotNull>
       <Position>3</Position>
       <StateNumber>27784</StateNumber>
       <StoredType>varchar(255)|0s</StoredType>
       <TypeId>1043</TypeId>
     </column>
-    <column id="356" parent="287" name="nome">
+    <column id="357" parent="287" name="nome">
       <NotNull>1</NotNull>
       <Position>4</Position>
       <StateNumber>27784</StateNumber>
       <StoredType>varchar(255)|0s</StoredType>
       <TypeId>1043</TypeId>
     </column>
-    <index id="357" parent="287" name="utente_pkey">
+    <index id="358" parent="287" name="utente_pkey">
       <ColNames>id</ColNames>
       <NameSurrogate>1</NameSurrogate>
       <ObjectId>109285</ObjectId>
@@ -4872,7 +4878,7 @@ libri_id</ColNames>
       <Unique>1</Unique>
       <AccessMethodId>403</AccessMethodId>
     </index>
-    <index id="358" parent="287" name="utente_email_key">
+    <index id="359" parent="287" name="utente_email_key">
       <ColNames>email</ColNames>
       <NameSurrogate>1</NameSurrogate>
       <ObjectId>109287</ObjectId>
@@ -4883,48 +4889,48 @@ libri_id</ColNames>
       <CollationIds>100</CollationIds>
       <CollationParentNames>pg_catalog</CollationParentNames>
     </index>
-    <key id="359" parent="287" name="utente_pkey">
+    <key id="360" parent="287" name="utente_pkey">
       <NameSurrogate>1</NameSurrogate>
       <ObjectId>109286</ObjectId>
       <Primary>1</Primary>
       <StateNumber>27784</StateNumber>
       <UnderlyingIndexId>109285</UnderlyingIndexId>
     </key>
-    <key id="360" parent="287" name="utente_email_key">
+    <key id="361" parent="287" name="utente_email_key">
       <NameSurrogate>1</NameSurrogate>
       <ObjectId>109288</ObjectId>
       <StateNumber>27784</StateNumber>
       <UnderlyingIndexId>109287</UnderlyingIndexId>
     </key>
-    <column id="361" parent="288" name="recensione_list_id">
+    <column id="362" parent="288" name="recensione_list_id">
       <NotNull>1</NotNull>
       <Position>1</Position>
       <StateNumber>27785</StateNumber>
       <StoredType>bigint|0s</StoredType>
       <TypeId>20</TypeId>
     </column>
-    <column id="362" parent="288" name="utente_id">
+    <column id="363" parent="288" name="utente_id">
       <NotNull>1</NotNull>
       <Position>2</Position>
       <StateNumber>27785</StateNumber>
       <StoredType>bigint|0s</StoredType>
       <TypeId>20</TypeId>
     </column>
-    <foreign-key id="363" parent="288" name="fkbxbmk4qnra5cmdi5aygiwowrf">
+    <foreign-key id="364" parent="288" name="fkbxbmk4qnra5cmdi5aygiwowrf">
       <ColNames>recensione_list_id</ColNames>
       <ObjectId>109339</ObjectId>
       <StateNumber>27795</StateNumber>
       <RefKeyColPositions>2</RefKeyColPositions>
       <RefTableId>109272</RefTableId>
     </foreign-key>
-    <foreign-key id="364" parent="288" name="fkme0sl8m604khxfgc34ph56hdt">
+    <foreign-key id="365" parent="288" name="fkme0sl8m604khxfgc34ph56hdt">
       <ColNames>utente_id</ColNames>
       <ObjectId>109344</ObjectId>
       <StateNumber>27796</StateNumber>
       <RefKeyColPositions>1</RefKeyColPositions>
       <RefTableId>109280</RefTableId>
     </foreign-key>
-    <index id="365" parent="288" name="utente_recensione_list_recensione_list_id_key">
+    <index id="366" parent="288" name="utente_recensione_list_recensione_list_id_key">
       <ColNames>recensione_list_id</ColNames>
       <NameSurrogate>1</NameSurrogate>
       <ObjectId>109292</ObjectId>
@@ -4932,7 +4938,7 @@ libri_id</ColNames>
       <Unique>1</Unique>
       <AccessMethodId>403</AccessMethodId>
     </index>
-    <key id="366" parent="288" name="utente_recensione_list_recensione_list_id_key">
+    <key id="367" parent="288" name="utente_recensione_list_recensione_list_id_key">
       <NameSurrogate>1</NameSurrogate>
       <ObjectId>109293</ObjectId>
       <StateNumber>27785</StateNumber>

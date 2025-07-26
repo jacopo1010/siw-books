@@ -3,7 +3,8 @@ package it.uniroma3.siw.model;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
-import jakarta.validation.constraints.Size;
+
+import java.util.Objects;
 
 
 @Entity
@@ -15,17 +16,22 @@ public class Recensione {
     private String titolo;
     @Min(1)
     @Max(5)
-    private int voto;
+    private Integer voto;
     @Column(columnDefinition = "TEXT")
     private String testo;
     @ManyToOne
+    @JoinColumn(nullable = false,name = "libro_id")
     private Libro libro;
-    //
+    @ManyToOne
+    @JoinColumn(nullable = false, name = "utente_id")
+    private Utente utente;
 
-    public Recensione(String titolo, int voto, String testo, Libro libro) {
+    public Recensione(Integer voto, String titolo, String testo, Libro libro, Utente utente) {
         this.titolo = titolo;
         this.voto = voto;
         this.testo = testo;
+        this.libro = libro;
+        this.utente = utente;
         this.libro = libro;
     }
 
@@ -49,11 +55,42 @@ public class Recensione {
         this.titolo = titolo;
     }
 
-    public int getVoto() {
+    public Integer getVoto() {
         return voto;
     }
 
-    public void setVoto(int voto) {
+    public void setVoto(Integer voto) {
         this.voto = voto;
+    }
+
+    public String getTesto() {
+        return testo;
+    }
+    public void setTesto(String testo) {
+         this.testo = testo;
+    }
+    public Libro getLibro() {
+        return libro;
+    }
+    public void setLibro(Libro libro) {
+        this.libro = libro;
+    }
+    public Utente getUtente() {
+        return utente;
+    }
+    public void setUtente(Utente utente) {
+        this.utente = utente;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == null || getClass() != o.getClass()) return false;
+        Recensione that = (Recensione) o;
+        return Objects.equals(id, that.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(id);
     }
 }
