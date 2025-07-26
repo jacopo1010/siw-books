@@ -32,7 +32,7 @@
     <section class="form-box">
         <h1>Aggiungi Autore</h1>
 
-        <form th:action="@{/admin/aggiungiAutore}" method="post" th:object="${autore}">
+        <form th:action="@{/admin/aggiungiAutore}" method="post" enctype="multipart/form-data" th:object="${autore}">
             <div class="field">
                 <label for="nome">nome:</label>
                 <input type="text" name="titolo" id="nome" th:field="*{nome}" required autocomplete="off">
@@ -58,8 +58,8 @@
             </div>
 
             <div class="field">
-                <label for="urlImmagine">Foto</label>
-                <input type="file" name="urlImmagine" accept="image/*">
+                <label for="url_foto">Foto</label>
+                <input type="file" name="url_foto" id="url_foto" accept="image/*" required>
             </div>
 
             <div class="field">

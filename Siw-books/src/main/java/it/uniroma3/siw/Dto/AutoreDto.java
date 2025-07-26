@@ -1,6 +1,7 @@
 package it.uniroma3.siw.Dto;
 
 import jakarta.validation.constraints.NotBlank;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.time.LocalDateTime;
 
@@ -14,7 +15,7 @@ public class AutoreDto {
     private LocalDateTime dataMorte;
     @NotBlank
     private String  nazionalita;
-    private String url_foto;
+    private MultipartFile url_foto;
 
     public String getNome() {
         return nome;
@@ -48,11 +49,11 @@ public class AutoreDto {
     public void setNazionalita(String nazionalita) {
         this.nazionalita = nazionalita;
     }
-    public String getUrl_foto() {
+    public MultipartFile getUrl_foto() {
         return url_foto;
     }
-
-    public void setUrl_foto(String url_foto) {
+    public void setUrl_foto(MultipartFile url_foto) {
         this.url_foto = url_foto;
     }
+
 }

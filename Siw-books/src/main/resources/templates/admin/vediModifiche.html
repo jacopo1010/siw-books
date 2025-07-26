@@ -98,7 +98,7 @@
                     <tbody th:if="${not #sets.isEmpty(autori)}" th:each="autore : ${autori}">
                     <tr>
                         <td th:text="${autore.id}"></td>
-                        <td th:text="${autore.url_foto}"></td>
+                        <td><img th:src="@{'/images/' + ${autore.url_foto}}" alt="Foto autore" width="80" height="100"></td>
                         <td>
                             Nome: <span th:text="${autore.nome}"></span><br/>
                             Cognome: <span th:text="${autore.cognome}"></span>

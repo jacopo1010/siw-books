@@ -125,12 +125,13 @@
 
         @PostMapping("/admin/aggiungiAutore")
         public String aggiungiAutorePost(Model model, @Valid @ModelAttribute("autore") AutoreDto daAutore,
-                                         BindingResult bindingResult) {
+                                         BindingResult bindingResult,@RequestParam("url_foto") MultipartFile file) {
             if (!bindingResult.hasErrors()) {
-                Autore autore = this.autoreService.creaAutore(daAutore.getNome(), daAutore.getCognome(), daAutore.getDataNascita(), daAutore.getDataNascita(), daAutore.getNazionalita(), daAutore.getUrl_foto());
+                Autore autore = this.autoreService.creaAutore(daAutore.getNome(), daAutore.getCognome(), daAutore.getDataNascita(), daAutore.getDataNascita(), daAutore.getNazionalita(),daAutore.getUrl_foto());
                 this.autoreService.salva(autore);
                 return "admin/paginaModifiche.html";
             } else {
+                System.err.println("errori" +  bindingResult.getAllErrors());
                 throw new IllegalArgumentException("L'autore non valido");
             }
         }
@@ -151,7 +152,7 @@
                 autore.setCognome(daAutore.getCognome());
                 autore.setDataNascita(daAutore.getDataNascita());
                 autore.setDataNascita(daAutore.getDataNascita());
-                autore.setUrl_foto(daAutore.getUrl_foto());
+               // autore.setUrl_foto(daAutore.getUrl_foto());
                 autore.setNazionalita(daAutore.getNazionalita());
                 this.autoreService.salva(autore);
                 return "admin/paginaModifiche.html";

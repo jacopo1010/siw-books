@@ -20,13 +20,13 @@ public class Autore {
     @ManyToMany(mappedBy = "scrittori")
     private List<Libro> libriScritti;
 
-    public Autore(String nome,String cognome, LocalDateTime dn,LocalDateTime dm,String na,String foto) {
+    public Autore(String nome,String cognome, LocalDateTime dn,LocalDateTime dm,String na) {
         this.nome = nome;
         this.cognome = cognome;
         this.dataNascita = dn;
         this.dataMorte = dm;
         this.nazionalita = na;
-        this.url_foto = foto;
+        this.url_foto = new String("foto");
         this.libriScritti = new ArrayList<>();
     }
 
