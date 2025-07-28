@@ -13,9 +13,9 @@ public interface RecensioneRepository extends JpaRepository<Recensione, Integer>
    Optional<Recensione> findById(Long id);
 
    // Per verificare se un utente ha già scritto una recensione per un determinato libro
-   @Query("SELECT EXISTS(SELECT 1 FROM Recensione r WHERE r.utente.id = :utenteId AND r.libro.id = :libroId)")
+   @Query("SELECT COUNT(r) > 0 FROM Recensione r WHERE r.libro.id = :bookId AND r.utente.id = :userId")
    public boolean existsByBookIdAndUserId(@Param("libroId") Long bookId, @Param("utenteId") Long userId);
 
    // Per prendere la recensione scritta dall'utente corrente (se esiste) per un determinato libro
-   public Recensione findByUtenteIdAndLibroId(Long userId, Long bookId);
+   public Recensione findByUtenteIdAndLibroId(Long userId, Long libroId);
 }

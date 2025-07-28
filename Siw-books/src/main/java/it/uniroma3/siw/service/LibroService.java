@@ -16,10 +16,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 @Service
 public class LibroService {
@@ -85,7 +82,13 @@ public class LibroService {
 
 
     public Libro getLibro(Long Id){
-          return this.libroRepository.findById(Id).orElseThrow(() -> new IllegalArgumentException("Libro non trovato"));
+       //   return this.libroRepository.findById(Id).orElseThrow(() -> new IllegalArgumentException("Libro non trovato"));
+        Optional<Libro> libro = this.libroRepository.findById(Id);
+        if(libro.isPresent()){
+            return libro.get();
+        }else {
+            throw new IllegalArgumentException("Libro non trovato");
+        }
     }
 
     public List<Libro> getAllLibri(){

@@ -55,7 +55,7 @@ public class UtenteController {
             model.addAttribute("recensione", recensione);
             return "redirect:/visualizzaLibro/" + libro.getId();
         } else {
-            throw new RuntimeException("Errore nel aggiungere una recensione");
+            return "aggiungiRecensione.html";
         }
     }
 
@@ -76,7 +76,7 @@ public class UtenteController {
             model.addAttribute("id", id);
             return "modificaRecensione.html";
         }else {
-          return  "redirect:/visualizzaLibro/" + recensione.getLibro().getId();
+          return "redirect:/visualizzaLibro/" + recensione.getLibro().getId();
         }
     }
 
@@ -96,7 +96,7 @@ public class UtenteController {
             model.addAttribute("recensione", recensione);
             return "redirect:/visualizzaLibro/" + libro.getId();
         } else {
-            throw new RuntimeException("Errore nel modificare una recensione");
+            return "modificaRecensione.html";
         }
     }
 

@@ -19,7 +19,7 @@ public class Utente {
     @NotBlank
     @Column(nullable = false, unique = true)
     private String email;
-    @OneToMany(mappedBy = "utente", cascade = CascadeType.REMOVE, fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "utente", cascade = CascadeType.REMOVE, fetch = FetchType.EAGER)
     private List<Recensione> recensioni;
     @OneToOne(mappedBy = "utente", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Credenziali credenziali;
