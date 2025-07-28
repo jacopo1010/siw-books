@@ -15,6 +15,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Date;
@@ -33,7 +34,7 @@ public class AutoreService {
     }
 
     @Transactional
-    public Autore creaAutore(String nome, String cognome, LocalDateTime dataNascita, LocalDateTime dataMorte, String nazionalita, MultipartFile image) {
+    public Autore creaAutore(String nome, String cognome, LocalDate dataNascita, LocalDate dataMorte, String nazionalita, MultipartFile image) {
         Autore nuovo = new Autore(nome, cognome, dataNascita, dataMorte, nazionalita);
         nuovo.setUrl_foto(this.aggiungiFotoAutore(image));
         nuovo = this.autoreRepository.save(nuovo);
@@ -127,7 +128,14 @@ public class AutoreService {
         }
     }
 
+    public void sostituisciImmagine(Autore autore, MultipartFile immagine) {
+        // Cancello l'immagine dall'autore
+        cancellaImmagineAutore(autore);
+        autore.setUrl_foto(null);
 
+        // Setto l'immagine
+        autore.setUrl_foto(this.aggiungiFotoAutore(immagine));
+    }
 
 
 }

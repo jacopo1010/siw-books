@@ -90,7 +90,7 @@
 
         @PostMapping("/admin/modificaLibro/{id}")
         public String modificaLibro(Model model, @PathVariable Long id, @Valid @ModelAttribute("libroDto") LibroDto libroDto, BindingResult bindingResult,
-                                    @RequestParam(name = "autore", required = false) List<Long> autoriId) {
+                                    @RequestParam(name = "immagini", required = false) List<MultipartFile> immagini, @RequestParam(name = "autore", required = false) List<Long> autoriId) {
             if (!bindingResult.hasErrors()) {
                 if (autoriId != null && !autoriId.isEmpty()) {
                     List<Autore> autori = this.autoreService.listAllById(autoriId);
@@ -102,6 +102,7 @@
                 for (Autore autore : libroDto.getScrittoriIds()) {
                     this.libroService.addAutore(autore.getId(), daModificare.getId());
                 }
+                this.libroService.sostituisciImmagine(daModificare, immagini);
                 this.libroService.saveLibro(daModificare);
                 return "admin/paginaModifiche.html";
             }
@@ -138,22 +139,29 @@
 
         @GetMapping("/admin/modificaAutore/{id}")
         public String modificaAutore(Model model, @PathVariable Long id) {
+            Autore autore = this.autoreService.getAutore(id);
             AutoreDto daAutore = new AutoreDto();
+            daAutore.setNome(autore.getNome());
+            daAutore.setCognome(autore.getCognome());
+            daAutore.setDataNascita(autore.getDataNascita());
+            daAutore.setDataMorte(autore.getDataMorte());
+            daAutore.setNazionalita(autore.getNazionalita());
+            model.addAttribute("id", id);
             model.addAttribute("autoreDto", daAutore);
             return "admin/modificaAutore.html";
         }
 
         @PostMapping("/admin/modificaAutore/{id}")
         public String modificaAutorePost(Model model, @PathVariable Long id, @Valid @ModelAttribute("autoreDto") AutoreDto daAutore,
-                                         BindingResult bindingResult) {
+                                         @RequestParam(name = "immagine", required = false) MultipartFile immagine, BindingResult bindingResult) {
             if (!bindingResult.hasErrors()) {
                 Autore autore = this.autoreService.getAutore(id);
                 autore.setNome(daAutore.getNome());
                 autore.setCognome(daAutore.getCognome());
                 autore.setDataNascita(daAutore.getDataNascita());
                 autore.setDataNascita(daAutore.getDataNascita());
-               // autore.setUrl_foto(daAutore.getUrl_foto());
                 autore.setNazionalita(daAutore.getNazionalita());
+                this.autoreService.sostituisciImmagine(autore, immagine);
                 this.autoreService.salva(autore);
                 return "admin/paginaModifiche.html";
             } else {

@@ -1,8 +1,10 @@
 package it.uniroma3.siw.Dto;
 
 import jakarta.validation.constraints.NotBlank;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 public class AutoreDto {
@@ -11,8 +13,10 @@ public class AutoreDto {
     private String nome;
     @NotBlank
     private String cognome;
-    private LocalDateTime dataNascita;
-    private LocalDateTime dataMorte;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private LocalDate dataNascita;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private LocalDate dataMorte;
     @NotBlank
     private String  nazionalita;
     private MultipartFile url_foto;
@@ -31,16 +35,16 @@ public class AutoreDto {
     public void setCognome(String cognome) {
         this.cognome = cognome;
     }
-    public LocalDateTime getDataNascita() {
+    public LocalDate getDataNascita() {
         return dataNascita;
     }
-    public void setDataNascita(LocalDateTime dataNascita) {
+    public void setDataNascita(LocalDate dataNascita) {
         this.dataNascita = dataNascita;
     }
-    public LocalDateTime getDataMorte() {
+    public LocalDate getDataMorte() {
         return dataMorte;
     }
-    public void setDataMorte(LocalDateTime dataMorte) {
+    public void setDataMorte(LocalDate dataMorte) {
         this.dataMorte = dataMorte;
     }
     public String getNazionalita() {

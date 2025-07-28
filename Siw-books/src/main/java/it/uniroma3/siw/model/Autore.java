@@ -2,6 +2,7 @@ package it.uniroma3.siw.model;
 
 import jakarta.persistence.*;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.*;
 
@@ -13,14 +14,14 @@ public class Autore {
     private Long id;
     private String nome;
     private String cognome;
-    private LocalDateTime dataNascita;
-    private LocalDateTime dataMorte;
+    private LocalDate dataNascita;
+    private LocalDate dataMorte;
     private String  nazionalita;
     private String url_foto;
     @ManyToMany(mappedBy = "scrittori")
     private List<Libro> libriScritti;
 
-    public Autore(String nome,String cognome, LocalDateTime dn,LocalDateTime dm,String na) {
+    public Autore(String nome,String cognome, LocalDate dn,LocalDate dm,String na) {
         this.nome = nome;
         this.cognome = cognome;
         this.dataNascita = dn;
@@ -58,19 +59,19 @@ public class Autore {
         this.cognome = cognome;
     }
 
-    public LocalDateTime getDataNascita() {
+    public LocalDate getDataNascita() {
         return dataNascita;
     }
 
-    public void setDataNascita(LocalDateTime dataNascita) {
+    public void setDataNascita(LocalDate dataNascita) {
         this.dataNascita = dataNascita;
     }
 
-    public LocalDateTime getDataMorte() {
+    public LocalDate getDataMorte() {
         return dataMorte;
     }
 
-    public void setDataMorte(LocalDateTime dataMorte) {
+    public void setDataMorte(LocalDate dataMorte) {
         this.dataMorte = dataMorte;
     }
 

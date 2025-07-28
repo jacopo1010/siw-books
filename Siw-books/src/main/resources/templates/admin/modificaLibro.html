@@ -41,7 +41,7 @@
 
             <div class="field">
                 <label for="anno">Anno di Pubblicazione</label>
-                <input type="date" name="anno" id="anno" th:field="*{annoPubblicazione}" required autocomplete="off">
+                <input type="date" name="anno" id="anno" th:field="*{annoPubblicazione}" th:value="${libroDto.annoPubblicazione != null ? libroDto.annoPubblicazione : ' '}" required>
             </div>
 
             <div class="field" style="height: auto;">
@@ -59,8 +59,8 @@
             </div>
 
             <div class="field">
-                <label for="urlImmagine">Foto</label>
-                <input type="file" name="urlImmagine" accept="image/*">
+                <label for="immagini">Foto</label>
+                <input type="file" id="immagine" name="immagini" accept="image/*" multiple>
             </div>
 
             <div class="field">

@@ -33,7 +33,7 @@
     <section class="form-box">
         <h1>Modifica Autore</h1>
 
-        <form th:action="@{/admin/modificaAutore/{id}(id=${id})}" method="post" th:object="${autoreDto}">
+        <form th:action="@{/admin/modificaAutore/{id}(id=${id})}" enctype="multipart/form-data" method="post" th:object="${autoreDto}">
             <div class="field">
                 <label for="nome">Nome</label>
                 <input type="text" name="nome" id="nome" th:field="*{nome}" required autocomplete="off">
@@ -44,17 +44,17 @@
             </div>
             <div class="field">
                 <label for="annoDiNascita">Anno di nascita</label>
-                <input type="datetime-local" name="annoDiNascita" id="annoDiNascita" th:field="*{dataNascita}" required autocomplete="off">
+                <input type="date" name="annoDiNascita" id="annoDiNascita" th:field="*{dataNascita}" th:value="${autoreDto.dataNascita != null ? autoreDto.dataNascita : ' '}" required autocomplete="off">
             </div>
             </div>
             <div class="field">
                 <label for="annoDiMorte">Anno di morte</label>
-                <input type="datetime-local" name="annoDiMorte" id="annoDiMorte" th:field="*{dataMorte}" required autocomplete="off">
+                <input type="date" name="annoDiMorte" id="annoDiMorte" th:field="*{dataMorte}" th:value="${autoreDto.dataMorte != null ? autoreDto.dataMorte : ' '}" required autocomplete="off">
             </div>
 
             <div class="field">
-                <label for="urlImmagine">Foto</label>
-                <input type="file" name="urlImmagine" accept="image/*">
+                <label for="immagine">Foto</label>
+                <input type="file" name="immagine" accept="image/*">
             </div>
             <div class="field">
                 <label for="nazionalita">Nazionalita</label>

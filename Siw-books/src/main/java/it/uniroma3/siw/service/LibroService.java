@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.awt.print.Book;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.file.Files;
@@ -135,6 +136,19 @@ public class LibroService {
 
     public List<Libro> getLibriMiglioriRecensioni(){
         return  this.libroRepository.findByMediaVotiRecensioneMigliore();
+    }
+
+    public void sostituisciImmagine(Libro libro, List<MultipartFile> immagini) {
+        // Cancello le immagini vecchie
+        cancellaImmagini(libro);
+        libro.getImmagine().clear();
+
+        // Setto le immagini
+        if (immagini != null && !immagini.isEmpty()) {
+            for (String url : gestioniImmagini(immagini)) {
+                libro.addFoto(url);
+            }
+        }
     }
 
 }

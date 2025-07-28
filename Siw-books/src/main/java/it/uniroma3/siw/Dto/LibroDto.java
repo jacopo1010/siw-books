@@ -2,6 +2,7 @@ package it.uniroma3.siw.Dto;
 
 import it.uniroma3.siw.model.Autore;
 import jakarta.validation.constraints.NotNull;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.time.LocalDate;
@@ -14,6 +15,7 @@ public class LibroDto {
     private String titolo;
 
     //@NotNull
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate annoPubblicazione;
 
     //@NotNull(message = "Devi caricare almeno una immagine")
