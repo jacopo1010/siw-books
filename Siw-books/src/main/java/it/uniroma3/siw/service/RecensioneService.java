@@ -43,8 +43,8 @@ public class RecensioneService {
         this.recensioneRepository.delete(recensione);
     }
 
-    public boolean HaRecensito(Long bookId, Long userId) {
-        return this.recensioneRepository.existsByBookIdAndUserId(userId, bookId);
+    public boolean HaRecensito(Long libroId, Long utenteId) {
+        return this.recensioneRepository.existsByLibroIdAndUtenteId(libroId,utenteId);
     }
 
     public Recensione getRecensioneByUtenteAndLibro(Long userId, Long bookId) {
