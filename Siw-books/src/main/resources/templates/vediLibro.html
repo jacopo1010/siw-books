@@ -36,15 +36,15 @@
       <p class="subtitle" th:text="'Anno di pubblicazione: ' + ${libro.annoPubblicazione}">Anno di pubblicazione</p>
 
       <!-- Immagini -->
-    <button th:if="${not #lists.isEmpty(book.urlImage)}" class="carousel-button prev" onclick="moveSlide(-1)">❮</button>
-    <div class="images-carousel-container" th:if="${not #lists.isEmpty(book.urlImage)}">
+    <button th:if="${not #lists.isEmpty(libro.immagine)}" class="carousel-button prev" onclick="moveSlide(-1)"><</button>
+    <div class="images-carousel-container" th:if="${not #lists.isEmpty(libro.immagine)}">
       <div class="images-carousel">
         <div class="images-carousel-track" >
-          <img th:each="image : ${book.urlImage}" th:src="@{'/images/' + ${image}}" alt="urlImage" class="carousel-image">
+          <img th:each="image : ${libro.immagine}" th:src="@{'/images/' + ${image}}" alt="urlImage" class="carousel-image">
         </div>
       </div>
     </div>
-    <button th:if="${not #lists.isEmpty(book.urlImage)}" class="carousel-button next" onclick="moveSlide(1)">❯</button>
+    <button th:if="${not #lists.isEmpty(libro.immagine)}" class="carousel-button next" onclick="moveSlide(1)">></button>
 
   </section>
 
@@ -100,6 +100,20 @@
 <footer>
   <p>© 2025 Librelandia - Tutti i diritti riservati</p>
 </footer>
+<script>
+  let currentSlide = 0;
 
+  function moveSlide(direction) {
+    const track = document.querySelector('.images-carousel-track');
+    const totalSlides = track.children.length;
+
+    currentSlide += direction;
+
+    if (currentSlide < 0) currentSlide = totalSlides - 1;
+    if (currentSlide >= totalSlides) currentSlide = 0;
+
+    track.style.transform = `translateX(-${currentSlide * 100}%)`;
+  }
+</script>
 </body>
 </html>
