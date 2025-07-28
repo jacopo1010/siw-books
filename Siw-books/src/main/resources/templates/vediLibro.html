@@ -19,7 +19,7 @@
     <a href="/autori" class="nav-link">Autori</a>
     <a th:if="${isAdmin}" href="/addBook" class="login-button">Aggiungi Libro</a>
     <a th:if="${isAnonymous}" href="/login" class="login-button">Accedi/Registrati</a>
-    <a th:if="${!isAnonymous}" href="/account" class="login-button">Account</a>
+    <a th:if="${!isAnonymous}" href="/myAccount" class="login-button" th:text="${utente.username}"></a>
   </nav>
 </header>
 
@@ -56,7 +56,7 @@
   <section class="reviews-section">
     <h2>Recensioni</h2>
 
-    <div th:if="${!isAnonymous}" style="width: 100%;">
+    <div th:if="${!isAnonymous and !isAdmin}" style="width: 100%;">
       <a th:href="@{/aggiungiRecensione/{id}(id=${libro.id})}">Scrivi la tua recensione</a>
     </div>
 
@@ -68,9 +68,16 @@
     <!-- Elenco recensioni -->
     <div th:if="${libro.recensioni != null and !#lists.isEmpty(libro.recensioni)}">
       <div th:each="recensione : ${libro.recensioni}">
-        <p><strong th:text="${recensione.utente?.username ?: 'Utente anonimo'}">Utente</strong>:</p>
+        <p><strong th:text="${recensione.utente.credenziali.username}">Utente</strong>:</p>
+        <p th:text="${recensione.titolo}">Testo recensione</p>
         <p th:text="${recensione.testo}">Testo recensione</p>
-        <hr/>
+        <div th:if="${!isAnonymous}">
+          <a th:if="${recensione.utente.id == utenteId}" th:href="@{/modificaRecensione/{id}(id=${recensione.id})}"><button type="submit">modifica recensione</button></a>
+          <form th:action="@{/cancellaRecensione/{id}(id=${recensione.id})}" method="post" th:if="${recensione.utente.id == utenteId or isAdmin}">
+            <button type="submit">Elimina</button>
+          </form>
+          <hr/>
+        </div>
       </div>
     </div>
   </section>

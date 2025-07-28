@@ -54,7 +54,7 @@ public class AutoreService {
 
     public List<Autore> listAllKeyword(String keyWord) {
         if (keyWord != null) {
-            return this.autoreRepository.findAllWithThatKeyWord(keyWord);
+            return this.autoreRepository.searchByKeyword(keyWord);
         }
         return this.getAllAutori();
     }

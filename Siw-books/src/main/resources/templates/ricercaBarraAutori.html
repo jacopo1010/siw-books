@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="it" xmlns:th="http://www.w3.org/1999/xhtml" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head>
+  <title>Librelandia</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+<header>
+
+  <div class="logo-title">
+    <span><h1>Librelandia</h1></span>
+  </div>
+
+  <nav class="nav">
+    <a href="/" class="nav-link">Home</a>
+    <a href="/books" class="nav-link">Libri</a>
+    <a href="/authors" class="nav-link">Autori</a>
+    <a th:if="${isAdmin}" href="/addBook" class="login-button">Aggiungi Libro</a>
+    <a th:if="${isAnonymous}" href="/login" class="login-button">Accedi/Registrati</a>
+    <a th:if="${!isAnonymous}" href="/myAccount" class="login-button" th:text="${utente.username}"></a>
+  </nav>
+</header>
+
+<main>
+
+
+
+
+    <h1 th:if="${not #lists.isEmpty(libri)}">Autori</h1>
+    <div th:if="${not #lists.isEmpty(autori)}" class="grid-container">
+      <div class="carousel-card" th:each="author : ${autori}">
+        <a th:href="@{'/author/' + ${author.id}}">
+          <img src="/images/homepage.png">
+          <div class="carousel-card-details">
+            <h4 th:text="${author.nome} + ' ' + ${author.cognome}">Nome Cognome</h4>
+            <p th:text="${#temporals.format(author.dataNascita, 'dd/MM/yyyy')} + ' - ' +
+								${author.dataMorte != null ? #temporals.format(author.dataMorte, 'dd/MM/yyyy') : '...'}">Data</p>
+            <p th:text="${author.nazionalita}">Nazionalita</p>
+          </div>
+        </a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <p>© 2025 librelandia - Tutti i diritti riservati</p>
+</footer>
+
+</body>
+</html>

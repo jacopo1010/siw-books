@@ -17,6 +17,7 @@ public class UtenteService {
     @Autowired private UtenteRepository utenteRepository;
     @Autowired private CredenzialiRepository credenzialiRepository;
 
+    @Transactional
     public Utente creaUtente(String nome, String cognome, String email){
         Utente utente = new Utente(nome,cognome,email);
         utente = this.utenteRepository.save(utente);

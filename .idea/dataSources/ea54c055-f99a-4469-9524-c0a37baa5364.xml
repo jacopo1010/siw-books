@@ -3,9 +3,17 @@
   <database-model serializer="dbm" dbms="POSTGRES" family-id="POSTGRES" format-version="4.53">
     <root id="1">
       <DateStyle>dmy</DateStyle>
-      <IntrospectionStateNumber>27916</IntrospectionStateNumber>
+      <Grants>1||-9223372036854775808|c|G
+1||10|c|G
+1||10|C|G
+1||10|T|G
+4||-9223372036854775808|c|G
+4||10|c|G
+4||10|C|G
+4||10|T|G</Grants>
+      <IntrospectionStateNumber>27943</IntrospectionStateNumber>
       <ServerVersion>17.4</ServerVersion>
-      <StartupTime>1753435285</StartupTime>
+      <StartupTime>1753559250</StartupTime>
       <TimeZones>true ACDT
 true ACSST
 false ACST
@@ -800,7 +808,7 @@ false Zulu
 14751||10|C|G
 14751||-9223372036854775808|U|G
 14751||10|U|G</Grants>
-      <IntrospectionStateNumber>27916</IntrospectionStateNumber>
+      <IntrospectionStateNumber>27943</IntrospectionStateNumber>
       <ObjectId>29807</ObjectId>
       <OwnerName>postgres</OwnerName>
     </database>
@@ -4239,8 +4247,8 @@ false Zulu
     <schema id="268" parent="2" name="public">
       <Comment>standard public schema</Comment>
       <Current>1</Current>
-      <IntrospectionStateNumber>27916</IntrospectionStateNumber>
-      <LastIntrospectionLocalTimestamp>2025-07-26.08:05:02</LastIntrospectionLocalTimestamp>
+      <IntrospectionStateNumber>27943</IntrospectionStateNumber>
+      <LastIntrospectionLocalTimestamp>2025-07-28.10:29:04</LastIntrospectionLocalTimestamp>
       <ObjectId>2200</ObjectId>
       <StateNumber>532</StateNumber>
       <OwnerName>pg_database_owner</OwnerName>
@@ -4351,49 +4359,37 @@ false Zulu
       <AccessMethodId>2</AccessMethodId>
       <OwnerName>postgres</OwnerName>
     </table>
-    <table id="284" parent="268" name="libro_immagine">
-      <ObjectId>109268</ObjectId>
-      <StateNumber>27793</StateNumber>
-      <AccessMethodId>2</AccessMethodId>
-      <OwnerName>postgres</OwnerName>
-    </table>
-    <table id="285" parent="268" name="libro_immagini">
+    <table id="284" parent="268" name="libro_immagini">
       <ObjectId>109350</ObjectId>
       <StateNumber>27885</StateNumber>
       <AccessMethodId>2</AccessMethodId>
       <OwnerName>postgres</OwnerName>
     </table>
-    <table id="286" parent="268" name="recensione">
+    <table id="285" parent="268" name="recensione">
       <ObjectId>109272</ObjectId>
-      <StateNumber>27794</StateNumber>
+      <StateNumber>27933</StateNumber>
       <AccessMethodId>2</AccessMethodId>
       <OwnerName>postgres</OwnerName>
     </table>
-    <table id="287" parent="268" name="utente">
+    <table id="286" parent="268" name="utente">
       <ObjectId>109280</ObjectId>
       <StateNumber>27786</StateNumber>
       <AccessMethodId>2</AccessMethodId>
       <OwnerName>postgres</OwnerName>
     </table>
-    <table id="288" parent="268" name="utente_recensione_list">
-      <ObjectId>109289</ObjectId>
-      <StateNumber>27795</StateNumber>
-      <AccessMethodId>2</AccessMethodId>
-      <OwnerName>postgres</OwnerName>
-    </table>
-    <column id="289" parent="277" name="data_morte">
+    <column id="287" parent="277" name="data_morte">
       <Position>1</Position>
       <StateNumber>27775</StateNumber>
       <StoredType>timestamp(6)|0s</StoredType>
       <TypeId>1114</TypeId>
     </column>
-    <column id="290" parent="277" name="data_nascita">
+    <column id="288" parent="277" name="data_nascita">
       <Position>2</Position>
       <StateNumber>27775</StateNumber>
       <StoredType>timestamp(6)|0s</StoredType>
       <TypeId>1114</TypeId>
     </column>
-    <column id="291" parent="277" name="id">
+    <column id="289" parent="277" name="id">
       <IdentityKind>by-default</IdentityKind>
       <NotNull>1</NotNull>
       <Position>3</Position>
@@ -4402,31 +4398,31 @@ false Zulu
       <SequenceId>109222</SequenceId>
       <TypeId>20</TypeId>
     </column>
-    <column id="292" parent="277" name="cognome">
+    <column id="290" parent="277" name="cognome">
       <Position>4</Position>
       <StateNumber>27775</StateNumber>
       <StoredType>varchar(255)|0s</StoredType>
       <TypeId>1043</TypeId>
     </column>
-    <column id="293" parent="277" name="nazionalita">
+    <column id="291" parent="277" name="nazionalita">
       <Position>5</Position>
       <StateNumber>27775</StateNumber>
       <StoredType>varchar(255)|0s</StoredType>
       <TypeId>1043</TypeId>
     </column>
-    <column id="294" parent="277" name="nome">
+    <column id="292" parent="277" name="nome">
       <Position>6</Position>
       <StateNumber>27775</StateNumber>
       <StoredType>varchar(255)|0s</StoredType>
       <TypeId>1043</TypeId>
     </column>
-    <column id="295" parent="277" name="url_foto">
+    <column id="293" parent="277" name="url_foto">
       <Position>7</Position>
       <StateNumber>27775</StateNumber>
       <StoredType>varchar(255)|0s</StoredType>
       <TypeId>1043</TypeId>
     </column>
-    <index id="296" parent="277" name="autore_pkey">
+    <index id="294" parent="277" name="autore_pkey">
       <ColNames>id</ColNames>
       <NameSurrogate>1</NameSurrogate>
       <ObjectId>109228</ObjectId>
@@ -4435,60 +4431,60 @@ false Zulu
       <Unique>1</Unique>
       <AccessMethodId>403</AccessMethodId>
     </index>
-    <key id="297" parent="277" name="autore_pkey">
+    <key id="295" parent="277" name="autore_pkey">
       <NameSurrogate>1</NameSurrogate>
       <ObjectId>109229</ObjectId>
       <Primary>1</Primary>
       <StateNumber>27775</StateNumber>
       <UnderlyingIndexId>109228</UnderlyingIndexId>
     </key>
-    <column id="298" parent="278" name="id">
+    <column id="296" parent="278" name="id">
       <NotNull>1</NotNull>
       <Position>1</Position>
       <StateNumber>27776</StateNumber>
       <StoredType>bigint|0s</StoredType>
       <TypeId>20</TypeId>
     </column>
-    <column id="299" parent="278" name="utente_id">
+    <column id="297" parent="278" name="utente_id">
       <Position>2</Position>
       <StateNumber>27776</StateNumber>
       <StoredType>bigint|0s</StoredType>
       <TypeId>20</TypeId>
     </column>
-    <column id="300" parent="278" name="password">
+    <column id="298" parent="278" name="password">
       <NotNull>1</NotNull>
       <Position>3</Position>
       <StateNumber>27776</StateNumber>
       <StoredType>varchar(255)|0s</StoredType>
       <TypeId>1043</TypeId>
     </column>
-    <column id="301" parent="278" name="reset_passwors_token">
+    <column id="299" parent="278" name="reset_passwors_token">
       <Position>4</Position>
       <StateNumber>27776</StateNumber>
       <StoredType>varchar(255)|0s</StoredType>
       <TypeId>1043</TypeId>
     </column>
-    <column id="302" parent="278" name="ruolo">
+    <column id="300" parent="278" name="ruolo">
       <Position>5</Position>
       <StateNumber>27776</StateNumber>
       <StoredType>varchar(255)|0s</StoredType>
       <TypeId>1043</TypeId>
     </column>
-    <column id="303" parent="278" name="username">
+    <column id="301" parent="278" name="username">
       <NotNull>1</NotNull>
       <Position>6</Position>
       <StateNumber>27776</StateNumber>
       <StoredType>varchar(255)|0s</StoredType>
       <TypeId>1043</TypeId>
     </column>
-    <foreign-key id="304" parent="278" name="fkkacq4taa3oam0bacomgcubkv5">
+    <foreign-key id="302" parent="278" name="fkkacq4taa3oam0bacomgcubkv5">
       <ColNames>utente_id</ColNames>
       <ObjectId>109294</ObjectId>
       <StateNumber>27786</StateNumber>
       <RefKeyColPositions>1</RefKeyColPositions>
       <RefTableId>109280</RefTableId>
     </foreign-key>
-    <index id="305" parent="278" name="credenziali_pkey">
+    <index id="303" parent="278" name="credenziali_pkey">
       <ColNames>id</ColNames>
       <NameSurrogate>1</NameSurrogate>
       <ObjectId>109235</ObjectId>
@@ -4497,7 +4493,7 @@ false Zulu
       <Unique>1</Unique>
       <AccessMethodId>403</AccessMethodId>
     </index>
-    <index id="306" parent="278" name="credenziali_utente_id_key">
+    <index id="304" parent="278" name="credenziali_utente_id_key">
       <ColNames>utente_id</ColNames>
       <NameSurrogate>1</NameSurrogate>
       <ObjectId>109237</ObjectId>
@@ -4505,7 +4501,7 @@ false Zulu
       <Unique>1</Unique>
       <AccessMethodId>403</AccessMethodId>
     </index>
-    <index id="307" parent="278" name="credenziali_username_key">
+    <index id="305" parent="278" name="credenziali_username_key">
       <ColNames>username</ColNames>
       <NameSurrogate>1</NameSurrogate>
       <ObjectId>109239</ObjectId>
@@ -4516,26 +4512,26 @@ false Zulu
       <CollationIds>100</CollationIds>
       <CollationParentNames>pg_catalog</CollationParentNames>
     </index>
-    <key id="308" parent="278" name="credenziali_pkey">
+    <key id="306" parent="278" name="credenziali_pkey">
       <NameSurrogate>1</NameSurrogate>
       <ObjectId>109236</ObjectId>
       <Primary>1</Primary>
       <StateNumber>27776</StateNumber>
       <UnderlyingIndexId>109235</UnderlyingIndexId>
     </key>
-    <key id="309" parent="278" name="credenziali_utente_id_key">
+    <key id="307" parent="278" name="credenziali_utente_id_key">
       <NameSurrogate>1</NameSurrogate>
       <ObjectId>109238</ObjectId>
       <StateNumber>27776</StateNumber>
       <UnderlyingIndexId>109237</UnderlyingIndexId>
     </key>
-    <key id="310" parent="278" name="credenziali_username_key">
+    <key id="308" parent="278" name="credenziali_username_key">
       <NameSurrogate>1</NameSurrogate>
       <ObjectId>109240</ObjectId>
       <StateNumber>27776</StateNumber>
       <UnderlyingIndexId>109239</UnderlyingIndexId>
     </key>
-    <column id="311" parent="279" name="id">
+    <column id="309" parent="279" name="id">
       <IdentityKind>by-default</IdentityKind>
       <NotNull>1</NotNull>
       <Position>1</Position>
@@ -4544,7 +4540,7 @@ false Zulu
       <SequenceId>109241</SequenceId>
       <TypeId>20</TypeId>
     </column>
-    <index id="312" parent="279" name="librelandia_pkey">
+    <index id="310" parent="279" name="librelandia_pkey">
       <ColNames>id</ColNames>
       <NameSurrogate>1</NameSurrogate>
       <ObjectId>109245</ObjectId>
@@ -4553,42 +4549,42 @@ false Zulu
       <Unique>1</Unique>
       <AccessMethodId>403</AccessMethodId>
     </index>
-    <key id="313" parent="279" name="librelandia_pkey">
+    <key id="311" parent="279" name="librelandia_pkey">
       <NameSurrogate>1</NameSurrogate>
       <ObjectId>109246</ObjectId>
       <Primary>1</Primary>
       <StateNumber>27777</StateNumber>
       <UnderlyingIndexId>109245</UnderlyingIndexId>
     </key>
-    <column id="314" parent="280" name="librelandia_id">
+    <column id="312" parent="280" name="librelandia_id">
       <NotNull>1</NotNull>
       <Position>1</Position>
       <StateNumber>27778</StateNumber>
       <StoredType>bigint|0s</StoredType>
       <TypeId>20</TypeId>
     </column>
-    <column id="315" parent="280" name="libri_id">
+    <column id="313" parent="280" name="libri_id">
       <NotNull>1</NotNull>
       <Position>2</Position>
       <StateNumber>27778</StateNumber>
       <StoredType>bigint|0s</StoredType>
       <TypeId>20</TypeId>
     </column>
-    <foreign-key id="316" parent="280" name="fko04bjewiagnyh93jcfbbe21ga">
+    <foreign-key id="314" parent="280" name="fko04bjewiagnyh93jcfbbe21ga">
       <ColNames>librelandia_id</ColNames>
       <ObjectId>109304</ObjectId>
       <StateNumber>27788</StateNumber>
       <RefKeyColPositions>1</RefKeyColPositions>
       <RefTableId>109242</RefTableId>
     </foreign-key>
-    <foreign-key id="317" parent="280" name="fkxforb4gg9a96ak996rdjov58">
+    <foreign-key id="315" parent="280" name="fkxforb4gg9a96ak996rdjov58">
       <ColNames>libri_id</ColNames>
       <ObjectId>109299</ObjectId>
       <StateNumber>27787</StateNumber>
       <RefKeyColPositions>2</RefKeyColPositions>
       <RefTableId>109260</RefTableId>
     </foreign-key>
-    <index id="318" parent="280" name="librelandia_libri_pkey">
+    <index id="316" parent="280" name="librelandia_libri_pkey">
       <ColNames>librelandia_id
 libri_id</ColNames>
       <NameSurrogate>1</NameSurrogate>
@@ -4598,7 +4594,7 @@ libri_id</ColNames>
       <Unique>1</Unique>
       <AccessMethodId>403</AccessMethodId>
     </index>
-    <index id="319" parent="280" name="librelandia_libri_libri_id_key">
+    <index id="317" parent="280" name="librelandia_libri_libri_id_key">
       <ColNames>libri_id</ColNames>
       <NameSurrogate>1</NameSurrogate>
       <ObjectId>109252</ObjectId>
@@ -4606,48 +4602,48 @@ libri_id</ColNames>
       <Unique>1</Unique>
       <AccessMethodId>403</AccessMethodId>
     </index>
-    <key id="320" parent="280" name="librelandia_libri_pkey">
+    <key id="318" parent="280" name="librelandia_libri_pkey">
       <NameSurrogate>1</NameSurrogate>
       <ObjectId>109251</ObjectId>
       <Primary>1</Primary>
       <StateNumber>27778</StateNumber>
       <UnderlyingIndexId>109250</UnderlyingIndexId>
     </key>
-    <key id="321" parent="280" name="librelandia_libri_libri_id_key">
+    <key id="319" parent="280" name="librelandia_libri_libri_id_key">
       <NameSurrogate>1</NameSurrogate>
       <ObjectId>109253</ObjectId>
       <StateNumber>27778</StateNumber>
       <UnderlyingIndexId>109252</UnderlyingIndexId>
     </key>
-    <column id="322" parent="281" name="librelandia_id">
+    <column id="320" parent="281" name="librelandia_id">
       <NotNull>1</NotNull>
       <Position>1</Position>
       <StateNumber>27779</StateNumber>
       <StoredType>bigint|0s</StoredType>
       <TypeId>20</TypeId>
     </column>
-    <column id="323" parent="281" name="utenti_registrati_id">
+    <column id="321" parent="281" name="utenti_registrati_id">
       <NotNull>1</NotNull>
       <Position>2</Position>
       <StateNumber>27779</StateNumber>
       <StoredType>bigint|0s</StoredType>
       <TypeId>20</TypeId>
     </column>
-    <foreign-key id="324" parent="281" name="fkbbmrlg35cbmu9wtjw1e2l7w4y">
+    <foreign-key id="322" parent="281" name="fkbbmrlg35cbmu9wtjw1e2l7w4y">
       <ColNames>librelandia_id</ColNames>
       <ObjectId>109314</ObjectId>
       <StateNumber>27790</StateNumber>
       <RefKeyColPositions>1</RefKeyColPositions>
       <RefTableId>109242</RefTableId>
     </foreign-key>
-    <foreign-key id="325" parent="281" name="fkaxbv8y1xoa0jt0niq79ix60yg">
+    <foreign-key id="323" parent="281" name="fkaxbv8y1xoa0jt0niq79ix60yg">
       <ColNames>utenti_registrati_id</ColNames>
       <ObjectId>109309</ObjectId>
       <StateNumber>27789</StateNumber>
       <RefKeyColPositions>1</RefKeyColPositions>
       <RefTableId>109280</RefTableId>
     </foreign-key>
-    <index id="326" parent="281" name="librelandia_utenti_registrati_utenti_registrati_id_key">
+    <index id="324" parent="281" name="librelandia_utenti_registrati_utenti_registrati_id_key">
       <ColNames>utenti_registrati_id</ColNames>
       <NameSurrogate>1</NameSurrogate>
       <ObjectId>109257</ObjectId>
@@ -4655,19 +4651,19 @@ libri_id</ColNames>
       <Unique>1</Unique>
       <AccessMethodId>403</AccessMethodId>
     </index>
-    <key id="327" parent="281" name="librelandia_utenti_registrati_utenti_registrati_id_key">
+    <key id="325" parent="281" name="librelandia_utenti_registrati_utenti_registrati_id_key">
       <NameSurrogate>1</NameSurrogate>
       <ObjectId>109258</ObjectId>
       <StateNumber>27779</StateNumber>
       <UnderlyingIndexId>109257</UnderlyingIndexId>
     </key>
-    <column id="328" parent="282" name="anno_di_pubblicazione">
+    <column id="326" parent="282" name="anno_di_pubblicazione">
       <Position>1</Position>
       <StateNumber>27780</StateNumber>
       <StoredType>date|0s</StoredType>
       <TypeId>1082</TypeId>
     </column>
-    <column id="329" parent="282" name="id">
+    <column id="327" parent="282" name="id">
       <IdentityKind>by-default</IdentityKind>
       <NotNull>1</NotNull>
       <Position>2</Position>
@@ -4676,19 +4672,19 @@ libri_id</ColNames>
       <SequenceId>109259</SequenceId>
       <TypeId>20</TypeId>
     </column>
-    <column id="330" parent="282" name="titolo">
+    <column id="328" parent="282" name="titolo">
       <Position>3</Position>
       <StateNumber>27780</StateNumber>
       <StoredType>varchar(255)|0s</StoredType>
       <TypeId>1043</TypeId>
     </column>
-    <column id="331" parent="282" name="oraedata_creazione">
+    <column id="329" parent="282" name="oraedata_creazione">
       <Position>4</Position>
       <StateNumber>27907</StateNumber>
       <StoredType>timestamp(6)|0s</StoredType>
       <TypeId>1114</TypeId>
     </column>
-    <index id="332" parent="282" name="libro_pkey">
+    <index id="330" parent="282" name="libro_pkey">
       <ColNames>id</ColNames>
       <NameSurrogate>1</NameSurrogate>
       <ObjectId>109263</ObjectId>
@@ -4697,95 +4693,75 @@ libri_id</ColNames>
       <Unique>1</Unique>
       <AccessMethodId>403</AccessMethodId>
     </index>
-    <key id="333" parent="282" name="libro_pkey">
+    <key id="331" parent="282" name="libro_pkey">
       <NameSurrogate>1</NameSurrogate>
       <ObjectId>109264</ObjectId>
       <Primary>1</Primary>
       <StateNumber>27780</StateNumber>
       <UnderlyingIndexId>109263</UnderlyingIndexId>
     </key>
-    <column id="334" parent="283" name="autore_id">
+    <column id="332" parent="283" name="autore_id">
       <NotNull>1</NotNull>
       <Position>1</Position>
       <StateNumber>27781</StateNumber>
       <StoredType>bigint|0s</StoredType>
       <TypeId>20</TypeId>
     </column>
-    <column id="335" parent="283" name="libro_id">
+    <column id="333" parent="283" name="libro_id">
       <NotNull>1</NotNull>
       <Position>2</Position>
       <StateNumber>27781</StateNumber>
       <StoredType>bigint|0s</StoredType>
       <TypeId>20</TypeId>
     </column>
-    <foreign-key id="336" parent="283" name="fksgfg0ss84qscvi1l8fdd45qwj">
+    <foreign-key id="334" parent="283" name="fksgfg0ss84qscvi1l8fdd45qwj">
       <ColNames>autore_id</ColNames>
       <ObjectId>109319</ObjectId>
       <StateNumber>27791</StateNumber>
       <RefKeyColPositions>3</RefKeyColPositions>
       <RefTableId>109223</RefTableId>
     </foreign-key>
-    <foreign-key id="337" parent="283" name="fkjqi5oqp3sw7g9mm1bhhqy1pi8">
+    <foreign-key id="335" parent="283" name="fkjqi5oqp3sw7g9mm1bhhqy1pi8">
       <ColNames>libro_id</ColNames>
       <ObjectId>109324</ObjectId>
       <StateNumber>27792</StateNumber>
       <RefKeyColPositions>2</RefKeyColPositions>
       <RefTableId>109260</RefTableId>
     </foreign-key>
-    <column id="338" parent="284" name="libro_id">
-      <NotNull>1</NotNull>
-      <Position>1</Position>
-      <StateNumber>27782</StateNumber>
-      <StoredType>bigint|0s</StoredType>
-      <TypeId>20</TypeId>
-    </column>
-    <column id="339" parent="284" name="url_immagine">
-      <Position>2</Position>
-      <StateNumber>27915</StateNumber>
-      <StoredType>varchar(255)|0s</StoredType>
-      <TypeId>1043</TypeId>
-    </column>
-    <foreign-key id="340" parent="284" name="fk2fm4a235j3kghfg3v6kkggjef">
-      <ColNames>libro_id</ColNames>
-      <ObjectId>109329</ObjectId>
-      <StateNumber>27793</StateNumber>
-      <RefKeyColPositions>2</RefKeyColPositions>
-      <RefTableId>109260</RefTableId>
-    </foreign-key>
-    <column id="341" parent="285" name="libro_id">
+    <column id="336" parent="284" name="libro_id">
       <NotNull>1</NotNull>
       <Position>1</Position>
       <StateNumber>27884</StateNumber>
       <StoredType>bigint|0s</StoredType>
       <TypeId>20</TypeId>
     </column>
-    <column id="342" parent="285" name="url_immagine">
+    <column id="337" parent="284" name="url_immagine">
       <Position>2</Position>
       <StateNumber>27884</StateNumber>
       <StoredType>varchar(255)|0s</StoredType>
       <TypeId>1043</TypeId>
     </column>
-    <foreign-key id="343" parent="285" name="fkh1700kwfu9vyulfuiu14r8c4l">
+    <foreign-key id="338" parent="284" name="fkh1700kwfu9vyulfuiu14r8c4l">
       <ColNames>libro_id</ColNames>
       <ObjectId>109353</ObjectId>
       <StateNumber>27885</StateNumber>
       <RefKeyColPositions>2</RefKeyColPositions>
       <RefTableId>109260</RefTableId>
     </foreign-key>
-    <check id="344" parent="286" name="recensione_voto_check">
+    <check id="339" parent="285" name="recensione_voto_check">
       <ColNames>voto</ColNames>
       <ObjectId>109275</ObjectId>
       <Predicate>(voto &lt;= 5) AND (voto &gt;= 1)</Predicate>
       <StateNumber>27783</StateNumber>
     </check>
-    <column id="345" parent="286" name="voto">
+    <column id="340" parent="285" name="voto">
       <NotNull>1</NotNull>
       <Position>1</Position>
       <StateNumber>27783</StateNumber>
       <StoredType>integer|0s</StoredType>
       <TypeId>23</TypeId>
     </column>
-    <column id="346" parent="286" name="id">
+    <column id="341" parent="285" name="id">
       <IdentityKind>by-default</IdentityKind>
       <NotNull>1</NotNull>
       <Position>2</Position>
@@ -4794,38 +4770,46 @@ libri_id</ColNames>
       <SequenceId>109271</SequenceId>
       <TypeId>20</TypeId>
     </column>
-    <column id="347" parent="286" name="libro_id">
+    <column id="342" parent="285" name="libro_id">
       <Position>3</Position>
       <StateNumber>27783</StateNumber>
       <StoredType>bigint|0s</StoredType>
       <TypeId>20</TypeId>
     </column>
-    <column id="348" parent="286" name="testo">
+    <column id="343" parent="285" name="testo">
       <Position>4</Position>
       <StateNumber>27783</StateNumber>
       <StoredType>text|0s</StoredType>
       <TypeId>25</TypeId>
     </column>
-    <column id="349" parent="286" name="titolo">
+    <column id="344" parent="285" name="titolo">
       <Position>5</Position>
       <StateNumber>27783</StateNumber>
       <StoredType>varchar(255)|0s</StoredType>
       <TypeId>1043</TypeId>
     </column>
-    <foreign-key id="350" parent="286" name="fko6yeeuyqb0kc4jdxbqid79pfj">
+    <column id="345" parent="285" name="utente_id">
+      <NotNull>1</NotNull>
+      <Position>6</Position>
+      <StateNumber>27933</StateNumber>
+      <StoredType>bigint|0s</StoredType>
+      <TypeId>20</TypeId>
+    </column>
+    <foreign-key id="346" parent="285" name="fko6yeeuyqb0kc4jdxbqid79pfj">
       <ColNames>libro_id</ColNames>
       <ObjectId>109334</ObjectId>
       <StateNumber>27794</StateNumber>
       <RefKeyColPositions>2</RefKeyColPositions>
       <RefTableId>109260</RefTableId>
     </foreign-key>
-    <foreign-key id="351" parent="286" name="fkb77d6048y1xbjljw1aaew6dt9">
+    <foreign-key id="347" parent="285" name="fkb77d6048y1xbjljw1aaew6dt9">
+      <ColNames>utente_id</ColNames>
       <ObjectId>109358</ObjectId>
       <StateNumber>27934</StateNumber>
       <RefKeyColPositions>1</RefKeyColPositions>
       <RefTableId>109280</RefTableId>
     </foreign-key>
-    <index id="352" parent="286" name="recensione_pkey">
+    <index id="348" parent="285" name="recensione_pkey">
       <ColNames>id</ColNames>
       <NameSurrogate>1</NameSurrogate>
       <ObjectId>109278</ObjectId>
@@ -4834,42 +4818,42 @@ libri_id</ColNames>
       <Unique>1</Unique>
       <AccessMethodId>403</AccessMethodId>
     </index>
-    <key id="353" parent="286" name="recensione_pkey">
+    <key id="349" parent="285" name="recensione_pkey">
       <NameSurrogate>1</NameSurrogate>
       <ObjectId>109279</ObjectId>
       <Primary>1</Primary>
       <StateNumber>27783</StateNumber>
       <UnderlyingIndexId>109278</UnderlyingIndexId>
     </key>
-    <column id="354" parent="287" name="id">
+    <column id="350" parent="286" name="id">
       <NotNull>1</NotNull>
       <Position>1</Position>
       <StateNumber>27784</StateNumber>
       <StoredType>bigint|0s</StoredType>
       <TypeId>20</TypeId>
     </column>
-    <column id="355" parent="287" name="cognome">
+    <column id="351" parent="286" name="cognome">
       <NotNull>1</NotNull>
       <Position>2</Position>
       <StateNumber>27784</StateNumber>
       <StoredType>varchar(255)|0s</StoredType>
       <TypeId>1043</TypeId>
     </column>
-    <column id="356" parent="287" name="email">
+    <column id="352" parent="286" name="email">
       <NotNull>1</NotNull>
       <Position>3</Position>
       <StateNumber>27784</StateNumber>
       <StoredType>varchar(255)|0s</StoredType>
       <TypeId>1043</TypeId>
     </column>
-    <column id="357" parent="287" name="nome">
+    <column id="353" parent="286" name="nome">
       <NotNull>1</NotNull>
       <Position>4</Position>
       <StateNumber>27784</StateNumber>
       <StoredType>varchar(255)|0s</StoredType>
       <TypeId>1043</TypeId>
     </column>
-    <index id="358" parent="287" name="utente_pkey">
+    <index id="354" parent="286" name="utente_pkey">
       <ColNames>id</ColNames>
       <NameSurrogate>1</NameSurrogate>
       <ObjectId>109285</ObjectId>
@@ -4878,7 +4862,7 @@ libri_id</ColNames>
       <Unique>1</Unique>
       <AccessMethodId>403</AccessMethodId>
     </index>
-    <index id="359" parent="287" name="utente_email_key">
+    <index id="355" parent="286" name="utente_email_key">
       <ColNames>email</ColNames>
       <NameSurrogate>1</NameSurrogate>
       <ObjectId>109287</ObjectId>
@@ -4889,60 +4873,18 @@ libri_id</ColNames>
       <CollationIds>100</CollationIds>
       <CollationParentNames>pg_catalog</CollationParentNames>
     </index>
-    <key id="360" parent="287" name="utente_pkey">
+    <key id="356" parent="286" name="utente_pkey">
       <NameSurrogate>1</NameSurrogate>
       <ObjectId>109286</ObjectId>
       <Primary>1</Primary>
       <StateNumber>27784</StateNumber>
       <UnderlyingIndexId>109285</UnderlyingIndexId>
     </key>
-    <key id="361" parent="287" name="utente_email_key">
+    <key id="357" parent="286" name="utente_email_key">
       <NameSurrogate>1</NameSurrogate>
       <ObjectId>109288</ObjectId>
       <StateNumber>27784</StateNumber>
       <UnderlyingIndexId>109287</UnderlyingIndexId>
-    </key>
-    <column id="362" parent="288" name="recensione_list_id">
-      <NotNull>1</NotNull>
-      <Position>1</Position>
-      <StateNumber>27785</StateNumber>
-      <StoredType>bigint|0s</StoredType>
-      <TypeId>20</TypeId>
-    </column>
-    <column id="363" parent="288" name="utente_id">
-      <NotNull>1</NotNull>
-      <Position>2</Position>
-      <StateNumber>27785</StateNumber>
-      <StoredType>bigint|0s</StoredType>
-      <TypeId>20</TypeId>
-    </column>
-    <foreign-key id="364" parent="288" name="fkbxbmk4qnra5cmdi5aygiwowrf">
-      <ColNames>recensione_list_id</ColNames>
-      <ObjectId>109339</ObjectId>
-      <StateNumber>27795</StateNumber>
-      <RefKeyColPositions>2</RefKeyColPositions>
-      <RefTableId>109272</RefTableId>
-    </foreign-key>
-    <foreign-key id="365" parent="288" name="fkme0sl8m604khxfgc34ph56hdt">
-      <ColNames>utente_id</ColNames>
-      <ObjectId>109344</ObjectId>
-      <StateNumber>27796</StateNumber>
-      <RefKeyColPositions>1</RefKeyColPositions>
-      <RefTableId>109280</RefTableId>
-    </foreign-key>
-    <index id="366" parent="288" name="utente_recensione_list_recensione_list_id_key">
-      <ColNames>recensione_list_id</ColNames>
-      <NameSurrogate>1</NameSurrogate>
-      <ObjectId>109292</ObjectId>
-      <StateNumber>27785</StateNumber>
-      <Unique>1</Unique>
-      <AccessMethodId>403</AccessMethodId>
-    </index>
-    <key id="367" parent="288" name="utente_recensione_list_recensione_list_id_key">
-      <NameSurrogate>1</NameSurrogate>
-      <ObjectId>109293</ObjectId>
-      <StateNumber>27785</StateNumber>
-      <UnderlyingIndexId>109292</UnderlyingIndexId>
     </key>
   </database-model>
 </dataSource>

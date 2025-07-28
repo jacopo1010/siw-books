@@ -3,6 +3,7 @@ package it.uniroma3.siw.model;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.Size;
 
 import java.util.Objects;
 
@@ -17,6 +18,7 @@ public class Recensione {
     @Min(1)
     @Max(5)
     private Integer voto;
+    @Size(min = 1, max = 300)
     @Column(columnDefinition = "TEXT")
     private String testo;
     @ManyToOne

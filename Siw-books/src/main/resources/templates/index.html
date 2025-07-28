@@ -24,8 +24,8 @@
                 <a th:href="@{/libri}" class="nav-button">Libri</a>
                 <a th:href="@{/autori}" class="nav-button">Autori</a>
                 <a th:if="${isAnonymous}" href="/login" class="nav-button">Accedi</a>
-                <a th:if="${!isAnonymous}" href="/account" class="nav-button" th:text="${utente.username}"></a>
-                <a th:if="${isAdmin}" href="/admin/paginaModifiche" class="nav-button">Admin</a>
+                <a th:if="${!isAnonymous}" href="/myAccount" class="nav-button" th:text="${utente.username}"></a>
+                <a th:if="${isAdmin}" href="/admin/paginaModifiche" class="nav-button">Amministratore</a>
             </section>
         </nav>
 

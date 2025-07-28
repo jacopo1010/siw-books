@@ -1,35 +1,36 @@
 <!DOCTYPE html>
 <html lang="it" xmlns:th="http://www.w3.org/1999/xhtml" xmlns:sec="http://www.w3.org/1999/xhtml">
 <head>
-    <title>SiwBooks</title>
+    <title>Librelandia</title>
     <link rel="stylesheet" href="css/style.css">
 </head>
 
 <body>
 
-<header>
+    <header>
+        <img src="/images/librelandia-logo.png">
+        <h1> Librelandia </h1>
+    </header>
 
-    <div class="logo-title">
-        <span><h1>SiwBooks</h1></span>
-    </div>
+    <nav>
+        <!--barra di ricerca-->
+        <form th:action="@{/ricercaHome}" method="post" class="searchbar-field">
+            <input type="text" name="keyword" th:value="${keyword}" placeholder="Cerca...">
+            <button type="submit">Cerca</button>
+        </form>
 
-    <nav class="nav">
-        <a href="/" class="nav-link">Home</a>
-        <a href="/books" class="nav-link">Libri</a>
-        <a href="/authors" class="nav-link">Autori</a>
-        <a th:if="${isAdmin}" href="/addBook" class="login-button">Aggiungi Libro</a>
-        <a th:if="${isAnonymous}" href="/login" class="login-button">Accedi/Registrati</a>
-        <a th:if="${!isAnonymous}" href="/account" class="login-button">Account</a>
+        <section class="menu">
+            <a th:href="@{/logout}" class="nav-button">Home</a>
+            <a th:href="@{/libri}" class="nav-button">Libri</a>
+            <a th:href="@{/autori}" class="nav-button">Autori</a>
+            <a th:if="${isAnonymous}" href="/login" class="nav-button">Accedi</a>
+            <a th:if="${!isAnonymous}" href="/myAccount" class="nav-button" th:text="${utente.username}"></a>
+            <a th:if="${isAdmin}" href="/admin/paginaModifiche" class="nav-button">Amministratore</a>
+        </section>
     </nav>
-</header>
-
-<main>
-    <form th:action="@{/ricercaHome}" method="post" class="searchbar-field">
-        <input type="text" name="keyword" th:value="${keyword}" placeholder="Cerca...">
-        <button type="submit">Cerca</button>
-    </form>
 
 
+    <main>
     <section>
         <div th:if="${#lists.isEmpty(libri) and #lists.isEmpty(autori)}" class="message">
             Nessuna corrispondenza trovata.
@@ -55,25 +56,11 @@
             </div>
         </div>
 
-        <h1 th:if="${not #lists.isEmpty(libri)}">Autori</h1>
-        <div th:if="${not #lists.isEmpty(autori)}" class="grid-container">
-            <div class="carousel-card" th:each="author : ${autori}">
-                <a th:href="@{'/author/' + ${author.id}}">
-                    <img src="/images/homepage-image.png">
-                    <div class="carousel-card-details">
-                        <h4 th:text="${author.nome} + ' ' + ${author.cognome}">Nome Cognome</h4>
-                        <p th:text="${#temporals.format(author.dataNascita, 'dd/MM/yyyy')} + ' - ' +
-								${author.dataMorte != null ? #temporals.format(author.dataMorte, 'dd/MM/yyyy') : '...'}">Data</p>
-                        <p th:text="${author.nazionalita}">Nazionalita</p>
-                    </div>
-                </a>
-            </div>
-        </div>
     </section>
 </main>
 
 <footer>
-    <p>© 2025 SiwBooks - Tutti i diritti riservati</p>
+    <p>© 2025 Librelandia - Tutti i diritti riservati</p>
 </footer>
 
 </body>

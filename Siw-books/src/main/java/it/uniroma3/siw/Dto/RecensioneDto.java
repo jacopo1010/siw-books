@@ -8,8 +8,8 @@ public class RecensioneDto {
     private Integer voto;
     private String titolo;
     private String testo;
-    private Libro libro;
-    private Utente utente;
+    private Long libroId;
+    private Long utenteId;
 
     public RecensioneDto() {}
 
@@ -33,18 +33,18 @@ public class RecensioneDto {
     public void setTesto(String testo) {
         this.testo = testo;
     }
-    public Libro getLibro() {
-        return libro;
-    }
-    public void setLibro(Libro libro) {
-        this.libro = libro;
-    }
-    public Utente getUtente() {
-        return utente;
-    }
-    public void setUtente(Utente utente) {
-        this.utente = utente;
-    }
 
+    public Long getLibroId() {
+        return libroId;
+    }
+    public void setLibroId(Long libroId) {
+        this.libroId = libroId;
+    }
+    public Long getUtenteId() {
+        return utenteId;
+    }
+    public void setUtenteId(Long utenteId) {
+        this.utenteId = utenteId;
+    }
 
 }

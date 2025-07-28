@@ -29,4 +29,13 @@ public interface LibroRepository extends JpaRepository<Libro, Long> {
 
     public List<Libro> findTop10ByOrderByOraEDataCreazioneDesc();
 
+    /**
+     * fare una query che trova i migliori 10 Libri con la media di voti più alta
+     */
+    @Query(value = "SELECT l.*, AVG(r.voto) as media_voti " +
+            "FROM libro l " +
+            "JOIN recensione r ON l.id = r.libro_id " +
+            "GROUP BY l.id " +
+            "ORDER BY media_voti DESC", nativeQuery = true)
+    public List<Libro> findByMediaVotiRecensioneMigliore();
 }

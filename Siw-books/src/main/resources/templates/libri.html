@@ -22,13 +22,39 @@
                 <a th:href="@{/libri}" class="nav-button">Libri</a>
                 <a th:href="@{/autori}" class="nav-button">Autori</a>
                 <a th:if="${isAnonymous}" href="/login" class="nav-button">Accedi</a>
-                <a th:if="${!isAnonymous}" href="/account" class="nav-button" th:text="${utente.username}"></a>
+                <a th:if="${!isAnonymous}" href="/myAccount" class="nav-button" th:text="${utente.username}"></a>
                 <a th:if="${isAdmin}" href="/admin/paginaModifiche" class="nav-button">Admin</a>
             </section>
         </nav>
 
-        <main>
 
+
+            <section>
+                <div th:if="${#lists.isEmpty(libri) and #lists.isEmpty(autori)}" class="message">
+                    Nessuna corrispondenza trovata.
+                </div>
+
+                <h1 th:if="${not #lists.isEmpty(autori)}">Libri</h1>
+                <div th:if="${not #lists.isEmpty(libri)}" class="grid-container">
+                    <div class="carousel-card" th:each="book : ${libri}">
+                        <a th:href="@{'/book/' + ${book.id}}">
+                            <img src="/images/homepage-image.png">
+                            <div class="carousel-card-details">
+                                <div th:each="imgName : ${book.immagine}">
+                                    <img th:src="@{'/images/' + ${imgName}}" alt="Copertina" width="200px">
+                                </div>
+
+                                <h4 th:text="${book.titolo}">Titolo</h4>
+                                <p th:text="${book.annoPubblicazione}">Anno di pubblicazione</p>
+                                <div th:if="${book.scrittori != null}" th:each="autore : ${book.scrittori}">
+                                    <p th:text="|${autore.nome} ${autore.cognome}|">Autore</p>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+
+            </section>
         </main>
 
         <footer>

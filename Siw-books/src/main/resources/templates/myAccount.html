@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="it" xmlns:th="http://www.w3.org/1999/xhtml" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>myAccount</title>
+</head>
+<body>
+<header>
+    <h1>Benvenuto nel tuo account</h1>
+</header>
+
+<nav>
+    <!--barra di ricerca-->
+    <form th:action="@{/ricercaHome}" method="post" class="searchbar-field">
+        <input type="text" th:value="${keyword}" placeholder="Cerca...">
+        <button type="submit">Cerca</button>
+    </form>
+    <section class="menu">
+        <a th:href="@{/index}" class="nav-button">Home</a>
+        <a th:href="@{/libri}" class="nav-button">Libri</a>
+        <a th:href="@{/autori}" class="nav-button">Autori</a>
+        <a th:if="${isAnonymous}" href="/login" class="nav-button">Accedi</a>
+        <a th:if="${!isAnonymous}" href="/myAccount" class="nav-button" th:text="${utente.credenziali.username}"></a>
+        <a th:if="${isAdmin}" href="/admin/paginaModifiche" class="nav-button">Admin</a>
+    </section>
+</nav>
+
+<main>
+    <div class="account-box">
+        <h2>Dati utente</h2>
+
+        <p><strong>Nome:</strong> <span th:text="${utente.nome}"></span></p>
+        <p><strong>Cognome:</strong> <span th:text="${utente.cognome}"></span></p>
+        <p><strong>Email:</strong> <span th:text="${utente.email}"></span></p>
+        <p><strong>Username:</strong> <span th:text="${utente.credenziali.username}"></span></p>
+    </div>
+
+    <div th:if="${utente.recensioni != null and utente.recensioni.size() > 0}" th:each="recensione : ${utente.recensioni}">
+        <p th:text="${recensione.titolo}"></p>
+        <p th:text="${recensione.voto}"></p>
+        <p th:text="${recensione.testo}"></p>
+        <a th:href="@{/modificaRecensione/{id}(id=${recensione.id})}"><button type="submit">modifica</button></a>
+        <form th:action="@{/cancellaRecensione/{id}(id=${recensione.id})}" method="post">
+            <button type="submit">Elimina</button>
+        </form>
+    </div>
+
+<div th:if="${#lists.isEmpty(utente.recensioni)}">
+    <p>Non hai ancora recensito nessun libro che aspetti!!!!</p>
+</div>
+
+    <div class="actions">
+        <a href="/logout" class="button">Esci</a>
+    </div>
+</main>
+</body>
+</html>

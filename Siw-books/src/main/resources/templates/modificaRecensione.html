@@ -7,10 +7,10 @@
 <body>
 
 <div>
-    <h1>Recensione</h1>
+    <h1>Modifica Recensione</h1>
 </div>
 
-<form th:action="@{/aggiungiRecensione/{id}}" th:object="${recensione}" method="post">
+<form th:action="@{/modificaRecensione/{id}(id=${id})}" th:object="${recensione}" method="post">
     <input type="hidden" th:field="*{libroId}" th:value="${libro.id}" />
     <input type="hidden" th:field="*{utenteId}" th:value="${utente.id}" />
     <div>

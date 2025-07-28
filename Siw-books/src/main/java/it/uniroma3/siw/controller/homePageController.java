@@ -27,29 +27,25 @@ public class homePageController {
     @Autowired private LibroService libroService;
     @Autowired private AutoreService autoreService;
     @Autowired private RecensioneService recensioneService;
+    @Autowired private SessionData sessionData;
 
     @GetMapping("/")
     public String homePage(Model model) {
-        model.addAttribute("libri", this.libroService.getAllLibri());
+        model.addAttribute("libri", this.libroService.getLibriMiglioriRecensioni());
         return "index.html";
     }
 
     @GetMapping("/index")
     public String showhomePage(Model model){
-        model.addAttribute("libri",this.libroService.getAllLibri());
+        model.addAttribute("libri",this.libroService.getLibriMiglioriRecensioni());
         return "index.html";
     }
 
     @PostMapping("/ricercaHome")
     public String ricercaBarraHome(Model model, @Param("keyword") String keyword) {
         List<Libro> books = this.libroService.listAllKeyWord(keyword);
-        List<Autore> autori = this.autoreService.listAllKeyword(keyword);
         model.addAttribute("libri", books);
-        model.addAttribute("autori", autori);
         model.addAttribute("keyword", keyword);
-        for(Libro libro : books){
-            System.err.println(libro.getScrittori().size());
-        }
         return "ricercaBarra.html";
     }
 
@@ -60,6 +56,9 @@ public class homePageController {
         model.addAttribute("libro", book);
         model.addAttribute("recensioni", recensioni);
         model.addAttribute("id", id);
+        if(this.sessionData.getLoggedUtente() != null) {
+            model.addAttribute("utenteId", this.sessionData.getLoggedUtente().getId());
+        }
         return "vediLibro.html";
     }
 

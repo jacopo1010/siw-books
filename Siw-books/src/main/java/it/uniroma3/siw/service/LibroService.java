@@ -130,5 +130,8 @@ public class LibroService {
         }
     }
 
+    public List<Libro> getLibriMiglioriRecensioni(){
+        return  this.libroRepository.findByMediaVotiRecensioneMigliore();
+    }
 
 }
