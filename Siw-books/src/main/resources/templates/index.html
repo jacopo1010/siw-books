@@ -43,19 +43,25 @@
 
             <section class="bestsellers">
                 <h1>Bestsellers</h1>
-                <div th:if="${libri.size()==0}" class="message">
-                    Nessun libro disponibile al momento.
+                <div th:if="${#lists.isEmpty(libri)}" class="message">
+                    Nessun libro disponibile.
                 </div>
 
-                <div th:if="${libri} and ${libri.size() > 0}" class="carousel-container">
-                    <div class="carousel-track">
-                        <div class="carousel-card" th:each="libro : ${libri}">
-                            <a th:href="@{/visualizzaLibro/{id}(id=${libro.id})}">
-                                <!--<img th:if="${book.urlImgage} != null" th:src="@{'/images/' + ${book.urlImgage}}" alt="Immagine"> -->
-                                <h5 th:text="${libro.titolo}">Titolo</h5>
-                                <p th:text="${libro.annoPubblicazione}">Anno di pubblicazione</p>
-                            </a>
-                        </div>
+                <div th:if="${not #lists.isEmpty(libri)}" class="grid-container">
+                    <div class="card" th:each="libro : ${libri}">
+                        <a th:href="@{'/visualizzaLibro/' + ${libro.id}}">
+                            <div>
+                                <img th:if="${#lists.isEmpty(libro.immagine)}" src="/images/homepage.png" alt="Nessuna copertina">
+                                <img th:if="${not #lists.isEmpty(libro.immagine)}" th:src="@{'/images/' + ${libro.immagine.get(0)}}" alt="Copertina">
+                            </div>
+
+                            <div class="card-details">
+                                <h2 th:text="${libro.titolo}">Titolo</h2>
+                                <div th:if="${libro.scrittori != null}" th:each="autore : ${libro.scrittori}">
+                                    <p th:text="|${autore.nome} ${autore.cognome}|">Autore</p>
+                                </div>
+                            </div>
+                        </a>
                     </div>
                 </div>
             </section>

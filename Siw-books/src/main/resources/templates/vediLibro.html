@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="it" xmlns:th="http://www.w3.org/1999/xhtml" xmlns:sec="http://www.w3.org/1999/xhtml">
 <head>
+  <meta charset="utf-8">
   <title>Librelandia</title>
   <link rel="stylesheet" href="/css/style.css">
   <link rel="stylesheet" href="/css/vediLibro.css">
@@ -64,14 +65,11 @@
         </div>
       </div>
     </div>
-  </section>
 
-  <!-- Sezione Recensioni -->
-  <section class="reviews-section">
     <h2>Recensioni</h2>
 
     <div th:if="${!isAnonymous and !isAdmin and !haRecensito}" style="width: 100%;">
-      <a th:href="@{/aggiungiRecensione/{id}(id=${libro.id})}">Scrivi la tua recensione</a>
+      <a th:href="@{/aggiungiRecensione/{id}(id=${libro.id})}" class="generic-button">Scrivi la tua recensione</a>
     </div>
 
     <!-- Nessuna recensione -->
@@ -80,25 +78,28 @@
     </div>
 
     <!-- Elenco recensioni -->
-    <div th:if="${libro.recensioni != null and !#lists.isEmpty(libro.recensioni)}">
+    <div th:if="${libro.recensioni != null and !#lists.isEmpty(libro.recensioni)}" class="recensione-container">
       <div th:each="recensione : ${libro.recensioni}">
-        <p><strong th:text="${recensione.utente.credenziali.username}">Utente</strong>:</p>
-        <p th:text="${recensione.titolo}">Testo recensione</p>
+        <h2 th:text="${recensione.libro.titolo}"></h2>
+        <p th:text="'Voto: ' + ${recensione.voto} + '.0'">Voto</p>
+        <h3><strong th:text="${recensione.utente.credenziali.username}">Utente</strong>:</h3>
+        <h3 th:text="${recensione.titolo}">Testo recensione</h3>
         <p th:text="${recensione.testo}">Testo recensione</p>
-        <div th:if="${!isAnonymous}">
-          <a th:if="${recensione.utente.id == utenteId}" th:href="@{/modificaRecensione/{id}(id=${recensione.id})}"><button type="submit">modifica recensione</button></a>
+        <div th:if="${!isAnonymous}" style="width: 100%; display: flex; justify-content: space-around;">
+          <a th:if="${recensione.utente.id == utenteId}" th:href="@{/modificaRecensione/{id}(id=${recensione.id})}"><button type="submit" class="button">modifica</button></a>
           <form th:action="@{/cancellaRecensione/{id}(id=${recensione.id})}" method="post" th:if="${recensione.utente.id == utenteId or isAdmin}">
-            <button type="submit">Elimina</button>
+            <button type="submit" class="button">Elimina</button>
           </form>
           <hr/>
         </div>
       </div>
     </div>
   </section>
+
 </main>
 
 <footer>
-  <p>© 2025 Librelandia - Tutti i diritti riservati</p>
+  <p>* 2025 Librelandia - Tutti i diritti riservati</p>
 </footer>
 <script>
   let currentSlide = 0;

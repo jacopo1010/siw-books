@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="it" xmlns:th="http://www.w3.org/1999/xhtml" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<div>
+    <h1>Recensione</h1>
+</div>
+
+<form th:action="@{/aggiungiRecensione/{id}}" th:object="${recensione}" method="post">
+    <input type="hidden" th:field="*{libroId}" th:value="${libro.id}" />
+    <input type="hidden" th:field="*{utenteId}" th:value="${utente.id}" />
+    <div>
+        <label for="voto">Voto:</label>
+        <input type="number" id="voto" th:field="*{voto}" min="1" max="5" required />
+    </div>
+
+    <div>
+        <label for="titolo">Titolo:</label>
+        <input type="text" id="titolo" th:field="*{titolo}" required />
+    </div>
+
+    <div>
+        <label for="testo">Testo:</label>
+        <textarea id="testo" th:field="*{testo}" rows="5" required></textarea>
+    </div>
+
+
+    <div>
+        <button type="submit">Invia Recensione</button>
+    </div>
+</form>
+
+
+
+</body>
+</html>
