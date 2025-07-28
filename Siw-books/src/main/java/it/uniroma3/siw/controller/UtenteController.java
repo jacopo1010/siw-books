@@ -61,18 +61,23 @@ public class UtenteController {
 
     @GetMapping("/modificaRecensione/{id}")
     public String modificaRecensione(Model model, @PathVariable Long id) {
-        RecensioneDto recensioneDto = new RecensioneDto();
         Recensione recensione = this.recensioneService.findRecensione(id);
-        recensioneDto.setTitolo(recensione.getTitolo());
-        recensioneDto.setTesto(recensione.getTesto());
-        recensioneDto.setVoto(recensione.getVoto());
-        recensioneDto.setUtenteId(recensione.getUtente().getId());
-        recensioneDto.setLibroId(recensione.getLibro().getId());
-        model.addAttribute("recensione", recensioneDto);
-        model.addAttribute("libro", recensione.getLibro());
-        model.addAttribute("utente", recensione.getUtente());
-        model.addAttribute("id",id);
-        return "modificaRecensione.html";
+        Utente corrente = this.sessionData.getLoggedUtente();
+        if (corrente.getId().equals(recensione.getUtente().getId())) {
+            RecensioneDto recensioneDto = new RecensioneDto();
+            recensioneDto.setTitolo(recensione.getTitolo());
+            recensioneDto.setTesto(recensione.getTesto());
+            recensioneDto.setVoto(recensione.getVoto());
+            recensioneDto.setUtenteId(recensione.getUtente().getId());
+            recensioneDto.setLibroId(recensione.getLibro().getId());
+            model.addAttribute("recensione", recensioneDto);
+            model.addAttribute("libro", recensione.getLibro());
+            model.addAttribute("utente", recensione.getUtente());
+            model.addAttribute("id", id);
+            return "modificaRecensione.html";
+        }else {
+          return  "redirect:/visualizzaLibro/" + recensione.getLibro().getId();
+        }
     }
 
     @PostMapping("/modificaRecensione/{id}")

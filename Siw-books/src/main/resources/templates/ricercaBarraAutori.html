@@ -1,52 +1,62 @@
 <!DOCTYPE html>
 <html lang="it" xmlns:th="http://www.w3.org/1999/xhtml" xmlns:sec="http://www.w3.org/1999/xhtml">
 <head>
+  <link rel="stylesheet" href="/css/style.css">
+  <meta charset="UTF-8">
   <title>Librelandia</title>
-  <link rel="stylesheet" href="css/style.css">
 </head>
-
 <body>
-
 <header>
-
-  <div class="logo-title">
-    <span><h1>Librelandia</h1></span>
-  </div>
-
-  <nav class="nav">
-    <a href="/" class="nav-link">Home</a>
-    <a href="/books" class="nav-link">Libri</a>
-    <a href="/authors" class="nav-link">Autori</a>
-    <a th:if="${isAdmin}" href="/addBook" class="login-button">Aggiungi Libro</a>
-    <a th:if="${isAnonymous}" href="/login" class="login-button">Accedi/Registrati</a>
-    <a th:if="${!isAnonymous}" href="/myAccount" class="login-button" th:text="${utente.username}"></a>
-  </nav>
+  <img src="/images/librelandia-logo.png">
+  <h1> Librelandia </h1>
 </header>
 
+<nav>
+  <!--barra di ricerca-->
+  <form th:action="@{/ricercaHomeAutori}" method="post" class="searchbar-field">
+    <input type="text" th:value="${keyword}" placeholder="Cerca...">
+    <button type="submit">Cerca</button>
+  </form>
+  <section class="menu">
+    <a th:href="@{/index}" class="nav-button">Home</a>
+    <a th:href="@{/libri}" class="nav-button">Libri</a>
+    <a th:href="@{/autori}" class="nav-button">Autori</a>
+    <a th:if="${isAnonymous}" href="/login" class="nav-button">Accedi</a>
+    <a th:if="${!isAnonymous}" href="/myAccount" class="nav-button" th:text="${utente.username}"></a>
+    <a th:if="${isAdmin}" href="/admin/paginaModifiche" class="nav-button">Admin</a>
+  </section>
+</nav>
+
 <main>
+  <h1 style="font-size: 36px; width: 100%; text-align: center;">Tutti gli autori</h1>
+  <section>
+    <div th:if="${#lists.isEmpty(autori)}" class="message">
+      Nessun autore disponibile.
+    </div>
 
+    <div th:if="${not #lists.isEmpty(autori)}" class="grid-container" style="grid-template-columns: repeat(2, 1fr);">
+      <div class="card" th:each="autore : ${autori}" style="width: 45vw">
+        <div>
+          <img th:if="${autore.url_foto == 'foto'}" src="/images/homepage.png" alt="Nessuna copertina">
+          <img th:if="${autore.url_foto != 'foto'}" th:src="@{'/images/' + ${autore.url_foto}}" alt="Copertina">
+        </div>
 
-
-
-    <h1 th:if="${not #lists.isEmpty(libri)}">Autori</h1>
-    <div th:if="${not #lists.isEmpty(autori)}" class="grid-container">
-      <div class="carousel-card" th:each="author : ${autori}">
-        <a th:href="@{'/author/' + ${author.id}}">
-          <img src="/images/homepage.png">
-          <div class="carousel-card-details">
-            <h4 th:text="${author.nome} + ' ' + ${author.cognome}">Nome Cognome</h4>
-            <p th:text="${#temporals.format(author.dataNascita, 'dd/MM/yyyy')} + ' - ' +
-								${author.dataMorte != null ? #temporals.format(author.dataMorte, 'dd/MM/yyyy') : '...'}">Data</p>
-            <p th:text="${author.nazionalita}">Nazionalita</p>
+        <div class="card-details">
+          <h2 th:text="${autore.nome} + ' ' + ${autore.cognome}">Nome e Cognome</h2>
+          <p><strong>Data di nascita: </strong><span th:text="${#temporals.format(autore.dataNascita, 'dd-MM-yyyy')}">Data di nascita</span></p>
+          <p><strong>Data di morte: </strong><span th:text="${#temporals.format(autore.dataMorte, 'dd-MM-yyyy')}">Data di morte</span></p>
+          <p><strong>Nazionalita': </strong><span th:text="${autore.nazionalita}">Nazionalità</span></p>
+          <div th:if="${autore.libriScritti != null}" th:each="libro : ${autore.libriScritti}" class="libri-scritti">
+            <a th:href="@{'/vediLibro/' + ${libro.id}}"><p th:text="${libro.titolo}">Libro</p></a>
           </div>
-        </a>
+        </div>
       </div>
     </div>
   </section>
 </main>
 
 <footer>
-  <p>© 2025 librelandia - Tutti i diritti riservati</p>
+  <p>* 2025 Librelandia - Tutti i diritti riservati</p>
 </footer>
 
 </body>

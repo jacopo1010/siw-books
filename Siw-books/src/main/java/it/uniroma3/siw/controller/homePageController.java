@@ -52,13 +52,21 @@ public class homePageController {
     @GetMapping("/visualizzaLibro/{id}")
     public String vediLibroSpecifico(Model model, @PathVariable("id") Long id){
         Libro book = this.libroService.getLibro(id);
-        List<Recensione> recensioni = this.recensioneService.listaRecensioni();
+        List<Recensione> recensioni = book.getRecensioni();
+
+        if(this.sessionData.getLoggedUtente() != null) {
+            model.addAttribute("utenteId", this.sessionData.getLoggedUtente().getId());
+            boolean haRecensito = this.recensioneService.HaRecensito(book.getId(), this.sessionData.getLoggedUtente().getId());
+            if(haRecensito){
+               Recensione recensioneUtente = this.recensioneService.getRecensioneByUtenteAndLibro(this.sessionData.getLoggedUtente().getId(), book.getId());
+               recensioni.remove(recensioneUtente);
+               recensioni.add(0,recensioneUtente);
+            }
+            model.addAttribute("haRecensito", haRecensito);
+        }
         model.addAttribute("libro", book);
         model.addAttribute("recensioni", recensioni);
         model.addAttribute("id", id);
-        if(this.sessionData.getLoggedUtente() != null) {
-            model.addAttribute("utenteId", this.sessionData.getLoggedUtente().getId());
-        }
         return "vediLibro.html";
     }
 

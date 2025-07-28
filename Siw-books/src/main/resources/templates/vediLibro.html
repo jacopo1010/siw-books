@@ -3,25 +3,32 @@
 <head>
   <title>Librelandia</title>
   <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/css/vediLibro.css">
 </head>
 
 <body>
 
 <header>
-  <div class="logo-title">
-    <span><img src="/images/librelandia-logo.png" class="image-logo"></span>
-    <span><h1>Librelandia</h1></span>
-  </div>
-
-  <nav class="nav">
-    <a href="/" class="nav-link">Home</a>
-    <a href="/libri" class="nav-link">Libri</a>
-    <a href="/autori" class="nav-link">Autori</a>
-    <a th:if="${isAdmin}" href="/addBook" class="login-button">Aggiungi Libro</a>
-    <a th:if="${isAnonymous}" href="/login" class="login-button">Accedi/Registrati</a>
-    <a th:if="${!isAnonymous}" href="/myAccount" class="login-button" th:text="${utente.username}"></a>
-  </nav>
+  <img src="/images/librelandia-logo.png">
+  <h1> Librelandia </h1>
 </header>
+
+<nav>
+  <!--barra di ricerca-->
+  <form th:action="@{/ricercaHome}" method="post" class="searchbar-field">
+    <input type="text" name="keyword" th:value="${keyword}" placeholder="Cerca...">
+    <button type="submit">Cerca</button>
+  </form>
+
+  <section class="menu">
+    <a th:href="@{/logout}" class="nav-button">Home</a>
+    <a th:href="@{/libri}" class="nav-button">Libri</a>
+    <a th:href="@{/autori}" class="nav-button">Autori</a>
+    <a th:if="${isAnonymous}" href="/login" class="nav-button">Accedi</a>
+    <a th:if="${!isAnonymous}" href="/myAccount" class="nav-button" th:text="${utente.username}"></a>
+    <a th:if="${isAdmin}" href="/admin/paginaModifiche" class="nav-button">Amministratore</a>
+  </section>
+</nav>
 
 <main>
   <section>
@@ -33,21 +40,22 @@
       <div th:if="${libro.immagine != null and !#lists.isEmpty(libro.immagine)}" class="image-gallery">
         <img th:each="img : ${libro.immagine}" th:src="@{'/images/' + ${img}}" alt="Immagine libro" class="book-image"/>
       </div>
+  </section>
 
-      <!-- Autori -->
-      <div th:if="${libro.scrittori != null and !#lists.isEmpty(libro.scrittori)}">
-        <p><strong>Scrittori:</strong></p>
-        <ul>
-          <li th:each="autore : ${libro.scrittori}">
-            <a th:href="@{'/author/' + ${autore.id}}" th:text="${autore.nome} + ' ' + ${autore.cognome}">Autore</a>
-          </li>
-        </ul>
-      </div>
+  <section class="second-section" style="width: 100%">
+    <!-- Autori -->
+    <h2>Scrittori:</h2>
+    <div th:if="${libro.scrittori != null and !#lists.isEmpty(libro.scrittori)}">
+      <div class="card" th:each="autore : ${libro.scrittori}" style="width: 30vw">
+        <div>
+          <img th:if="${autore.url_foto == 'foto'}" src="/images/homepage.png" alt="Nessuna copertina" style="width: 100px; height: 120px;">
+          <img th:if="${autore.url_foto != 'foto'}" th:src="@{'/images/' + ${autore.url_foto}}" alt="Copertina" style="width: 100px; height: 120px;">
+        </div>
 
-      <!-- Pulsanti admin -->
-      <div th:if="${isAdmin}">
-        <a th:href="@{'/updateBook/' + ${libro.id}}" id="update-button">Modifica Libro</a>
-        <a th:href="@{'/deleteBook/' + ${libro.id}}" id="delete-button">Elimina Libro</a>
+        <div class="card-details">
+          <h4 th:text="${autore.nome} + ' ' + ${autore.cognome}">Nome e Cognome</h4>
+          <p class="subtitle" th:text="${#temporals.format(autore.dataNascita, 'dd/MM/yyyy')} + ' - ' + ${#temporals.format(autore.dataMorte, 'dd/MM/yyyy')}" style="font-size: 14px"></p>
+        </div>
       </div>
     </div>
   </section>
@@ -56,7 +64,7 @@
   <section class="reviews-section">
     <h2>Recensioni</h2>
 
-    <div th:if="${!isAnonymous and !isAdmin}" style="width: 100%;">
+    <div th:if="${!isAnonymous and !isAdmin and !haRecensito}" style="width: 100%;">
       <a th:href="@{/aggiungiRecensione/{id}(id=${libro.id})}">Scrivi la tua recensione</a>
     </div>
 

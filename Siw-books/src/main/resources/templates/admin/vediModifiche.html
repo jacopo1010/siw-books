@@ -55,8 +55,11 @@
                     <tr>
                         <td th:text="${libro.id}"></td>
                         <td>
-                            <div th:each="img : ${libro.immagine}">
-                                <img th:src="@{'/images/' + ${img}}" alt="Foto libro" width="80" height="100">
+                            <div th:if="${#lists.isEmpty(libro.immagine)}">
+                                <p class="message">Nessuna foto disponibile</p>
+                            </div>
+                            <div th:if="${not #lists.isEmpty(libro.immagine)}">
+                                <img th:src="@{'/images/' + ${libro.immagine.get(0)}}" alt="Foto libro" width="80" height="100">
                             </div>
                         </td>
 
@@ -98,7 +101,14 @@
                     <tbody th:if="${not #sets.isEmpty(autori)}" th:each="autore : ${autori}">
                     <tr>
                         <td th:text="${autore.id}"></td>
-                        <td><img th:src="@{'/images/' + ${autore.url_foto}}" alt="Foto autore" width="80" height="100"></td>
+                        <td>
+                            <div th:if="${autore.url_foto == 'foto'}">
+                                <p class="message">Nessuna foto disponibile</p>
+                            </div>
+                            <div th:if="${autore.url_foto != 'foto'}">
+                                <img th:src="@{'/images/' + ${autore.url_foto}}" alt="Foto autore" width="80" height="100">
+                            </div>
+                        </td>
                         <td>
                             Nome: <span th:text="${autore.nome}"></span><br/>
                             Cognome: <span th:text="${autore.cognome}"></span>

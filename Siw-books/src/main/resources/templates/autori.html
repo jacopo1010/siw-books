@@ -28,7 +28,31 @@
         </nav>
 
         <main>
+            <h1 style="font-size: 36px; width: 100%; text-align: center;">Tutti gli autori</h1>
+            <section>
+                <div th:if="${#lists.isEmpty(autori)}" class="message">
+                    Nessun autore disponibile.
+                </div>
 
+                <div th:if="${not #lists.isEmpty(autori)}" class="grid-container" style="grid-template-columns: repeat(2, 1fr);">
+                    <div class="card" th:each="autore : ${autori}" style="width: 45vw">
+                        <div>
+                            <img th:if="${autore.url_foto == 'foto'}" src="/images/homepage.png" alt="Nessuna copertina">
+                            <img th:if="${autore.url_foto != 'foto'}" th:src="@{'/images/' + ${autore.url_foto}}" alt="Copertina">
+                        </div>
+
+                        <div class="card-details">
+                            <h2 th:text="${autore.nome} + ' ' + ${autore.cognome}">Nome e Cognome</h2>
+                            <p><strong>Data di nascita: </strong><span th:text="${#temporals.format(autore.dataNascita, 'dd-MM-yyyy')}">Data di nascita</span></p>
+                            <p><strong>Data di morte: </strong><span th:text="${#temporals.format(autore.dataMorte, 'dd-MM-yyyy')}">Data di morte</span></p>
+                            <p><strong>Nazionalita': </strong><span th:text="${autore.nazionalita}">Nazionalità</span></p>
+                            <div th:if="${autore.libriScritti != null}" th:each="libro : ${autore.libriScritti}" class="libri-scritti">
+                                <a th:href="@{'/visualizzaLibro/' + ${libro.id}}"><p th:text="${libro.titolo}">Libro</p></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
         </main>
 
         <footer>

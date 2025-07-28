@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="it" xmlns:th="http://www.w3.org/1999/xhtml" xmlns:sec="http://www.w3.org/1999/xhtml">
 <head>
+    <link rel="stylesheet" href="/css/style.css">
     <meta charset="UTF-8">
     <title>myAccount</title>
 </head>
@@ -26,32 +27,37 @@
 </nav>
 
 <main>
-    <div class="account-box">
-        <h2>Dati utente</h2>
+    <div class="form-box" style="padding-bottom: 1rem;">
+        <h1>Dati utente</h1>
 
-        <p><strong>Nome:</strong> <span th:text="${utente.nome}"></span></p>
-        <p><strong>Cognome:</strong> <span th:text="${utente.cognome}"></span></p>
-        <p><strong>Email:</strong> <span th:text="${utente.email}"></span></p>
-        <p><strong>Username:</strong> <span th:text="${utente.credenziali.username}"></span></p>
+        <div>
+            <p><strong>Nome:</strong> <span th:text="${utente.nome}"></span></p>
+            <p><strong>Cognome:</strong> <span th:text="${utente.cognome}"></span></p>
+            <p><strong>Email:</strong> <span th:text="${utente.email}"></span></p>
+            <p><strong>Username:</strong> <span th:text="${utente.credenziali.username}"></span></p>
+        </div>
+
+        <div class="actions">
+            <a href="/logout" style="text-decoration: none"><button type="button" class="submit-button" style="width: 15vw; height: 8vh">Esci</button></a>
+        </div>
     </div>
 
-    <div th:if="${utente.recensioni != null and utente.recensioni.size() > 0}" th:each="recensione : ${utente.recensioni}">
-        <p th:text="${recensione.titolo}"></p>
-        <p th:text="${recensione.voto}"></p>
-        <p th:text="${recensione.testo}"></p>
-        <a th:href="@{/modificaRecensione/{id}(id=${recensione.id})}"><button type="submit">modifica</button></a>
-        <form th:action="@{/cancellaRecensione/{id}(id=${recensione.id})}" method="post">
-            <button type="submit">Elimina</button>
-        </form>
-    </div>
+    <section style="margin: 1rem 2rem;">
+        <h1>Le tue recensioni</h1>
+        <div th:if="${utente.recensioni != null and utente.recensioni.size() > 0}" th:each="recensione : ${utente.recensioni}">
+            <p th:text="${recensione.titolo}"></p>
+            <p th:text="${recensione.voto}"></p>
+            <p th:text="${recensione.testo}"></p>
+            <a th:href="@{/modificaRecensione/{id}(id=${recensione.id})}"><button type="submit">modifica</button></a>
+            <form th:action="@{/cancellaRecensione/{id}(id=${recensione.id})}" method="post">
+                <button type="submit">Elimina</button>
+            </form>
+        </div>
 
-<div th:if="${#lists.isEmpty(utente.recensioni)}">
-    <p>Non hai ancora recensito nessun libro che aspetti!!!!</p>
-</div>
-
-    <div class="actions">
-        <a href="/logout" class="button">Esci</a>
-    </div>
+        <div th:if="${#lists.isEmpty(utente.recensioni)}" class="message">
+            <p>Non hai ancora recensito nessun libro che aspetti!!!!</p>
+        </div>
+    </section>
 </main>
 </body>
 </html>

@@ -174,6 +174,30 @@ footer p {
      font-size: 14px;
 }
 
+.checkboxes {
+     display: flex;
+     flex-direction: column;
+     gap: 10px;
+     margin: 15px 0;
+     height: auto;
+}
+
+.checkboxes input[type="checkbox"] {
+     width: 18px; /* Dimensioni coerenti per la checkbox */
+     height: 18px;
+     cursor: pointer; /* Puntatore interattivo */
+     margin-bottom: 1rem;
+}
+
+.checkboxes label {
+     font-size: 1rem;         /* Dimensione del testo */
+     margin-left: 5px;        /* Spazio tra la checkbox e il testo */
+     cursor: pointer;         /* Anche la label è interattiva */
+     display: inline-flex;    /* Align testo e checkbox */
+     align-items: center;     /* Allinea centrato con checkbox */
+     gap: 5px;                /* Spazio tra checkbox e testo */
+}
+
 /* Bottoni */
 .generic-button {
      width: 20vw;
@@ -194,4 +218,52 @@ footer p {
 
 .generic-button:hover {
      background-color: #2F443B;
+}
+
+/* Vista libri e autori */
+.grid-container {
+     display: grid;
+     grid-template-columns: repeat(3, 1fr); /* 2 libri per riga */
+     gap: 10px;
+     padding: 20px;
+     margin-top: -1rem;
+     align-items: stretch; /* Questo forza tutte le card a estendersi */
+}
+
+.card {
+     width: 30vw;
+     height: auto;
+     margin: 5vh auto;
+     box-shadow: 0 4px 8px grey;
+     display: flex;
+     flex-direction: row;
+}
+
+.card a {
+     display: flex;
+     text-decoration: none;
+     color: inherit;
+     width: 100%;
+}
+
+.card img {
+     width: 200px;
+     height: auto;
+     object-fit: cover;
+     display: inline-block;
+}
+
+.card-details {
+     padding: 1rem;
+     width: 100%;
+     display: inline-block;
+}
+
+.libri-scritti {
+     display: inline-block;
+}
+
+.libri-scritti a {
+     text-decoration: underline;
+     margin: 0 5px;
 }

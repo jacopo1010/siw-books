@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="it" xmlns:th="http://www.w3.org/1999/xhtml" xmlns:sec="http://www.w3.org/1999/xhtml">
 <head>
+    <link rel="stylesheet" href="/css/style.css">
     <title>Librelandia</title>
     <link rel="stylesheet" href="../css/style.css">
 </head>
@@ -43,15 +44,17 @@
                 <input type="date" name="anno" id="anno" th:field="*{annoPubblicazione}" required autocomplete="off">
             </div>
 
-            <div class="field" style="padding-bottom: 6vh;">
+            <div class="field" style="height: auto;">
                 <label for="autoriId">Autori</label>
                 <div th:if="${#lists.isEmpty(autori)}" class="message">
                     Nessun autore disponibile al momento.
                 </div>
 
-                <div th:if="${not #lists.isEmpty(autori)}" th:each="autore : ${autori}">
-                    <input type="checkbox" th:id="'autore-' + ${autore.id}" th:name="autore" th:value="${autore.id}">
-                    <label th:for="'autore-' + ${autore.id}" th:text="${autore.nome} + ${autore.cognome}"></label>
+                <div class="checkboxes">
+                    <div th:if="${not #lists.isEmpty(autori)}" th:each="autore : ${autori}">
+                        <input type="checkbox" th:id="'autore-' + ${autore.id}" th:name="autore" th:value="${autore.id}" th:checked="${#lists.contains(libroDto.scrittoriIds, autore)}">
+                        <label th:for="'autore-' + ${autore.id}" th:text="${autore.nome} + ${autore.cognome}"></label>
+                    </div>
                 </div>
             </div>
 

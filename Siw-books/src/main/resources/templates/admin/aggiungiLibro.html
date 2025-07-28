@@ -42,20 +42,22 @@
                         <label for="anno">Anno di Pubblicazione</label>
                         <input type="date" name="anno" id="anno" th:field="*{annoPubblicazione}" required autocomplete="off">
                     </div>
-                    <div class="field" style="padding-bottom: 6vh;">
+                    <div class="field" style="height: auto;">
                         <label>Autori</label>
                         <div th:if="${#lists.isEmpty(autori)}" class="message">
                             Nessun autore disponibile al momento.
                         </div>
 
-                        <div th:if="${not #lists.isEmpty(autori)}" th:each="autore : ${autori}">
-                            <input type="checkbox" th:id="'autore-' + ${autore.id}" th:name="autore" th:value="${autore.id}">
-                            <label th:for="'autore-' + ${autore.id}" th:text="${autore.nome} + ${autore.cognome}"></label>
+                        <div class="checkboxes">
+                            <div th:if="${not #lists.isEmpty(autori)}" th:each="autore : ${autori}">
+                                <input type="checkbox" th:id="'autore-' + ${autore.id}" th:name="autore" th:value="${autore.id}">
+                                <label th:for="'autore-' + ${autore.id}" th:text="${autore.nome} + ${autore.cognome}"></label>
+                            </div>
                         </div>
                     </div>
 
                     <div class="field">
-                        <label for="immagini">Foto (puoi caricare più immagini)</label>
+                        <label for="immagini">Foto (puoi caricare piu' immagini)</label>
                         <input type="file" id="immagine" name="immagini" accept="image/*"  multiple>
                     </div>
 
